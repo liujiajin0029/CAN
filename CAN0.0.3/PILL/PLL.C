@@ -3,7 +3,6 @@
 
 void Pll_Init(void)
 {
-	unsigned char BlockingTime = 0;
 	CLKSEL_PLLSEL = 0;
 	PLLCTL_PLLON = 0;
 	SYNR = 0x47;
@@ -12,9 +11,9 @@ void Pll_Init(void)
 	PLLCTL_PLLON = 1;
 	_asm(nop);
 	_asm(nop);
-    while(CRGFLG_LOCK == 0 && BlockingTime < 5)
+        while(CRGFLG_LOCK == 0 )
 	{
-		BlockingTime ++;
+	
 	}
 	CLKSEL_PLLSEL = 1;
 }
