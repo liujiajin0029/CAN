@@ -42,6 +42,7 @@
 # 以下是忽略的文件
 
 bin/
+CAN_ONE_Data/
 BMS_Data/
 cmd/
 prm/
