@@ -2,7 +2,7 @@
 #include "CAN.h"
 #include "CAN_CFG.h"
 
-
+//测试
 //void CAN_IDSend(Can_InitType *Can_Cfg)
 //{
 //	unsigned char Remove_Warning = 0;
