@@ -89,66 +89,66 @@ void Can_Init(void)
 	Can_DeInit(&Can1_InitType);
 }
 
-/*CAN初始化函数*/
-void Can_DeInit(Can_AddressType *Address , Can_InitType *Can_Cfg)
+/*CAN��ʼ������*/
+void Can_DeInit(Can_InitType *Can_Cfg)
 {
 	unsigned char Memory = 0;
 	unsigned char BlockingTime = 0;
 
 	Memory = Can_Cfg->Geway;
 
-	if ((Address->CANCTL0) & 0x01== 0)
+	if ((*((&CAN0CTL0) + Memory) & 0x01) == 0)
 	{
-		Address->CANRXDSR0|= 1;
+		*((&CAN0RXDSR0) + Memory) |= 1;
 	}
-	while ((Address->CANCTL1)  & 0x01 == 0)
+	while ((*((&CAN0CTL1) + Memory) & 0x01) == 0)
 	{
 
 	}
 
-	(Address->CANBTR0)  |= 0xC0;
-	/*CAN通道通信频率选择*/
+	*((&CAN0BTR0) + Memory) |= 0xC0;
+	/*CANͨ��ͨ��Ƶ��ѡ��*/
 	if (Can_Cfg->BPS == CAN_BSPTYPE125K)
 	{
-		(Address->CANBTR1) |= 0x1D;
-		(Address->CANBTR0)  = 0x0E;
+		*((&CAN0BTR1) + Memory) |= 0x1D;
+		*((&CAN0BTR0) + Memory)  = 0x0E;
 	}
 	else if (Can_Cfg->BPS == CAN_BSPTYPE250K)
 	{
-		(Address->CANBTR1) |= 0x1C;
-		(Address->CANBTR0)  = 0x07;
+		*((&CAN0BTR1) + Memory) |= 0x1C;
+		*((&CAN0BTR0) + Memory)  = 0x07;
 	}
 	else if (Can_Cfg->BPS == CAN_BSPTYPE500K)
 	{
-		(Address->CANBTR1) |= 0x1C;
-		(Address->CANBTR0)  = 0x03;
+		*((&CAN0BTR1) + Memory) |= 0x1C;
+		*((&CAN0BTR0) + Memory)  = 0x03;
 	}
 	else if (Can_Cfg->BPS == CAN_BSPTYPE1000K)
 	{
-		(Address->CANBTR1) |= 0x1C;
-		(Address->CANBTR0)  = 0x01;
+		*((&CAN0BTR1) + Memory) |= 0x1C;
+		*((&CAN0BTR0) + Memory)  = 0x01;
 	}
 	else
 	{
 
 	}
 
-	(Address->CANIDMR0) = 0xFF;
-	(Address->CANIDMR1) = 0xFF;
-	(Address->CANIDMR3) = 0xFF;
-	(Address->CANIDMR4) = 0xFF;
-	(Address->CANIDMR5) = 0xFF;
-	(Address->CANIDMR6) = 0XFF;
-	(Address->CANIDMR7) = 0xFF;
-	(Address->CANCTL1) = 0xC0;
-	(Address->CANCTL0) = 0x00;
+	*((&CAN0IDMR0) + Memory) = 0xFF;
+	*((&CAN0IDMR1) + Memory) = 0xFF;
+	*((&CAN0IDMR3) + Memory) = 0xFF;
+	*((&CAN0IDMR4) + Memory) = 0xFF;
+	*((&CAN0IDMR5) + Memory) = 0xFF;
+	*((&CAN0IDMR6) + Memory) = 0XFF;
+	*((&CAN0IDMR7) + Memory) = 0xFF;
+	*((&CAN0CTL1) + Memory) = 0xC0;
+	*((&CAN0CTL0) + Memory) = 0x00;
 
-	while (((Address->CANCTL1) & 0x01) == 1 && BlockingTime < 5)
+	while (*((&CAN0CTL1) + Memory) & 0x01 == 1)
 	{
 		BlockingTime ++;
 	}
 
-	(Address->CANRIER) |= 0x01;
+	*((&CAN0RIER) + Memory) |= 0x01;
 }
 
 /*报文发送函数*/

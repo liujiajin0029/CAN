@@ -3,17 +3,19 @@
 
 #include "hidef.h"
 #include "derivative.h"
-/*
+
 typedef struct _Node_MsgType
 {
-	int Node_MsgTypeNum;	//节点号
-	BOOL(*Node_MsgTypeCondition)(void);//条件
-	int Node_MsgTypeNumber;	//条件数
-	int Node_MsgTypeStatus;	//条件匹配
-	void (*Node_MsgTypeAct)(void);//动作
-	int Node_MsgTypeNext;//下个节点
+	int TypeNum;	//节点号
+	Bool (*Condition)(void);//条件
+	int Number;	//条件数
+	int Status;	//条件匹配
+	void (*Act)(void);//动作
+	int Next;//下个节点
 }Node_MsgType;
-*/
+
+
+extern Node_MsgType Lcfg[3][4];
 
 #endif
 

@@ -14,11 +14,17 @@ typedef enum
 
 typedef struct _Fault
 {
-	Bool PrechargeM_FaultTypeData1;
-	Bool PrechargeM_FaultTypeData2;
-	Bool PrechargeM_FaultTypeData3;
+	Bool FaulData1;
+	Bool FaulData2;
+	Bool FaulData3;
 }PrechargeM_FaultType;
 
-int PrechargeM_IsFail(void);
+Bool    PrechargeM_StartPre(void) ;
+Bool    PrechargeM_StopPre(void);
+Bool    PreChargeM_Change(void);
+Bool   PrechargeM_IsFail(void);
+ Bool PrechargeM_IsFinish(void);
+Bool PreChargeM_StopMaster(void) ;
+
 
 #endif

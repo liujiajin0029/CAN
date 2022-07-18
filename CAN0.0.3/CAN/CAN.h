@@ -67,7 +67,9 @@ typedef struct Can_HwCfgType
 
 
 typedef struct _Can_AddressType
-{
+{   	
+        Can_BspType BPS;
+	unsigned char Geway;
 	unsigned char  CANCTL0;
 	unsigned char  CANCTL1;
 	unsigned char  CANBTR0;
@@ -98,36 +100,40 @@ typedef struct _Can_AddressType
 	unsigned char  CANTXDLR;
 	unsigned char  CANTXTBPR;
 }Can_AddressType;
+
+
 /*
 void CAN_RegAdd_Cfg(int channel)
 {
- CANCTL0 = ((&CAN0CTL0) + channel * 0x40);
- CANCTL1 = ((&CAN0CTL1) + channel * 0x40);
- CANBTR0 = ((&CAN0BTR0) + channel * 0x40);
- CANBTR1 = ((&CAN0BTR1) + channel * 0x40);
- CANRFLG = ((&CAN0RFLG) + channel * 0x40);
-  CANRIER = ((&CAN0RIER) + channel * 0x40);
- CANTBSEL = ((&CAN0TBSEL) + channel * 0x40);
- CANTFLG = ((&CAN0TFLG) + channel * 0x40);
- CANTXIDR0 = ((&CAN0TXIDR0) + channel * 0x40);
- CANTXIDR1 = ((&CAN0TXIDR1) + channel * 0x40);
- CANTXIDR2 = ((&CAN0TXIDR2) + channel * 0x40);
- CANTXIDR3 = ((&CAN0TXIDR3) + channel * 0x40);
-  CANIDMR0 = ((&CAN0IDMR0) + channel * 0x40);
-  CANIDMR1 = ((&CAN0IDMR1) + channel * 0x40);
-  CANIDMR2 = ((&CAN0IDMR2) + channel * 0x40);
-  CANIDMR3 = ((&CAN0IDMR3) + channel * 0x40);
-  CANIDMR4 = ((&CAN0IDMR4) + channel * 0x40);
- CANIDMR5 = ((&CAN0IDMR5) + channel * 0x40);
- CANIDMR6 = ((&CAN0IDMR6) + channel * 0x40);
-  CANIDMR7 = ((&CAN0IDMR7) + channel * 0x40);
-  CANRXIDR0 = ((&CAN0RXIDR0) + channel * 0x40);
-  CANRXIDR1 = ((&CAN0RXIDR1) + channel * 0x40);
- CANRXIDR2 = ((&CAN0RXIDR2) + channel * 0x40);
-  CANRXIDR3 = ((&CAN0RXIDR3) + channel * 0x40);
- CANRXDSR0 = ((&CAN0RXDSR0) + channel * 0x40);
- CANRXDLR = ((&CAN0RXDLR) + chann
+    CANCTL0 = ((&CAN0CTL0) + channel * 0x40);
+    CANCTL1 = ((&CAN0CTL1) + channel * 0x40);
+    CANBTR0 = ((&CAN0BTR0) + channel * 0x40);
+    CANBTR1 = ((&CAN0BTR1) + channel * 0x40);
+    CANRFLG = ((&CAN0RFLG) + channel * 0x40);
+    CANRIER = ((&CAN0RIER) + channel * 0x40);
+    CANTBSEL = ((&CAN0TBSEL) + channel * 0x40);
+    CANTFLG = ((&CAN0TFLG) + channel * 0x40);
+    CANTXIDR0 = ((&CAN0TXIDR0) + channel * 0x40);
+    CANTXIDR1 = ((&CAN0TXIDR1) + channel * 0x40);
+    CANTXIDR2 = ((&CAN0TXIDR2) + channel * 0x40);
+    CANTXIDR3 = ((&CAN0TXIDR3) + channel * 0x40);
+    CANIDMR0 = ((&CAN0IDMR0) + channel * 0x40);
+    CANIDMR1 = ((&CAN0IDMR1) + channel * 0x40);
+    CANIDMR2 = ((&CAN0IDMR2) + channel * 0x40);
+    CANIDMR3 = ((&CAN0IDMR3) + channel * 0x40);
+    CANIDMR4 = ((&CAN0IDMR4) + channel * 0x40);
+    CANIDMR5 = ((&CAN0IDMR5) + channel * 0x40);
+    CANIDMR6 = ((&CAN0IDMR6) + channel * 0x40);
+    CANIDMR7 = ((&CAN0IDMR7) + channel * 0x40);
+    CANRXIDR0 = ((&CAN0RXIDR0) + channel * 0x40);
+    CANRXIDR1 = ((&CAN0RXIDR1) + channel * 0x40);
+    CANRXIDR2 = ((&CAN0RXIDR2) + channel * 0x40);
+    CANRXIDR3 = ((&CAN0RXIDR3) + channel * 0x40);
+    CANRXDSR0 = ((&CAN0RXDSR0) + channel * 0x40);
+    CANRXDLR = ((&CAN0RXDLR) + chann
 }*/
+
+
 static Can_InitType Can0_InitType =
 {
 	CAN_BSPTYPE125K,
