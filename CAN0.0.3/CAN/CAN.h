@@ -14,7 +14,7 @@
 
 #define		CAN_CTL1_ADDRESS(address)		(*(&CAN0CTL1 + address))
 
-#define		CAN_RXDSR0_ADDRESS(address)		(*(&CAN0RXDSR0 + address))
+#define		CAN_RXDSR0_ADDRESS(address)	(*(&CAN0RXDSR0 + address))
 
 #define		CAN_TBSEL_ADDRESS(address)		(*(&CAN0TBSEL + address))
 
@@ -67,38 +67,36 @@ typedef struct Can_HwCfgType
 
 
 typedef struct _Can_AddressType
-{   	
-        Can_BspType BPS;
-	unsigned char Geway;
-	unsigned char  CANCTL0;
-	unsigned char  CANCTL1;
-	unsigned char  CANBTR0;
-	unsigned char  CANBTR1;
-	unsigned char  CANRFLG;
-	unsigned char  CANRIER;
-	unsigned char  CANTBSEL;
-	unsigned char  CANTFLG;
-	unsigned char  CANTXIDR0;
-	unsigned char  CANTXIDR1;
-	unsigned char  CANTXIDR2;
-	unsigned char  CANTXIDR3;
-	unsigned char  CANIDMR0;
-	unsigned char  CANIDMR1;
-	unsigned char  CANIDMR2;
-	unsigned char  CANIDMR3;
-	unsigned char  CANIDMR4;
-	unsigned char  CANIDMR5;
-	unsigned char  CANIDMR6;
-	unsigned char  CANIDMR7;
-	unsigned char  CANRXIDR0;
-	unsigned char  CANRXIDR1;
-	unsigned char  CANRXIDR2;
-	unsigned char  CANRXIDR3;
-	unsigned char  CANRXDSR0;
-	unsigned char  CANRXDLR;
-	unsigned char  CANTXDSR0;
-	unsigned char  CANTXDLR;
-	unsigned char  CANTXTBPR;
+{
+	unsigned char CANCTL0;
+	unsigned char CANCTL1;
+	unsigned char CANBTR0;
+	unsigned char CANBTR1;
+	unsigned char CANRFLG;
+	unsigned char CANRIER;
+	unsigned char CANTBSEL;
+	unsigned char CANTFLG;
+	unsigned char CANTXIDR0;
+	unsigned char CANTXIDR1;
+	unsigned char CANTXIDR2;
+	unsigned char CANTXIDR3;
+	unsigned char CANIDMR0;
+	unsigned char CANIDMR1;
+	unsigned char CANIDMR2;
+	unsigned char CANIDMR3;
+	unsigned char CANIDMR4;
+	unsigned char CANIDMR5;
+	unsigned char CANIDMR6;
+	unsigned char CANIDMR7;
+	unsigned char CANRXIDR0;
+	unsigned char CANRXIDR1;
+	unsigned char CANRXIDR2;
+	unsigned char CANRXIDR3;
+	unsigned char CANRXDSR0;
+	unsigned char CANRXDLR;
+	unsigned char CANTXDSR0;
+	unsigned char CANTXDLR;
+	unsigned char CANTXTBPR;
 }Can_AddressType;
 
 

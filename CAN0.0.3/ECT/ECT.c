@@ -1,6 +1,5 @@
 #include "ECT.h"
 
-
 void Ect_Init(void)
 {
 	ECT_TSCR1_TFFCA = 1;  // 定时器标志位快速清除
@@ -16,5 +15,3 @@ void Ect_Init(void)
 	ECT_TFLG1 = 0xff;	  // 清除各IC/OC中断标志位
 	ECT_TFLG2 = 0xff;     // 清除自由定时器中断标志位
 }
-
-

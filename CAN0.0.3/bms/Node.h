@@ -3,17 +3,25 @@
 
 #include "hidef.h"
 #include "derivative.h"
+#include "PrechargeM.h"
+
+typedef enum  _Node_NumType
+{
+    NODE_NUMBER0 = 0,
+    NODE_NUMBER1 = 1,
+    NODE_NUMBER2 = 2,
+    NODE_NUMBER3 = 3,
+}Node_NumType;
 
 typedef struct _Node_MsgType
 {
-	int TypeNum;	//节点号
-	Bool (*Condition)(void);//条件
-	int Number;	//条件数
-	int Status;	//条件匹配
-	void (*Act)(void);//动作
-	int Next;//下个节点
+	int TypeNum;
+	PrechargeM_ReturnType (*Condition)(void);
+	int N_num;
+	int Status;
+	PrechargeM_ReturnType  (*Act)(void);
+	Node_NumType Next;
 }Node_MsgType;
-
 
 extern Node_MsgType Lcfg[3][4];
 

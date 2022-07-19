@@ -8,7 +8,7 @@ Can_MsgType Can_MsgSendType1 =
 	{1, 0, 0, 0, 0, 0, 0, 0},
 	8,
 	0,
-	0,
+	CAN_PASSAGEWAY1,
 };
 
  Can_MsgType Can_MsgSendType2 =
@@ -18,7 +18,7 @@ Can_MsgType Can_MsgSendType1 =
 	{2, 0, 0, 0, 0, 0, 0, 0},
 	8,
 	0,
-	0,
+	CAN_PASSAGEWAY1,
 };
 
 Can_MsgType Can_MsgSendType3 =
@@ -28,7 +28,7 @@ Can_MsgType Can_MsgSendType3 =
 	{3, 0, 0, 0, 0, 0, 0, 0},
 	8,
 	0,
-	0,
+	CAN_PASSAGEWAY1,
 };
 
 Can_TimeType Can_TimeSendType =

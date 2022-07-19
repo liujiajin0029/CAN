@@ -6,10 +6,10 @@
 //void CAN_IDSend(Can_InitType *Can_Cfg)
 //{
 //	unsigned char Remove_Warning = 0;
-//	/*扩展帧ID发送*/
+//	/*æ‰©å±•å¸§IDå‘é€*/
 //	if (Can_Cfg->Ide)
 //	{
-//		/*消除移位超过15位编译器警告问题*/
+//		/*æ¶ˆé™¤ç§»ä½è¶…è¿‡15ä½ç¼–è¯‘å™¨è­¦å‘Šé—®é¢˜*/
 //		Remove_Warning =  (Can_Cfg->Id) >> 15;
 //		*((&CAN0TXIDR0) + Memory) = (unsigned char)(Remove_Warning >> 6);
 //		*((&CAN0TXIDR1) + Memory) = (unsigned char)(Can_Cfg->Id >> 13) & 0xE0;
@@ -21,7 +21,7 @@
 //	}
 //	else
 //	{
-//		/*标准帧ID发送*/
+//		/*æ ‡å‡†å¸§IDå‘é€*/
 //		*((&CAN0TXIDR0) + Memory) = (unsigned char)(Can_Cfg->Id>>3);
 //		*((&CAN0TXIDR1) + Memory) = (unsigned char)(Can_Cfg->Id<<5);
 //	}
@@ -29,17 +29,17 @@
 //
 //void Can_DataSend(Can_InitType *Can_Cfg)
 //{
-//	/*报文数据发送*/
+//	/*æŠ¥æ–‡æ•°æ®å‘é€*/
 //	for (sp = 0; sp < Can_Cfg->Len;sp++)
 //	{
 //		*((&CAN0TXDSR0) + sp + Memory) = Can_Cfg-> Data[sp];
 //	}
-//	/*报文长度发送*/
+//	/*æŠ¥æ–‡é•¿åº¦å‘é€*/
 //	*((&CAN0TXDLR) + Memory) = Can_Cfg-> Len;
 //
 //	*((&CAN0TXTBPR) + Memory) = Can_Cfg-> Prty;
 //
-//	/*清除标志*/
+//	/*æ¸…é™¤æ ‡å¿—*/
 //	*((&CAN0TFLG) + Memory) = SendBuf;
 //}
 //
@@ -47,13 +47,13 @@
 //{
 //	{
 //		{(&CAN_CTL0_ADDRESS(CAN_PASSAGEWAY1)),(&CAN_CTL0_ADDRESS(CAN_PASSAGEWAY1))|0x01},
-//		/*ID帧检测发送*/
+//		/*IDå¸§æ£€æµ‹å‘é€*/
 //		{},
-//		/*报文检测发送*/
+//		/*æŠ¥æ–‡æ£€æµ‹å‘é€*/
 //		{		},
-//		/*发送完成检测*/
+//		/*å‘é€å®Œæˆæ£€æµ‹*/
 //		{		},
-//		/*下个寄存器地址*/
+//		/*ä¸‹ä¸ªå¯„å­˜å™¨åœ°å€*/
 //		{		},
 //	};
 //
@@ -85,11 +85,10 @@
 
 void Can_Init(void)
 {
-	Can_DeInit(&Can0_InitType);
+//	Can_DeInit(&Can0_InitType);
 	Can_DeInit(&Can1_InitType);
 }
 
-/*CAN��ʼ������*/
 void Can_DeInit(Can_InitType *Can_Cfg)
 {
 	unsigned char Memory = 0;
@@ -107,7 +106,7 @@ void Can_DeInit(Can_InitType *Can_Cfg)
 	}
 
 	*((&CAN0BTR0) + Memory) |= 0xC0;
-	/*CANͨ��ͨ��Ƶ��ѡ��*/
+	/*CAN通道通信频率选择*/
 	if (Can_Cfg->BPS == CAN_BSPTYPE125K)
 	{
 		*((&CAN0BTR1) + Memory) |= 0x1D;

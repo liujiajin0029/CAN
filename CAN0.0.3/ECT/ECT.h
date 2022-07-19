@@ -4,5 +4,4 @@
 #include "derivative.h"
 
 void Ect_Init(void);
-
 #endif

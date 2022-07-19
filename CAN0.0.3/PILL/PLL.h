@@ -3,5 +3,5 @@
 
 #include "derivative.h"
 
-void Pll_Init(void);
+void Pii_Init(void);
 #endif

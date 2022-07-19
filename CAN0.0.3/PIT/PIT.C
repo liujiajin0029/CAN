@@ -18,7 +18,7 @@ void Pit_Init(void)
 void interrupt VectorNumber_Vpit0 PIT0(void)
 {
 	PITTF_PTF0 = 1;
-	Can_SendMsgAll();
+//	Can_SendMsgAll();
 }
 
 #pragma CODE_SEG DEFAULT

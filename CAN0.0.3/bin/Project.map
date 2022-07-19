@@ -15,7 +15,6 @@ FILE SECTION
 MC9S12XEP100.c.o                        Model: BANKED,        Lang: ANSI-C
 main.c.o                                Model: BANKED,        Lang: ANSI-C
 Start12.c.o                             Model: BANKED,        Lang: ANSI-C
-rtshc12.c.o (ansixbf.lib)               Model: BANKED,        Lang: ANSI-C
 PLL.C.o                                 Model: BANKED,        Lang: ANSI-C
 CAN.C.o                                 Model: BANKED,        Lang: ANSI-C
 ECT.c.o                                 Model: BANKED,        Lang: ANSI-C
@@ -29,8 +28,8 @@ Entry point: 0xC000 (_Startup)
 _startupData is allocated at 0xC00F and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x2100     72
-  _Copy    *toCopyDownBeg 0xC067
+  _Range   pZeroOut       0x2100     31
+  _Copy    *toCopyDownBeg 0xC05B
 } _startupData;
 
 *********************************************************************************************
@@ -39,11 +38,11 @@ Section Name                    Size  Type     From       To       Segment
 ---------------------------------------------------------------------------------------------
 .init                             15     R     0xC000     0xC00E   ROM_C000
 .startData                        66     R     0xC00F     0xC050   ROM_C000
-NON_BANKED                        22     R     0xC051     0xC066   ROM_C000
-.copy                             57     R     0xC067     0xC09F   ROM_C000
-.text                            935     R   0xFE8000   0xFE83A6   PAGE_FE
+NON_BANKED                        10     R     0xC051     0xC05A   ROM_C000
+.copy                             21     R     0xC05B     0xC06F   ROM_C000
+.text                            866     R   0xFE8000   0xFE8361   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
-.data                             53   R/W     0x2100     0x2134   RAM
+.data                             17   R/W     0x2100     0x2110   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
 .abs_section_a                     1   N/I        0xA        0xA   .absSeg2
@@ -784,12 +783,12 @@ NON_BANKED                        22     R     0xC051     0xC066   ROM_C000
 .abs_section_3f2                   2   N/I      0x3F2      0x3F3   .absSeg737
 .abs_section_ff7a                  2     R     0xFF7A     0xFF7B   .absSeg738
 .abs_section_ffaa                  2     R     0xFFAA     0xFFAB   .absSeg739
-.bss                              19   R/W     0x2135     0x2147   RAM
+.bss                              14   R/W     0x2111     0x211E   RAM
 .vectSeg740_vect                   2     R     0xFFFE     0xFFFF   .vectSeg740
 
 Summary of section sizes per section type:
-READ_ONLY (R):         44D (dec:     1101)
-READ_WRITE (R/W):      148 (dec:      328)
+READ_ONLY (R):         3D8 (dec:      984)
+READ_WRITE (R/W):      11F (dec:      287)
 NO_INIT (N/I):         383 (dec:      899)
 
 *********************************************************************************************
@@ -1555,47 +1554,36 @@ MODULE:                 -- Start12.c.o --
      _startupData                              C00F       6       6       3   .startData  
 - LABELS:
      __SEG_END_SSTACK                          2100       0       0       1               
-MODULE:                 -- rtshc12.c.o (ansixbf.lib) --
-- PROCEDURES:
-     _COPY                                     C051       8       8       1   NON_BANKED  
-- VARIABLES:
 MODULE:                 -- PLL.C.o --
 - PROCEDURES:
-     Pll_Init                                FE8067      1D      29       2   .text       
+     Pii_Init                                FE8067      1D      29       2   .text       
 - VARIABLES:
 MODULE:                 -- CAN.C.o --
 - PROCEDURES:
-     Can_Init                                FE8084       F      15       2   .text       
-     Can_DeInit                              FE8093      F6     246       4   .text       
-     Can_SendMsg                             FE8189     11A     282       7   .text       
-     Can_SendTime                            FE82A3      2C      44       2   .text       
-     Can_SendMsgAll                          FE82CF      12      18       2   .text       
-     Can_GetMsg                              FE82E1      62      98       2   .text       
-     Can_GetCallBack                         FE8343      21      33       2   .text       
+     Can_Init                                FE8084       8       8       2   .text       
+     Can_DeInit                              FE808C      F6     246       2   .text       
+     Can_SendMsg                             FE8182     11A     282       3   .text       
+     Can_GetMsg                              FE829C      62      98       2   .text       
+     Can_GetCallBack                         FE82FE      21      33       2   .text       
 - VARIABLES:
      Can1_InitType                             2100       3       3       1   .data       
-     Can0_InitType                             2135       3       3       1   .bss        
-     Can_TIME.1                                2138       2       2       5   .bss        
 MODULE:                 -- ECT.c.o --
 - PROCEDURES:
-     Ect_Init                                FE8364      24      36       2   .text       
+     Ect_Init                                FE831F      24      36       2   .text       
 - VARIABLES:
 MODULE:                 -- PIT.C.o --
 - PROCEDURES:
-     Pit_Init                                FE8388      1F      31       2   .text       
-     PIT0                                      C059       9       9       1   NON_BANKED  
-     Can_receive                               C062       5       5       1   NON_BANKED  
+     Pit_Init                                FE8343      1F      31       2   .text       
+     PIT0                                      C051       5       5       1   NON_BANKED  
+     Can_receive                               C056       5       5       1   NON_BANKED  
 - VARIABLES:
      _Vector_66                                FF7A       2       2       0   .abs_section_ff7a
      _Vector_42                                FFAA       2       2       0   .abs_section_ffaa
 MODULE:                 -- CAN_CFG.c.o --
 - PROCEDURES:
 - VARIABLES:
-     Can_MsgSendType1                          2103       E      14       1   .data       
-     Can_MsgSendType2                          2111       E      14       1   .data       
-     Can_MsgSendType3                          211F       E      14       1   .data       
-     Can_TimeSendType                          212D       8       8       1   .data       
-     Can_MsgGetType                            213A       E      14       3   .bss        
+     Can_MsgSendType3                          2103       E      14       1   .data       
+     Can_MsgGetType                            2111       E      14       3   .bss        
 
 *********************************************************************************************
 MODULE STATISTIC
@@ -1604,29 +1592,27 @@ MODULE STATISTIC
   MC9S12XEP100.c.o                           899      0      0
   main.c.o                                     0     41      0
   Start12.c.o                                  0     77      0
-  rtshc12.c.o (ansixbf.lib)                    0      8      0
   PLL.C.o                                      0     29      0
-  CAN.C.o                                      8    736      0
+  CAN.C.o                                      3    667      0
   ECT.c.o                                      0     36      0
-  PIT.C.o                                      0     45      4
-  CAN_CFG.c.o                                 64      0      0
-  other                                      256     68     57
+  PIT.C.o                                      0     41      4
+  CAN_CFG.c.o                                 28      0      0
+  other                                      256     68     21
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 SECTION: ".text"
-  main Init Pll_Init Can_Init Can_DeInit Can_SendMsg Can_SendTime 
-  Can_SendMsgAll Can_GetMsg Can_GetCallBack Ect_Init Pit_Init 
+  main Init Pii_Init Can_Init Can_DeInit Can_SendMsg Can_GetMsg 
+  Can_GetCallBack Ect_Init Pit_Init 
 SECTION: ".data"
-  Can1_InitType Can_MsgSendType1 Can_MsgSendType2 Can_MsgSendType3 
-  Can_TimeSendType 
+  Can1_InitType Can_MsgSendType3 
 SECTION: ".bss"
-  Can0_InitType Can_TIME.1 Can_MsgGetType 
+  Can_MsgGetType 
 SECTION: ".init"
   _Startup 
 SECTION: "NON_BANKED"
-  _COPY PIT0 Can_receive 
+  PIT0 Can_receive 
 SECTION: ".abs_section_8"
   _PORTE 
 SECTION: ".abs_section_9"
@@ -3851,105 +3837,63 @@ OBJECT LIST SORTED BY ADDRESS
      _TIM_OCPD                                  3FC       1       1       0   .abs_section_3fc
      _TIM_PTPSR                                 3FE       1       1       0   .abs_section_3fe
      Can1_InitType                             2100       3       3       1   .data       
-     Can_MsgSendType1                          2103       E      14       1   .data       
-     Can_MsgSendType2                          2111       E      14       1   .data       
-     Can_MsgSendType3                          211F       E      14       1   .data       
-     Can_TimeSendType                          212D       8       8       1   .data       
-     Can0_InitType                             2135       3       3       1   .bss        
-     Can_TIME.1                                2138       2       2       5   .bss        
-     Can_MsgGetType                            213A       E      14       3   .bss        
+     Can_MsgSendType3                          2103       E      14       1   .data       
+     Can_MsgGetType                            2111       E      14       3   .bss        
      _Startup                                  C000       F      15       0   .init       
-     _COPY                                     C051       8       8       1   NON_BANKED  
-     PIT0                                      C059       9       9       1   NON_BANKED  
-     Can_receive                               C062       5       5       1   NON_BANKED  
+     PIT0                                      C051       5       5       1   NON_BANKED  
+     Can_receive                               C056       5       5       1   NON_BANKED  
      _Vector_66                                FF7A       2       2       0   .abs_section_ff7a
      _Vector_42                                FFAA       2       2       0   .abs_section_ffaa
      main                                    FE8000      29      41       2   .text       
      Init                                    FE8029      3E      62       2   .text       
-     Pll_Init                                FE8067      1D      29       2   .text       
-     Can_Init                                FE8084       F      15       2   .text       
-     Can_DeInit                              FE8093      F6     246       4   .text       
-     Can_SendMsg                             FE8189     11A     282       7   .text       
-     Can_SendTime                            FE82A3      2C      44       2   .text       
-     Can_SendMsgAll                          FE82CF      12      18       2   .text       
-     Can_GetMsg                              FE82E1      62      98       2   .text       
-     Can_GetCallBack                         FE8343      21      33       2   .text       
-     Ect_Init                                FE8364      24      36       2   .text       
-     Pit_Init                                FE8388      1F      31       2   .text       
+     Pii_Init                                FE8067      1D      29       2   .text       
+     Can_Init                                FE8084       8       8       2   .text       
+     Can_DeInit                              FE808C      F6     246       2   .text       
+     Can_SendMsg                             FE8182     11A     282       3   .text       
+     Can_GetMsg                              FE829C      62      98       2   .text       
+     Can_GetCallBack                         FE82FE      21      33       2   .text       
+     Ect_Init                                FE831F      24      36       2   .text       
+     Pit_Init                                FE8343      1F      31       2   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
 ---------------------------------------------------------------------------------------------
 NOT USED PROCEDURES
-rtshc12.c.o (ansixbf.lib):
-  _BSHL _BSHRS _BSHRU _BDIVMODU _BDIVMODS _ISHL _ISHRU _ISHRS _LSHL _LSHRU 
-  _LSHRS _LADD _LSUB _LAND _LOR _LXOR _LCMP _LCMP_P _LCMP_PP _LNEG _LCOM _LINC 
-  _LDEC _LMUL _LMULU16x32 _LMULS16x32 _lDivMod _LDIVU _NEG_P _LDIVS _LMODU 
-  _LMODS _ILSEXT _CASE_DIRECT _CASE_DIRECT_BYTE _CASE_CHECKED 
-  _CASE_CHECKED_BYTE _CASE_SEARCH _CASE_SEARCH_BYTE _CASE_SEARCH_8 
-  _CASE_SEARCH_8_BYTE _FCALL _FPCMP _PADD _PSUB _PINC _PDEC 
+CAN.C.o:
+  Can_SendTime Can_SendMsgAll 
 NOT USED VARIABLES
 main.c.o:
   Can1_InitType Can0_InitType 
-rtshc12.c.o (ansixbf.lib):
-  _PowOfTwo_8 _PowOfTwo_16 _PowOfTwo_32 errno 
+CAN.C.o:
+  Can0_InitType Can_TIME.1 Can_MsgSendType1 Can_MsgSendType2 Can_TimeSendType 
 PIT.C.o:
   Can1_InitType Can0_InitType 
 CAN_CFG.c.o:
-  Can1_InitType Can0_InitType 
+  Can1_InitType Can_MsgSendType1 Can_MsgSendType2 Can_TimeSendType 
+  Can0_InitType 
 
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xC067 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xC05B ---- SIZE       4 ---
 Filling bytes inserted
- 00332102
-------- ROM-ADDRESS: 0xC06B ---- RAM-ADDRESS: 0x2102 ---- SIZE       1 ---
+ 000F2102
+------- ROM-ADDRESS: 0xC05F ---- RAM-ADDRESS: 0x2102 ---- SIZE       1 ---
 Name of initialized Object : Can1_InitType:2
  40
-------- ROM-ADDRESS: 0xC06C ---- SIZE       1 ---
+------- ROM-ADDRESS: 0xC060 ---- SIZE       1 ---
 Filling bytes inserted
  00
-------- ROM-ADDRESS: 0xC06D ---- RAM-ADDRESS: 0x2104 ---- SIZE       3 ---
-Name of initialized Object : Can_MsgSendType1:1
- 010001
-------- ROM-ADDRESS: 0xC070 ---- SIZE       7 ---
-Filling bytes inserted
- 0000000000 0000
-------- ROM-ADDRESS: 0xC077 ---- RAM-ADDRESS: 0x210E ---- SIZE       1 ---
-Name of initialized Object : Can_MsgSendType1:11
- 08
-------- ROM-ADDRESS: 0xC078 ---- SIZE       3 ---
-Filling bytes inserted
- 000000
-------- ROM-ADDRESS: 0xC07B ---- RAM-ADDRESS: 0x2112 ---- SIZE       3 ---
-Name of initialized Object : Can_MsgSendType2:1
- 020002
-------- ROM-ADDRESS: 0xC07E ---- SIZE       7 ---
-Filling bytes inserted
- 0000000000 0000
-------- ROM-ADDRESS: 0xC085 ---- RAM-ADDRESS: 0x211C ---- SIZE       1 ---
-Name of initialized Object : Can_MsgSendType2:11
- 08
-------- ROM-ADDRESS: 0xC086 ---- SIZE       3 ---
-Filling bytes inserted
- 000000
-------- ROM-ADDRESS: 0xC089 ---- RAM-ADDRESS: 0x2120 ---- SIZE       3 ---
+------- ROM-ADDRESS: 0xC061 ---- RAM-ADDRESS: 0x2104 ---- SIZE       3 ---
 Name of initialized Object : Can_MsgSendType3:1
  030003
-------- ROM-ADDRESS: 0xC08C ---- SIZE       7 ---
+------- ROM-ADDRESS: 0xC064 ---- SIZE       7 ---
 Filling bytes inserted
  0000000000 0000
-------- ROM-ADDRESS: 0xC093 ---- RAM-ADDRESS: 0x212A ---- SIZE       1 ---
+------- ROM-ADDRESS: 0xC06B ---- RAM-ADDRESS: 0x210E ---- SIZE       3 ---
 Name of initialized Object : Can_MsgSendType3:11
- 08
-------- ROM-ADDRESS: 0xC094 ---- SIZE       3 ---
-Filling bytes inserted
- 000000
-------- ROM-ADDRESS: 0xC097 ---- RAM-ADDRESS: 0x212E ---- SIZE       7 ---
-Name of initialized Object : Can_TimeSendType:1
- 280032003C 0064
-------- ROM-ADDRESS: 0xC09E ---- SIZE       2 ---
+ 080040
+------- ROM-ADDRESS: 0xC06E ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -3957,24 +3901,21 @@ Filling bytes inserted
 OBJECT-DEPENDENCIES SECTION
 ---------------------------------------------------------------------------------------------
 _Startup                  USES __SEG_END_SSTACK Init main 
-PIT0                      USES _PITTF Can_SendMsgAll 
+PIT0                      USES _PITTF 
 Can_receive               USES Can_GetCallBack 
 _Vector_66                USES PIT0 
 _Vector_42                USES Can_receive 
-main                      USES Pll_Init Can_Init Pit_Init Ect_Init _PORTCD 
+main                      USES Pii_Init Can_Init Pit_Init Ect_Init _PORTCD 
                                 _DDRCD 
 Init                      USES _startupData 
-Pll_Init                  USES _CLKSEL _PLLCTL _SYNR _REFDV _POSTDIV _CRGFLG 
-Can_Init                  USES Can0_InitType Can_DeInit Can1_InitType 
+Pii_Init                  USES _CLKSEL _PLLCTL _SYNR _REFDV _POSTDIV _CRGFLG 
+Can_Init                  USES Can1_InitType Can_DeInit 
 Can_DeInit                USES _CAN0CTL0 _CAN0RXDSR0 _CAN0CTL1 _CAN0BTR0 
                                 _CAN0BTR1 _CAN0IDMR0 _CAN0IDMR1 _CAN0IDMR3 _CAN0IDMR4 
                                 _CAN0IDMR5 _CAN0IDMR6 _CAN0IDMR7 _CAN0RIER 
 Can_SendMsg               USES Can_SendMsg _CAN0CTL0 _CAN0TBSEL _CAN0TFLG 
                                 _CAN0TXIDR0 _CAN0TXIDR1 _CAN0TXIDR2 _CAN0TXIDR3 
                                 _CAN0TXDSR0 _CAN0TXDLR _CAN0TXTBPR 
-Can_SendTime              USES Can_TIME.1 Can_MsgSendType1 Can_SendMsg 
-                                Can_MsgSendType2 
-Can_SendMsgAll            USES Can_TimeSendType _COPY Can_SendTime 
 Can_GetMsg                USES _CAN1RFLG _CAN1RXIDR1 _CAN1RXIDR0 _CAN1RXDLR 
                                 _CAN1RXDSR0 
 Can_GetCallBack           USES Can_MsgGetType Can_GetMsg Can_MsgSendType3 
@@ -3992,7 +3933,7 @@ DEPENDENCY TREE
  | 
  +- main                
  |  | 
- |  +- Pll_Init            
+ |  +- Pii_Init            
  |  |    
  |  +- Can_Init            
  |  |  | 
@@ -4011,15 +3952,7 @@ DEPENDENCY TREE
  _Vector_66          
  | 
  +- PIT0                
-    | 
-    +- Can_SendMsgAll      
-       | 
-       +- _COPY               
-       |    
-       +- Can_SendTime        
-          | 
-          +- Can_SendMsg         
-               
+      
  _Vector_42          
  | 
  +- Can_receive         
@@ -4028,8 +3961,8 @@ DEPENDENCY TREE
        | 
        +- Can_GetMsg          
        |    
-       +- Can_SendMsg          (see above)
-          
+       +- Can_SendMsg         
+            
 *********************************************************************************************
 STATISTIC SECTION
 ---------------------------------------------------------------------------------------------
@@ -4037,5 +3970,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 8
-Total size of all blocks to be downloaded: 1101
+Total size of all blocks to be downloaded: 984
 

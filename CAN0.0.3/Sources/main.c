@@ -19,16 +19,15 @@ void main(void)
   /* put your own code here */
 
     DisableInterrupts;
-    Pll_Init();
+    Pii_Init();
     Can_Init();
     Pit_Init();
     Ect_Init();
     EnableInterrupts;
-    MODE_ONE=1;
-    MODE_ONE_DIR=1;
-    MODE_TWO=0;
-    MODE_TWO_DIR=1;
-
+    MODE_ONE = 1;
+    MODE_ONE_DIR = 1;
+    MODE_TWO = 0;
+    MODE_TWO_DIR = 1;          
     for(;;)
     {
       _FEED_COP();   /* feeds the dog */
