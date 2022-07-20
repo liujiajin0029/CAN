@@ -1,7 +1,7 @@
 #include "derivative.h"
 #include "CAN_CFG.h"
 
-Can_MsgType Can_MsgSendType1 =
+Can_MsgType  Can_MsgSendType1 =
 {
 	0x00000001,
 	0,
@@ -21,7 +21,7 @@ Can_MsgType Can_MsgSendType1 =
 	CAN_PASSAGEWAY1,
 };
 
-Can_MsgType Can_MsgSendType3 =
+Can_MsgType  Can_MsgSendType3 =
 {
 	0x000000003,
 	0,

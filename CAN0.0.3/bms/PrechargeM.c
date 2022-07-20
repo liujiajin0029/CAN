@@ -1,11 +1,11 @@
 #include "PrechargeM.h"
 
 
-float  VBAT_BATGet()
+float PrechargeM_BATGet(void)
 {
     return 1;
 }
-float  VBAT_V1Get()
+float PrechargeM_V1Get(void)
 {
     return 0;
 }
@@ -16,16 +16,16 @@ void PrechargeM_Init(void)
 
 }
 
-PrechargeM_ReturnType PrechargeM_StartPre(void)
+PrechargeM_Return_E PrechargeM_StartPre(void)
 {
     PrechargeM_DcType  Hw_Data;
-    PrechargeM_ReturnType  retval = PRECHARGEM_NOTOK;
+    PrechargeM_Return_E  retval = PRECHARGEM_NOTOK;
 
-    Hw_Data.vbat_data  = VBAT_BATGet();
+    Hw_Data.vbat_data  = PrechargeM_BATGet();
 
-    Hw_Data.state_v1 = VBAT_V1Get();
+    Hw_Data.state_v1 = PrechargeM_V1Get();
 
-    if ( Hw_Data.state_v1 > 10)
+    if (Hw_Data.state_v1 > 10)
     {
         retval = PRECHARGEM_OK;
     }
@@ -33,13 +33,16 @@ PrechargeM_ReturnType PrechargeM_StartPre(void)
     {
         retval = PRECHARGEM_NOTOK;
     }
+    /*测试使用*/
+    retval = PRECHARGEM_OK;
+
     return retval;
 
 }
 
-PrechargeM_ReturnType  PrechargeM_StopPre(void)
+PrechargeM_Return_E PrechargeM_StopPre(void)
 {
-    PrechargeM_ReturnType  retval = PRECHARGEM_NOTOK;
+    PrechargeM_Return_E  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
 
@@ -47,27 +50,27 @@ PrechargeM_ReturnType  PrechargeM_StopPre(void)
 }
 
 
-PrechargeM_ReturnType PrechargeM_StartMaster(void)
+PrechargeM_Return_E PrechargeM_StartMaster(void)
 {
-    PrechargeM_ReturnType  retval = PRECHARGEM_NOTOK;
+    PrechargeM_Return_E  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
 
     return retval;
 }
 
-PrechargeM_ReturnType PrechargeM_StopMaster(void)
+PrechargeM_Return_E PrechargeM_StopMaster(void)
 {
-    PrechargeM_ReturnType  retval = PRECHARGEM_NOTOK;
+    PrechargeM_Return_E  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
 
     return retval;
 }
 
-PrechargeM_ReturnType PrechargeM_Change(void)
+PrechargeM_Return_E PrechargeM_Change(void)
 {
-    PrechargeM_ReturnType  retval = PRECHARGEM_NOTOK;
+    PrechargeM_Return_E  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
 
@@ -75,18 +78,18 @@ PrechargeM_ReturnType PrechargeM_Change(void)
 
 }
 
-PrechargeM_ReturnType PrechargeM_IsFinish(void)
+PrechargeM_Return_E PrechargeM_IsFinish(void)
 {
-    PrechargeM_ReturnType  retval = PRECHARGEM_NOTOK;
+    PrechargeM_Return_E  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
 
     return retval;
 }
 
-PrechargeM_ReturnType PrechargeM_IsFail(void)
+PrechargeM_Return_E PrechargeM_IsFail(void)
 {
-    PrechargeM_ReturnType  retval = PRECHARGEM_NOTOK;
+    PrechargeM_Return_E  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
 
@@ -95,10 +98,10 @@ PrechargeM_ReturnType PrechargeM_IsFail(void)
 }
 
 /*诊断函数，主要用来故障判断*/
-PrechargeM_ReturnType PrechargeM_Diagnosis(void)
+PrechargeM_Return_E PrechargeM_Diagnosis(void)
 {
     // PrechargeM_FaultType diagnosis2 ;
-    PrechargeM_ReturnType  retval = PRECHARGEM_NOTOK;
+    PrechargeM_Return_E  retval = PRECHARGEM_NOTOK;
 /*    if (diagnosis2.FaulData1 == 1)
     {
         retval = PRECHARGEM_NOTOK;
@@ -112,11 +115,11 @@ PrechargeM_ReturnType PrechargeM_Diagnosis(void)
 }
 
 
-PrechargeM_ReturnType PrechargeM_NoAct(void)
+PrechargeM_Return_E PrechargeM_NoAct(void)
 {
-     PrechargeM_ReturnType  retval = PRECHARGEM_NOTOK;
+     PrechargeM_Return_E  retval = PRECHARGEM_NOTOK;
 
-    retval = PRECHARGEM_OK;
+    retval = PRECHARGEM_NOTOK;
 
     return retval;
 }

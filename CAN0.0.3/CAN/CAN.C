@@ -1,91 +1,11 @@
 #include "derivative.h"
 #include "CAN.h"
 #include "CAN_CFG.h"
-
-
-//void CAN_IDSend(Can_InitType *Can_Cfg)
-//{
-//	unsigned char Remove_Warning = 0;
-//	/*æ‰©å±•å¸§IDå‘é€*/
-//	if (Can_Cfg->Ide)
-//	{
-//		/*æ¶ˆé™¤ç§»ä½è¶…è¿‡15ä½ç¼–è¯‘å™¨è­¦å‘Šé—®é¢˜*/
-//		Remove_Warning =  (Can_Cfg->Id) >> 15;
-//		*((&CAN0TXIDR0) + Memory) = (unsigned char)(Remove_Warning >> 6);
-//		*((&CAN0TXIDR1) + Memory) = (unsigned char)(Can_Cfg->Id >> 13) & 0xE0;
-//		*((&CAN0TXIDR1) + Memory) |= 0x18;
-//		*((&CAN0TXIDR1) + Memory) |= (unsigned char)(Can_Cfg->Id >> 15) & 0x07;
-//		*((&CAN0TXIDR2) + Memory) = (unsigned char)(Can_Cfg->Id >> 7);
-//		*((&CAN0TXIDR3) + Memory) = (unsigned char)(Can_Cfg->Id << 1);
-//		*((&CAN0TXIDR3) + Memory) |= 0x01;
-//	}
-//	else
-//	{
-//		/*æ ‡å‡†å¸§IDå‘é€*/
-//		*((&CAN0TXIDR0) + Memory) = (unsigned char)(Can_Cfg->Id>>3);
-//		*((&CAN0TXIDR1) + Memory) = (unsigned char)(Can_Cfg->Id<<5);
-//	}
-//}
-//
-//void Can_DataSend(Can_InitType *Can_Cfg)
-//{
-//	/*æŠ¥æ–‡æ•°æ®å‘é€*/
-//	for (sp = 0; sp < Can_Cfg->Len;sp++)
-//	{
-//		*((&CAN0TXDSR0) + sp + Memory) = Can_Cfg-> Data[sp];
-//	}
-//	/*æŠ¥æ–‡é•¿åº¦å‘é€*/
-//	*((&CAN0TXDLR) + Memory) = Can_Cfg-> Len;
-//
-//	*((&CAN0TXTBPR) + Memory) = Can_Cfg-> Prty;
-//
-//	/*æ¸…é™¤æ ‡å¿—*/
-//	*((&CAN0TFLG) + Memory) = SendBuf;
-//}
-//
-//Can_SendType Can_Send[] =
-//{
-//	{
-//		{(&CAN_CTL0_ADDRESS(CAN_PASSAGEWAY1)),(&CAN_CTL0_ADDRESS(CAN_PASSAGEWAY1))|0x01},
-//		/*IDå¸§æ£€æµ‹å‘é€*/
-//		{},
-//		/*æŠ¥æ–‡æ£€æµ‹å‘é€*/
-//		{		},
-//		/*å‘é€å®Œæˆæ£€æµ‹*/
-//		{		},
-//		/*ä¸‹ä¸ªå¯„å­˜å™¨åœ°å€*/
-//		{		},
-//	};
-//
-//	{
-//		{		},
-//		{		},
-//		{		},
-//		{		},
-//	}
-//}
-//
-//void Can_SendAll(Can_SendType *Can_SendType)
-//{
-//	int i;
-//
-//	for (i = 0 ; i<64 ; i++)
-//	{
-//		if (((&CAN0TXIDR0) + Can_SendAll[i].Memory + i) == Can_SendAll[i].address)
-//		{
-//			*((&CAN0TXIDR0) + Can_SendAll[i].Memory+i) = Can_SendAll[i].data;
-//		}
-//		else
-//		{
-//
-//		}
-//	}
-//}
-//
+#include "Node.h"
 
 void Can_Init(void)
 {
-//	Can_DeInit(&Can0_InitType);
+	Can_DeInit(&Can0_InitType);
 	Can_DeInit(&Can1_InitType);
 }
 
@@ -245,7 +165,7 @@ void Can_SendTime(Can_TimeType TimeCfgType)
 /*发送所有函数*/
 void Can_SendMsgAll(void)
 {
-	Can_SendTime(Can_TimeSendType);
+//	Can_SendTime(Can_TimeSendType);
 }
 
 /*报文接收函数*/
@@ -300,6 +220,7 @@ Bool Can_GetCallBack(void)
 		/*接收信息*/
 		if (Can_MsgGetType.Id == 0x3c && (!Can_MsgGetType.Ide))
 		{
+                    Node_Poll();
 			if (Can_SendMsg(&Can_MsgSendType3) == 1)
 			{
 

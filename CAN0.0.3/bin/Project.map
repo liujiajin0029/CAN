@@ -19,7 +19,10 @@ PLL.C.o                                 Model: BANKED,        Lang: ANSI-C
 CAN.C.o                                 Model: BANKED,        Lang: ANSI-C
 ECT.c.o                                 Model: BANKED,        Lang: ANSI-C
 PIT.C.o                                 Model: BANKED,        Lang: ANSI-C
+Node.c.o                                Model: BANKED,        Lang: ANSI-C
+PrechargeM.c.o                          Model: BANKED,        Lang: ANSI-C
 CAN_CFG.c.o                             Model: BANKED,        Lang: ANSI-C
+Node_Cfg.c.o                            Model: BANKED,        Lang: ANSI-C
 
 *********************************************************************************************
 STARTUP SECTION
@@ -28,7 +31,7 @@ Entry point: 0xC000 (_Startup)
 _startupData is allocated at 0xC00F and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x2100     31
+  _Range   pZeroOut       0x2100     170
   _Copy    *toCopyDownBeg 0xC05B
 } _startupData;
 
@@ -39,10 +42,10 @@ Section Name                    Size  Type     From       To       Segment
 .init                             15     R     0xC000     0xC00E   ROM_C000
 .startData                        66     R     0xC00F     0xC050   ROM_C000
 NON_BANKED                        10     R     0xC051     0xC05A   ROM_C000
-.copy                             21     R     0xC05B     0xC06F   ROM_C000
-.text                            866     R   0xFE8000   0xFE8361   PAGE_FE
+.copy                            119     R     0xC05B     0xC0D1   ROM_C000
+.text                           1084     R   0xFE8000   0xFE843B   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
-.data                             17   R/W     0x2100     0x2110   RAM
+.data                            151   R/W     0x2100     0x2196   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
 .abs_section_a                     1   N/I        0xA        0xA   .absSeg2
@@ -783,12 +786,12 @@ NON_BANKED                        10     R     0xC051     0xC05A   ROM_C000
 .abs_section_3f2                   2   N/I      0x3F2      0x3F3   .absSeg737
 .abs_section_ff7a                  2     R     0xFF7A     0xFF7B   .absSeg738
 .abs_section_ffaa                  2     R     0xFFAA     0xFFAB   .absSeg739
-.bss                              14   R/W     0x2111     0x211E   RAM
+.bss                              19   R/W     0x2197     0x21A9   RAM
 .vectSeg740_vect                   2     R     0xFFFE     0xFFFF   .vectSeg740
 
 Summary of section sizes per section type:
-READ_ONLY (R):         3D8 (dec:      984)
-READ_WRITE (R/W):      11F (dec:      287)
+READ_ONLY (R):         514 (dec:     1300)
+READ_WRITE (R/W):      1AA (dec:      426)
 NO_INIT (N/I):         383 (dec:      899)
 
 *********************************************************************************************
@@ -1544,11 +1547,11 @@ MODULE:                 -- MC9S12XEP100.c.o --
      _TIM_PACNT                                 3F2       2       2       0   .abs_section_3f2
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     main                                    FE8000      29      41       2   .text       
+     main                                    FE8000      2D      45       2   .text       
 - VARIABLES:
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
-     Init                                    FE8029      3E      62       2   .text       
+     Init                                    FE802D      3E      62       2   .text       
      _Startup                                  C000       F      15       0   .init       
 - VARIABLES:
      _startupData                              C00F       6       6       3   .startData  
@@ -1556,59 +1559,89 @@ MODULE:                 -- Start12.c.o --
      __SEG_END_SSTACK                          2100       0       0       1               
 MODULE:                 -- PLL.C.o --
 - PROCEDURES:
-     Pii_Init                                FE8067      1D      29       2   .text       
+     Pii_Init                                FE806B      1D      29       2   .text       
 - VARIABLES:
 MODULE:                 -- CAN.C.o --
 - PROCEDURES:
-     Can_Init                                FE8084       8       8       2   .text       
-     Can_DeInit                              FE808C      F6     246       2   .text       
-     Can_SendMsg                             FE8182     11A     282       3   .text       
-     Can_GetMsg                              FE829C      62      98       2   .text       
-     Can_GetCallBack                         FE82FE      21      33       2   .text       
+     Can_Init                                FE8088       F      15       2   .text       
+     Can_DeInit                              FE8097      F6     246       4   .text       
+     Can_SendMsg                             FE818D     11A     282       5   .text       
+     Can_GetMsg                              FE82A7      62      98       2   .text       
+     Can_GetCallBack                         FE8309      25      37       2   .text       
 - VARIABLES:
      Can1_InitType                             2100       3       3       1   .data       
+     Can0_InitType                             2197       3       3       1   .bss        
 MODULE:                 -- ECT.c.o --
 - PROCEDURES:
-     Ect_Init                                FE831F      24      36       2   .text       
+     Ect_Init                                FE832E      24      36       2   .text       
 - VARIABLES:
 MODULE:                 -- PIT.C.o --
 - PROCEDURES:
-     Pit_Init                                FE8343      1F      31       2   .text       
+     Pit_Init                                FE8352      1F      31       2   .text       
      PIT0                                      C051       5       5       1   NON_BANKED  
      Can_receive                               C056       5       5       1   NON_BANKED  
 - VARIABLES:
      _Vector_66                                FF7A       2       2       0   .abs_section_ff7a
      _Vector_42                                FFAA       2       2       0   .abs_section_ffaa
+MODULE:                 -- Node.c.o --
+- PROCEDURES:
+     Node_Poll                               FE8371      98     152       4   .text       
+- VARIABLES:
+     Node_Current.1                            219A       2       2       5   .bss        
+MODULE:                 -- PrechargeM.c.o --
+- PROCEDURES:
+     PrechargeM_BATGet                       FE8409       6       6       2   .text       
+     PrechargeM_V1Get                        FE840F       5       5       2   .text       
+     PrechargeM_StartPre                     FE8414       C      12       2   .text       
+     PrechargeM_StopPre                      FE8420       4       4       4   .text       
+     PrechargeM_StopMaster                   FE8424       4       4       2   .text       
+     PrechargeM_Change                       FE8428       4       4       2   .text       
+     PrechargeM_IsFinish                     FE842C       4       4       4   .text       
+     PrechargeM_IsFail                       FE8430       4       4       2   .text       
+     PrechargeM_Diagnosis                    FE8434       4       4      10   .text       
+     PrechargeM_NoAct                        FE8438       4       4       6   .text       
+- VARIABLES:
 MODULE:                 -- CAN_CFG.c.o --
 - PROCEDURES:
 - VARIABLES:
-     Can_MsgSendType3                          2103       E      14       1   .data       
-     Can_MsgGetType                            2111       E      14       3   .bss        
+     Can_MsgSendType1                          2103       E      14       2   .data       
+     Can_MsgSendType3                          2111       E      14       1   .data       
+     Can_MsgGetType                            219C       E      14       3   .bss        
+MODULE:                 -- Node_Cfg.c.o --
+- PROCEDURES:
+- VARIABLES:
+     Node_MsgData                              211F      78     120       6   .data       
 
 *********************************************************************************************
 MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   MC9S12XEP100.c.o                           899      0      0
-  main.c.o                                     0     41      0
+  main.c.o                                     0     45      0
   Start12.c.o                                  0     77      0
   PLL.C.o                                      0     29      0
-  CAN.C.o                                      3    667      0
+  CAN.C.o                                      6    678      0
   ECT.c.o                                      0     36      0
   PIT.C.o                                      0     41      4
-  CAN_CFG.c.o                                 28      0      0
-  other                                      256     68     21
+  Node.c.o                                     2    152      0
+  PrechargeM.c.o                               0     51      0
+  CAN_CFG.c.o                                 42      0      0
+  Node_Cfg.c.o                               120      0      0
+  other                                      256     68    119
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 SECTION: ".text"
   main Init Pii_Init Can_Init Can_DeInit Can_SendMsg Can_GetMsg 
-  Can_GetCallBack Ect_Init Pit_Init 
+  Can_GetCallBack Ect_Init Pit_Init Node_Poll PrechargeM_BATGet 
+  PrechargeM_V1Get PrechargeM_StartPre PrechargeM_StopPre PrechargeM_StopMaster 
+  PrechargeM_Change PrechargeM_IsFinish PrechargeM_IsFail PrechargeM_Diagnosis 
+  PrechargeM_NoAct 
 SECTION: ".data"
-  Can1_InitType Can_MsgSendType3 
+  Can1_InitType Can_MsgSendType1 Can_MsgSendType3 Node_MsgData 
 SECTION: ".bss"
-  Can_MsgGetType 
+  Can0_InitType Node_Current.1 Can_MsgGetType 
 SECTION: ".init"
   _Startup 
 SECTION: "NON_BANKED"
@@ -3837,23 +3870,38 @@ OBJECT LIST SORTED BY ADDRESS
      _TIM_OCPD                                  3FC       1       1       0   .abs_section_3fc
      _TIM_PTPSR                                 3FE       1       1       0   .abs_section_3fe
      Can1_InitType                             2100       3       3       1   .data       
-     Can_MsgSendType3                          2103       E      14       1   .data       
-     Can_MsgGetType                            2111       E      14       3   .bss        
+     Can_MsgSendType1                          2103       E      14       2   .data       
+     Can_MsgSendType3                          2111       E      14       1   .data       
+     Node_MsgData                              211F      78     120       6   .data       
+     Can0_InitType                             2197       3       3       1   .bss        
+     Node_Current.1                            219A       2       2       5   .bss        
+     Can_MsgGetType                            219C       E      14       3   .bss        
      _Startup                                  C000       F      15       0   .init       
      PIT0                                      C051       5       5       1   NON_BANKED  
      Can_receive                               C056       5       5       1   NON_BANKED  
      _Vector_66                                FF7A       2       2       0   .abs_section_ff7a
      _Vector_42                                FFAA       2       2       0   .abs_section_ffaa
-     main                                    FE8000      29      41       2   .text       
-     Init                                    FE8029      3E      62       2   .text       
-     Pii_Init                                FE8067      1D      29       2   .text       
-     Can_Init                                FE8084       8       8       2   .text       
-     Can_DeInit                              FE808C      F6     246       2   .text       
-     Can_SendMsg                             FE8182     11A     282       3   .text       
-     Can_GetMsg                              FE829C      62      98       2   .text       
-     Can_GetCallBack                         FE82FE      21      33       2   .text       
-     Ect_Init                                FE831F      24      36       2   .text       
-     Pit_Init                                FE8343      1F      31       2   .text       
+     main                                    FE8000      2D      45       2   .text       
+     Init                                    FE802D      3E      62       2   .text       
+     Pii_Init                                FE806B      1D      29       2   .text       
+     Can_Init                                FE8088       F      15       2   .text       
+     Can_DeInit                              FE8097      F6     246       4   .text       
+     Can_SendMsg                             FE818D     11A     282       5   .text       
+     Can_GetMsg                              FE82A7      62      98       2   .text       
+     Can_GetCallBack                         FE8309      25      37       2   .text       
+     Ect_Init                                FE832E      24      36       2   .text       
+     Pit_Init                                FE8352      1F      31       2   .text       
+     Node_Poll                               FE8371      98     152       4   .text       
+     PrechargeM_BATGet                       FE8409       6       6       2   .text       
+     PrechargeM_V1Get                        FE840F       5       5       2   .text       
+     PrechargeM_StartPre                     FE8414       C      12       2   .text       
+     PrechargeM_StopPre                      FE8420       4       4       4   .text       
+     PrechargeM_StopMaster                   FE8424       4       4       2   .text       
+     PrechargeM_Change                       FE8428       4       4       2   .text       
+     PrechargeM_IsFinish                     FE842C       4       4       4   .text       
+     PrechargeM_IsFail                       FE8430       4       4       2   .text       
+     PrechargeM_Diagnosis                    FE8434       4       4      10   .text       
+     PrechargeM_NoAct                        FE8438       4       4       6   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -3861,23 +3909,28 @@ UNUSED-OBJECTS SECTION
 NOT USED PROCEDURES
 CAN.C.o:
   Can_SendTime Can_SendMsgAll 
+PrechargeM.c.o:
+  PrechargeM_Init PrechargeM_StartMaster 
 NOT USED VARIABLES
 main.c.o:
   Can1_InitType Can0_InitType 
 CAN.C.o:
-  Can0_InitType Can_TIME.1 Can_MsgSendType1 Can_MsgSendType2 Can_TimeSendType 
+  Can_TIME.1 Can_MsgSendType2 
 PIT.C.o:
   Can1_InitType Can0_InitType 
+Node.c.o:
+  Can1_InitType Can0_InitType 
 CAN_CFG.c.o:
-  Can1_InitType Can_MsgSendType1 Can_MsgSendType2 Can_TimeSendType 
-  Can0_InitType 
+  Can1_InitType Can_MsgSendType2 Can_TimeSendType Can0_InitType 
+Node_Cfg.c.o:
+  Can1_InitType Can0_InitType 
 
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
 ------- ROM-ADDRESS: 0xC05B ---- SIZE       4 ---
 Filling bytes inserted
- 000F2102
+ 00312102
 ------- ROM-ADDRESS: 0xC05F ---- RAM-ADDRESS: 0x2102 ---- SIZE       1 ---
 Name of initialized Object : Can1_InitType:2
  40
@@ -3885,31 +3938,59 @@ Name of initialized Object : Can1_InitType:2
 Filling bytes inserted
  00
 ------- ROM-ADDRESS: 0xC061 ---- RAM-ADDRESS: 0x2104 ---- SIZE       3 ---
-Name of initialized Object : Can_MsgSendType3:1
- 030003
+Name of initialized Object : Can_MsgSendType1:1
+ 010001
 ------- ROM-ADDRESS: 0xC064 ---- SIZE       7 ---
 Filling bytes inserted
  0000000000 0000
 ------- ROM-ADDRESS: 0xC06B ---- RAM-ADDRESS: 0x210E ---- SIZE       3 ---
+Name of initialized Object : Can_MsgSendType1:11
+ 080040
+------- ROM-ADDRESS: 0xC06E ---- SIZE       1 ---
+Filling bytes inserted
+ 00
+------- ROM-ADDRESS: 0xC06F ---- RAM-ADDRESS: 0x2112 ---- SIZE       3 ---
+Name of initialized Object : Can_MsgSendType3:1
+ 030003
+------- ROM-ADDRESS: 0xC072 ---- SIZE       7 ---
+Filling bytes inserted
+ 0000000000 0000
+------- ROM-ADDRESS: 0xC079 ---- RAM-ADDRESS: 0x211C ---- SIZE       3 ---
 Name of initialized Object : Can_MsgSendType3:11
  080040
-------- ROM-ADDRESS: 0xC06E ---- SIZE       2 ---
+------- ROM-ADDRESS: 0xC07C ---- RAM-ADDRESS: 0x211F ---- SIZE      20 ---
+Name of initialized Object : Node_MsgData
+ 018434FE00 018438FE01 018434FE00
+ 028414FE02
+------- ROM-ADDRESS: 0xC090 ---- SIZE       4 ---
+Filling bytes inserted
+ 003C2147
+------- ROM-ADDRESS: 0xC094 ---- RAM-ADDRESS: 0x2147 ---- SIZE      60 ---
+Name of initialized Object : Node_MsgData:40
+ 028434FE00 018420FE01 028430FE00
+ 018420FE01 02842CFE00 018428FE03
+ 02842CFE00 028438FE02 038434FE00
+ 018424FE01 038434FE00 028438FE03
+------- ROM-ADDRESS: 0xC0D0 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
 *********************************************************************************************
 OBJECT-DEPENDENCIES SECTION
 ---------------------------------------------------------------------------------------------
+Node_MsgData              USES PrechargeM_Diagnosis PrechargeM_NoAct 
+                                PrechargeM_StartPre PrechargeM_StopPre PrechargeM_IsFail 
+                                PrechargeM_IsFinish PrechargeM_Change PrechargeM_StopMaster 
 _Startup                  USES __SEG_END_SSTACK Init main 
 PIT0                      USES _PITTF 
 Can_receive               USES Can_GetCallBack 
 _Vector_66                USES PIT0 
 _Vector_42                USES Can_receive 
 main                      USES Pii_Init Can_Init Pit_Init Ect_Init _PORTCD 
-                                _DDRCD 
+                                _DDRCD Node_Poll 
 Init                      USES _startupData 
 Pii_Init                  USES _CLKSEL _PLLCTL _SYNR _REFDV _POSTDIV _CRGFLG 
-Can_Init                  USES Can1_InitType Can_DeInit 
+Can_Init                  USES Can0_InitType Can_DeInit Can1_InitType 
 Can_DeInit                USES _CAN0CTL0 _CAN0RXDSR0 _CAN0CTL1 _CAN0BTR0 
                                 _CAN0BTR1 _CAN0IDMR0 _CAN0IDMR1 _CAN0IDMR3 _CAN0IDMR4 
                                 _CAN0IDMR5 _CAN0IDMR6 _CAN0IDMR7 _CAN0RIER 
@@ -3918,13 +3999,16 @@ Can_SendMsg               USES Can_SendMsg _CAN0CTL0 _CAN0TBSEL _CAN0TFLG
                                 _CAN0TXDSR0 _CAN0TXDLR _CAN0TXTBPR 
 Can_GetMsg                USES _CAN1RFLG _CAN1RXIDR1 _CAN1RXIDR0 _CAN1RXDLR 
                                 _CAN1RXDSR0 
-Can_GetCallBack           USES Can_MsgGetType Can_GetMsg Can_MsgSendType3 
-                                Can_SendMsg 
+Can_GetCallBack           USES Can_MsgGetType Can_GetMsg Node_Poll 
+                                Can_MsgSendType3 Can_SendMsg 
 Ect_Init                  USES _ECT_TSCR1 _ECT_TIOS _ECT_TCTL1 _ECT_TCTL2 
                                 _ECT_DLYCT _ECT_ICOVW _ECT_ICSYS _ECT_TIE _ECT_TSCR2 
                                 _ECT_TFLG1 _ECT_TFLG2 
 Pit_Init                  USES _PITCFLMT _PITCE _PITMUX _PITMTLD0 _PITLD0 
                                 _PITINTE 
+Node_Poll                 USES Node_Current.1 Node_MsgData Can_MsgSendType1 
+                                Can_SendMsg 
+PrechargeM_StartPre       USES PrechargeM_BATGet PrechargeM_V1Get 
 
 *********************************************************************************************
 DEPENDENCY TREE
@@ -3942,7 +4026,33 @@ DEPENDENCY TREE
  |  +- Pit_Init            
  |  |    
  |  +- Ect_Init            
- |       
+ |  |    
+ |  +- Node_Poll           
+ |     | 
+ |     +- Node_MsgData        
+ |     |  | 
+ |     |  +- PrechargeM_Diagnosis
+ |     |  |    
+ |     |  +- PrechargeM_NoAct    
+ |     |  |    
+ |     |  +- PrechargeM_StartPre 
+ |     |  |  | 
+ |     |  |  +- PrechargeM_BATGet   
+ |     |  |  |    
+ |     |  |  +- PrechargeM_V1Get    
+ |     |  |       
+ |     |  +- PrechargeM_StopPre  
+ |     |  |    
+ |     |  +- PrechargeM_IsFail   
+ |     |  |    
+ |     |  +- PrechargeM_IsFinish 
+ |     |  |    
+ |     |  +- PrechargeM_Change   
+ |     |  |    
+ |     |  +- PrechargeM_StopMaster
+ |     |       
+ |     +- Can_SendMsg         
+ |          
  +- _Startup            
     | 
     +- Init                
@@ -3961,8 +4071,10 @@ DEPENDENCY TREE
        | 
        +- Can_GetMsg          
        |    
-       +- Can_SendMsg         
-            
+       +- Node_Poll            (see above)
+       |  
+       +- Can_SendMsg          (see above)
+          
 *********************************************************************************************
 STATISTIC SECTION
 ---------------------------------------------------------------------------------------------
@@ -3970,5 +4082,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 8
-Total size of all blocks to be downloaded: 984
+Total size of all blocks to be downloaded: 1300
 
