@@ -36,4 +36,5 @@ PrechargeM_Return_E PrechargeM_Change(void);
 PrechargeM_Return_E PrechargeM_IsFinish(void);
 PrechargeM_Return_E PrechargeM_NoAct(void);
 
+
 #endif

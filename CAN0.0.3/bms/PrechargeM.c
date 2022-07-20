@@ -5,6 +5,7 @@ float PrechargeM_BATGet(void)
 {
     return 1;
 }
+
 float PrechargeM_V1Get(void)
 {
     return 0;
@@ -109,7 +110,7 @@ PrechargeM_Return_E PrechargeM_Diagnosis(void)
     if (diagnosis2.FaulData2 == 1)
     {
         retval = PRECHARGEM_OK;
-    }              */
+    }  */
     retval = PRECHARGEM_OK;
     return  retval;
 }
