@@ -28,10 +28,11 @@ void main(void)
     MODE_ONE_DIR = 1;
     MODE_TWO = 0;
     MODE_TWO_DIR = 1;
+
     for(;;)
     {
       _FEED_COP();   /* feeds the dog */
-      //Node_Poll(&Node_MsgData);
+
     }                /* loop forever */
                        /* please make sure that you never leave main */
 }

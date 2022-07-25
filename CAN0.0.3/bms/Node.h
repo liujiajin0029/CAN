@@ -10,18 +10,27 @@
 #define   NODE_NUMBER2   (3U)
 #define   NODE_NUMBER3   (4U)
 
-typedef struct _Node_MsgType
+typedef struct _Node_StateType
 {
 	unsigned int TypeNum;
-	PrechargeM_ReturnType (*Condition)(void);
-	PrechargeM_ReturnType Status;
-	PrechargeM_ReturnType (*Act)(void);
+	Pre_ReturnType (*Condition)(void);
+	Pre_ReturnType Status;
+	Pre_ReturnType (*Act)(void);
 	unsigned int Next;
-}Node_MsgType;
+}Node_StateType;
 
-extern Node_MsgType  Node_MsgData[] ;
+typedef struct  _NodeStateCfgType
+{
+  unsigned char num;
+  Node_StateType *state;
+} Node_StateCfgType;
 
-//void Node_Poll(Node_MsgType *Node_Data[3][4]);
- void Node_Poll(void);
+typedef struct _NodeStateInfoType
+{
+  unsigned char  node;
+  Node_StateCfgType *state;
+} Node_StateInfoType;
+
+
 #endif
 

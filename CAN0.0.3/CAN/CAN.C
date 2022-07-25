@@ -1,7 +1,6 @@
 #include "derivative.h"
 #include "CAN.h"
 #include "CAN_CFG.h"
-#include "Node.h"
 
 void Can_Init(void)
 {
@@ -142,7 +141,7 @@ void Can_SendTime(Can_TimeType TimeCfgType)
 
 	if (Can_TIME == TimeCfgType.Can_Time1)
 	{
-		Node_Poll();
+
 		if (Can_SendMsg(&Can_MsgSendType1) == 1)
 		{
 
