@@ -15,20 +15,20 @@ typedef struct _Node_StateType
 	unsigned int TypeNum;
 	Pre_ReturnType (*Condition)(void);
 	Pre_ReturnType Status;
-	Pre_ReturnType (*Act)(void);
-	unsigned int Next;
+	void (*Act)(void);
+	unsigned char Next;
 }Node_StateType;
 
 typedef struct  _NodeStateCfgType
 {
-  unsigned char num;
-  Node_StateType *state;
+	unsigned int num;
+	Node_StateType *state;
 } Node_StateCfgType;
 
 typedef struct _NodeStateInfoType
 {
-  unsigned char  node;
-  Node_StateCfgType *state;
+	unsigned char  node;
+	Node_StateCfgType *state;
 } Node_StateInfoType;
 
 

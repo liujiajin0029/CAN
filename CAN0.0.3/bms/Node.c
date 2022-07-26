@@ -18,12 +18,11 @@ const Node_StateType Node_PreStateCheck[] =
 	{ NODE_NUMBER1, Pre_IsFinish, PRECHARGEM_OK, Pre_Change, NODE_NUMBER2},
 	/*预充未完成 等待预充完成*/
 	{ NODE_NUMBER1, Pre_IsFinish, PRECHARGEM_NOTOK, Pre_NoAct,NODE_NUMBER1},
-
 };
 
 const Node_StateType Node_PreStateFinish[] =
 {
-    {NODE_NUMBER1 ,Pre_IsFinish ,0 ,Pre_NoAct ,NODE_NUMBER1},
+    {NODE_NUMBER1 ,Pre_IsFinish ,PRECHARGEM_NOTOK,Pre_NoAct ,NODE_NUMBER1},
 };
 
 const Node_StateType Node_PreStateFault[] =
@@ -46,18 +45,16 @@ const Node_StateCfgType Node_StateCfg[] =
 void Node_Poll(void)
 {
     Node_StateInfoType Node_cfg;
-    unsigned char i = 0,sum;
-    Node_cfg.node =   NODE_NUMBER0;
-    Node_cfg.state  = &Node_StateCfg[NODE_NUMBER0] ;
-    sum = Node_cfg.state -> num;
+    unsigned char i = 0 , sum = 0;
+    Node_cfg.node = NODE_NUMBER0;
+    Node_cfg.state = (unsigned char*)(&Node_StateCfg[NODE_NUMBER0]) ;
+    sum = (unsigned char)(Node_cfg.state -> num);
     for (i = 0;i <sum ;i++ )
     {
         if (Node_cfg.state->state[i].Condition()  == Node_cfg.state->state[i].Status)
         {
-            if (Node_cfg.state->state[i].Act() == 1)
-            {
+           Node_cfg.state->state[i].Act() ;
 
-            }
         break;
         }
     }

@@ -1,37 +1,31 @@
 #include "RelayM.h"
 
 
-void RelayM_Init(RelayM_IoChgType *IOType) //    IO口初始化配置
+
+void RelayM_Change(unsigned char  Switch)            //    开关切换函数
 {
-    IOType->KEY_PRE = 1;
+    if (Switch ==  RELAYM_PRESWITCHON)
+    {
+        RelayM_Control(RELAYM_PRE_IOON,1);
+    }
+    else if (Switch ==  RELAYM_PRESWITCHOFF)
+    {
+        RelayM_Control(RELAYM_PRE_IOOFF,0);
+    }
+    else if (Switch == RELAYM_CLOSEDTOTALON)
+    {
+        RelayM_Control(RELAYM_PRE_IOOFF,0);
+        RelayM_Control(RELAYM_CLOSEDTOTALIO,1);
+    }
+
 }
 
-void  RelayM_Control(void)
+void RelayM_Control(unsigned char Pre_switch,unsigned char  state)
 {
-
-
+   if (RELAYM_PRE_IOON == Pre_switch)
+   {
+     
+   }
 }
-
-int RelayM_Change(RelayM_IoChgType *IoChg)  //    开关切换函数
-{
-    if (IoChg->KEY_PRE == TRUE)
-    {
-		PORTC_PC4 = TRUE;
-    }
-    else
-    {
-		PORTC_PC4 = FALSE;
-    }
-    if (IoChg->KEY_RELAY == TRUE)
-    {
-		PORTC_PC4 = TRUE;
-    }
-    else
-    {
-		PORTC_PC4 = FALSE;
-    }
-    return FALSE;
-}
-
 
 

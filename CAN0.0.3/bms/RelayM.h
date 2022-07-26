@@ -6,28 +6,15 @@
 #include "VBAT.h"
 
 
-typedef struct _Hv_IOInit
-{
-	char IO_dir;
-}RelayM_IOInitType;
-
-RelayM_IOInitType Hv_IOType =
-{
-	1,
-};
-
-typedef struct _RelayM
-{
-   char KEY_PRE;
-   char KEY_RELAY;
-} RelayM_IoChgType;
-
-RelayM_IoChgType MODE_IO =
-{
-	1,
-	0,
-};
+#define RELAYM_PRESWITCHON  	(1U)
+#define RELAYM_PRESWITCHOFF 	(0U)
+#define RELAYM_PRE_IOON  		(1U)
+#define RELAYM_PRE_IOOFF 		(1U)
+#define RELAYM_CLOSEDTOTALON 	(5U)
+#define RELAYM_CLOSEDTOTALOFF	(0U)
+#define RELAYM_CLOSEDTOTALIO 	(1U)
 
 void RelayM_Init();
-
+void RelayM_Change(unsigned char  Switch);
+void RelayM_Control(unsigned char  Pre_switch,unsigned char state);
 #endif

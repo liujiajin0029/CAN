@@ -1,83 +1,56 @@
 #include "PrechargeM.h"
 #include "Vbat.h"
-
+#include "RelayM.h"
 
 void Pre_Init(void)
 {
 
 }
 
-
-Bool Pre_StartPre(void)
+void Pre_StartPre(void)
 {
-    Bool retval;
-     retval = 0;
-
-    return retval;
-}
-
-Pre_ReturnType Pre_DeStargtPre()
-{
-
     Pre_ReturnType  retval = PRECHARGEM_NOTOK;
 
-    return retval;
+    RelayM_Change(RELAYM_PRESWITCHON);
+
 }
-Pre_ReturnType  Pre_StopPre(void)
+
+void  Pre_StopPre(void)
 {
     Pre_ReturnType  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
-
-    return retval;
+    RelayM_Change(RELAYM_PRESWITCHOFF);
 }
 
-
-Pre_ReturnType Pre_StartMaster(void)
+void Pre_StartMaster(void)
 {
     Pre_ReturnType  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
-
-    return retval;
+    RelayM_Change(RELAYM_CLOSEDTOTALON);
 }
 
-Pre_ReturnType Pre_StopMaster(void)
+void Pre_StopMaster(void)
 {
     Pre_ReturnType  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
-
-    return retval;
+    RelayM_Change(RELAYM_CLOSEDTOTALOFF);
 }
 
-Pre_ReturnType Pre_Change(void)
+void Pre_Change(void)
 {
     Pre_ReturnType  retval = PRECHARGEM_NOTOK;
 
     retval = PRECHARGEM_OK;
-
-    return retval;
+    RelayM_Change(RELAYM_CLOSEDTOTALON);
 
 }
-Bool Pre_IsFinish(void)
+Pre_ReturnType Pre_IsFinish(void)
 {
-    Bool retval;
-    if(Pre_DeIsFinish(9,10,0.9) == PRECHARGEM_NOTOK)
-    {
-        retval = 1;
-    }
-    else
-    {
-        retval = 0;
-    }
-    return retval;
-}
-
-Pre_ReturnType Pre_DeIsFinish(float BAT,float v1,float multiple)
-{
-    Pre_ReturnType retval = PRECHARGEM_NOTOK;
-    if (BAT > (v1 * multiple) )
+    Pre_ReturnType retval;
+    if (Pre_DeIsFinish(9,10,0.9) == PRECHARGEM_NOTOK)
     {
         retval = PRECHARGEM_OK;
     }
@@ -85,15 +58,33 @@ Pre_ReturnType Pre_DeIsFinish(float BAT,float v1,float multiple)
     {
         retval = PRECHARGEM_NOTOK;
     }
-    /*测试使用*/
+
+
     retval = PRECHARGEM_OK;
 
     return retval;
 }
-Bool Pre_IsFail(void)
+
+Bool Pre_DeIsFinish(float BAT, float v1, float multiple)
 {
-    Bool retval;
-    if (Pre_DeIsFail(10,2000,5000) == PRECHARGEM_OK)
+    Bool retval = FALSE;
+    if (BAT > (v1 * multiple))
+    {
+        retval = TRUE;
+    }
+    else
+    {
+        retval = FALSE;
+    }
+
+    retval = TRUE;
+
+    return retval;
+}
+Pre_ReturnType Pre_IsFail(void)
+{
+    Pre_ReturnType retval;
+    if (Pre_DeIsFail(10,2000,5000) == TRUE)
     {
         retval = PRECHARGEM_OK;
     }
@@ -101,45 +92,35 @@ Bool Pre_IsFail(void)
     {
         retval = PRECHARGEM_NOTOK;
     }
-    return retval;
-}
-Pre_ReturnType Pre_DeIsFail(unsigned int StartTime,
-                            unsigned int NowTime,
-                            unsigned int SetTime)
-{
-    Pre_ReturnType  retval = PRECHARGEM_NOTOK;
-    if (NowTime - StartTime > SetTime)
-    {
-        retval = PRECHARGEM_NOTOK;
-    }
+
+
     retval = PRECHARGEM_OK;
     return retval;
 }
+Bool Pre_DeIsFail(unsigned int StartTime,unsigned int NowTime,unsigned int SetTime)
+{
+    Bool retval = FALSE;
+    if ((NowTime - StartTime) > SetTime)
+    {
+        retval = TRUE;
+    }
 
+    retval = TRUE;
+    return retval;
+}
 /*诊断函数，主要用来故障判断*/
 Pre_ReturnType Pre_Diagnosis(void)
 {
-    // PrechargeM_FaultType diagnosis2 ;
+
     Pre_ReturnType  retval = PRECHARGEM_NOTOK;
-/*    if (diagnosis2.FaulData1 == 1)
-    {
-        retval = PRECHARGEM_NOTOK;
-    }
-    if (diagnosis2.FaulData2 == 1)
-    {
-        retval = PRECHARGEM_OK;
-    }              */
     retval = PRECHARGEM_OK;
     return  retval;
+
 }
 
 
-Pre_ReturnType Pre_NoAct(void)
+void Pre_NoAct(void)
 {
-     Pre_ReturnType  retval = PRECHARGEM_NOTOK;
 
-    retval = PRECHARGEM_NOTOK;
-
-    return retval;
 }
 
