@@ -2,8 +2,6 @@
 #include "Node_Cfg.h"
 #include "CAN_CFG.h"
 
-Node_StateInfoType Node_cfg;
-
 const Node_StateType Node_PreStateStart[] =
 {
     {NODE_NUMBER0, Pre_Diagnosis, PRECHARGEM_NOTOK, Pre_NoAct, NODE_NUMBER0},
@@ -50,13 +48,14 @@ void Node_CanSend(uint8_t node_num ,uint8_t data)
 {
     Can_NodeSend(node_num,data);
 }
+Node_StateInfoType Node_cfg;
 
 void Node_Poll(void)
 {
     uint8_t i = 0 , sum = 0;
     Node_cfg.node = NODE_NUMBER0;
 
-    *(Node_cfg.state)= (Node_StateCfg[NODE_NUMBER0]);
+    Node_cfg.state = &(Node_StateCfg[NODE_NUMBER0]);
     sum = (uint8_t)(Node_cfg.state -> num);
     for (i = 0;i <sum ;i++ )
     {

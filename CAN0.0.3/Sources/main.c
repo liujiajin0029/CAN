@@ -8,11 +8,11 @@
 #include "Node.h"
 #include "PIT.h"
 
-#define MODE_ONE PORTC_PC4
-#define MODE_ONE_DIR DDRC_DDRC4
+#define IO_MODEPC4 PORTC_PC4
+#define IO_DIRRC4 DDRC_DDRC4
 
-#define MODE_TWO PORTC_PC5
-#define MODE_TWO_DIR DDRC_DDRC5
+#define IO_MODEPC5 PORTC_PC5
+#define IO_DIRRC5 DDRC_DDRC5
 
 void main(void)
 {
@@ -24,10 +24,10 @@ void main(void)
     Pit_Init();
     Ect_Init();
     EnableInterrupts;
-    MODE_ONE = 1;
-    MODE_ONE_DIR = 1;
-    MODE_TWO = 0;
-    MODE_TWO_DIR = 1;
+    IO_MODEPC4 = 1;
+    IO_DIRRC4 = 1;
+    IO_MODEPC5 = 0;
+    IO_DIRRC5 = 1;
 
     for(;;)
     {

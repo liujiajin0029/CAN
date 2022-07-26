@@ -22,13 +22,13 @@ typedef struct _Node_StateType
 typedef struct  _NodeStateCfgType
 {
     uint16_t num;
-    Node_StateType *state;
+    const Node_StateType *state;
 } Node_StateCfgType;
 
 typedef struct _NodeStateInfoType
 {
     uint8_t node;
-    Node_StateCfgType *state;
+    const Node_StateCfgType *state;
 } Node_StateInfoType;
 
 
