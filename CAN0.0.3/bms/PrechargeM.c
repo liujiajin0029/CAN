@@ -1,6 +1,7 @@
 #include "PrechargeM.h"
-#include "Vbat.h"
+#include "VBAT.h"
 #include "RelayM.h"
+#include "derivative.h"
 
 void Pre_Init(void)
 {
@@ -15,7 +16,7 @@ void Pre_StartPre(void)
 
 }
 
-void  Pre_StopPre(void)
+void Pre_StopPre(void)
 {
     Pre_ReturnType  retval = PRECHARGEM_NOTOK;
 
@@ -59,7 +60,6 @@ Pre_ReturnType Pre_IsFinish(void)
         retval = PRECHARGEM_NOTOK;
     }
 
-
     retval = PRECHARGEM_OK;
 
     return retval;
@@ -93,11 +93,10 @@ Pre_ReturnType Pre_IsFail(void)
         retval = PRECHARGEM_NOTOK;
     }
 
-
     retval = PRECHARGEM_OK;
     return retval;
 }
-Bool Pre_DeIsFail(unsigned int StartTime,unsigned int NowTime,unsigned int SetTime)
+Bool Pre_DeIsFail(uint32_t StartTime,uint32_t NowTime,uint32_t SetTime)
 {
     Bool retval = FALSE;
     if ((NowTime - StartTime) > SetTime)
@@ -108,6 +107,7 @@ Bool Pre_DeIsFail(unsigned int StartTime,unsigned int NowTime,unsigned int SetTi
     retval = TRUE;
     return retval;
 }
+
 /*诊断函数，主要用来故障判断*/
 Pre_ReturnType Pre_Diagnosis(void)
 {
@@ -118,9 +118,9 @@ Pre_ReturnType Pre_Diagnosis(void)
 
 }
 
-
 void Pre_NoAct(void)
 {
+
 
 }
 

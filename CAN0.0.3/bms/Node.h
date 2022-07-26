@@ -5,30 +5,30 @@
 #include "derivative.h"
 #include "PrechargeM.h"
 
-#define   NODE_NUMBER0   (1U)
-#define   NODE_NUMBER1   (2U)
-#define   NODE_NUMBER2   (3U)
-#define   NODE_NUMBER3   (4U)
+#define   NODE_NUMBER0   (0U)
+#define   NODE_NUMBER1   (1U)
+#define   NODE_NUMBER2   (2U)
+#define   NODE_NUMBER3   (3U)
 
 typedef struct _Node_StateType
 {
-	unsigned int TypeNum;
-	Pre_ReturnType (*Condition)(void);
-	Pre_ReturnType Status;
-	void (*Act)(void);
-	unsigned char Next;
+    unsigned int TypeNum;
+    Pre_ReturnType (*Condition)(void);
+    Pre_ReturnType Status;
+    void (*Act)(void);
+    unsigned char Next;
 }Node_StateType;
 
 typedef struct  _NodeStateCfgType
 {
-	unsigned int num;
-	Node_StateType *state;
+    uint16_t num;
+    Node_StateType *state;
 } Node_StateCfgType;
 
 typedef struct _NodeStateInfoType
 {
-	unsigned char  node;
-	Node_StateCfgType *state;
+    uint8_t node;
+    Node_StateCfgType *state;
 } Node_StateInfoType;
 
 

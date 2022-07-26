@@ -12,17 +12,17 @@ typedef struct _PrechargeM_DcDtat
 
 typedef enum _PrechargeM_ReturnType
 {
-    PRECHARGEM_OK               =1,		/*正常*/
-    PRECHARGEM_NOTOK            =2,		/*正在运行*/
-    PRECHARGEM_PENDING          =3,		/*请求挂起*/
-    PRECHARGEM_INITIALIZED      =4,		/*已初始化*/
+    PRECHARGEM_OK               =1,
+    PRECHARGEM_NOTOK            =2,
+    PRECHARGEM_PENDING          =3,
+    PRECHARGEM_INITIALIZED      =4,
 } Pre_ReturnType;
 
 typedef struct _PrechargeM_FaultType
 {
     Bool FaulData1;
-	Bool FaulData2;
-	Bool FaulData3;
+    Bool FaulData2;
+    Bool FaulData3;
 }PrechargeM_FaultType;
 
 
@@ -36,7 +36,7 @@ void Pre_Change(void);
 Pre_ReturnType Pre_IsFail(void);
 void Pre_NoAct(void);
 Bool Pre_DeIsFinish(float BAT,float v1,float multiple);
-Bool Pre_DeIsFail(unsigned int StartTime,unsigned int NowTime,unsigned int SetTime);
+Bool Pre_DeIsFail(uint32_t StartTime,uint32_t NowTime,uint32_t SetTime);
 
 
 #endif

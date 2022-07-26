@@ -6,9 +6,9 @@
 extern Can_MsgType Can_MsgSendType1;
 extern Can_MsgType Can_MsgSendType2;
 extern Can_MsgType Can_MsgSendType3;
-
+extern Can_MsgType Can_MsgNodeType;
 extern Can_TimeType Can_TimeSendType;
 
 extern Can_MsgType Can_MsgGetType;
-
+void Can_NodeSend(uint8_t Tag_num, uint8_t data);
 #endif
