@@ -148,9 +148,25 @@ Bool Can_GetMsg(Can_MsgType *Can_Cfg)
     // IDE = Recessive (Extended Mode)
         return FALSE;
     }
+    if ((CAN1RXIDR1 & 0x08) == 0x08)                        //åˆ¤æ–­æ˜¯å¦ä¸ºæ ‡å‡†å¸§
+    {
+        Can_Cfg->Id = ((unsigned int)(CAN1RXIDR0 & 0xff)) << 21;
+        Can_Cfg->Id = Can_Cfg->Id | (((unsigned int)(CAN1RXIDR1 & 0xe0)) << 13);
+        Can_Cfg->Id = Can_Cfg->Id | (((unsigned int)(CAN1RXIDR1 & 0x07)) << 15);
+        Can_Cfg->Id = Can_Cfg->Id | (((unsigned int)(CAN1RXIDR2 & 0xff)) << 7);
+        Can_Cfg->Id = Can_Cfg->Id | (((unsigned int)(CAN1RXIDR3 & 0xfe)) >> 1);
+        Can_Cfg->Ide = 1;
+    }
+    else
+    {
+        Can_Cfg->Id  = (unsigned long)(CAN1RXIDR0 << 3) |   //è¯»å‡ºæŽ¥æ”¶å¸§IDå‰8ä½
+                       (unsigned long)(CAN1RXIDR1 >> 5) ;   //å¹¶ä¸”ä¸Žä¸Šè¯»å‡ºæŽ¥æ”¶å¸§IDå3ä½
+        Can_Cfg->Ide = 0;
+    }
+
     /*读标识符*/
     Can_Cfg -> Id = (unsigned int)(CAN1RXIDR0<<3) |
-                          (unsigned char)(CAN1RXIDR1>>5);
+                    (unsigned char)(CAN1RXIDR1>>5);
 
     if (CAN1RXIDR1 & 0x10)
     {
