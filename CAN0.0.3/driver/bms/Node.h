@@ -31,6 +31,6 @@ typedef struct _NodeStateInfoType
     const Node_StateCfgType *state;
 } Node_StateInfoType;
 
-
+void Node_Poll(void);
 #endif
 

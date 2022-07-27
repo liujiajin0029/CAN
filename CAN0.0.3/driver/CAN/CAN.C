@@ -131,43 +131,6 @@ Bool Can_SendMsg(Can_MsgType *Can_Cfg)
     return TRUE;
 
 }
-
-/*报文周期发送函数*/
-void Can_SendTime(Can_TimeType TimeCfgType)
-{
-    static int Can_TIME ;
-
-    Can_TIME++;
-
-    if (Can_TIME == TimeCfgType.Can_Time1)
-    {
-
-        if (Can_SendMsg(&Can_MsgNodeType) == 1)
-        {
-
-        }
-    }
-
-    if (Can_TIME == TimeCfgType.Can_Time2)
-    {
-        if (Can_SendMsg(&Can_MsgSendType2) == 1)
-        {
-
-        }
-    }
-    if (Can_TIME >= TimeCfgType.Can_Time4)
-    {
-        Can_TIME = 0;
-    }
-
-}
-
-/*发送所有函数*/
-void Can_SendMsgAll(void)
-{
-    Can_SendTime(Can_TimeSendType);
-}
-
 /*报文接收函数*/
 Bool Can_GetMsg(Can_MsgType *Can_Cfg)
 {
@@ -211,22 +174,4 @@ Bool Can_GetMsg(Can_MsgType *Can_Cfg)
 
     return TRUE;
 }
-
-/*接收报文数据处理函数*/
-Bool Can_GetCallBack(void)
-{
-    if (Can_GetMsg(&Can_MsgGetType) == TRUE)
-    {
-        /*接收信息*/
-        if (Can_MsgGetType.Id == 0x3c && (!Can_MsgGetType.Ide))
-        {
-            if (Can_SendMsg(&Can_MsgNodeType) == 1)
-            {
-
-            }
-        }
-    }
-    return 0;
-}
-
 

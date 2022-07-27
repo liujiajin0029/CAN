@@ -1,7 +1,7 @@
 #include "PIT.h"
 #include "derivative.h"
 #include "CAN.h"
-
+#include "CAN_Msg.h"
 void Pit_Init(void)
 {
 	PITCFLMT_PITE = 0;

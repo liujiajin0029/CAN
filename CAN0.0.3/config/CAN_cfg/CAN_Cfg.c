@@ -1,5 +1,6 @@
 #include "derivative.h"
 #include "CAN_CFG.h"
+#include "Node.h"
 
 Can_MsgType Can_MsgSendType1 =
 {
@@ -59,8 +60,3 @@ Can_MsgType Can_MsgNodeType =
     CAN_PASSAGEWAY1,
 };
 
-
-void Can_NodeSend(uint8_t Tag_num, uint8_t data)
-{
-    Can_MsgNodeType.Data[Tag_num] = data;
-}

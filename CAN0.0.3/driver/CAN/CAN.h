@@ -62,9 +62,7 @@ static Can_InitType Can1_InitType =
 
 void Can_Init(void);
 void Can_DeInit(Can_InitType *Can_InitTypeCfg);
-void Can_SendTime(Can_TimeType Can_TimeTypeCfg);
-void Can_SendMsgAll(void);
-Bool Can_GetCallBack(void);
 Bool Can_SendMsg(Can_MsgType *Can_Cfg);
+Bool Can_GetMsg(Can_MsgType *Can_Cfg);
 
 #endif

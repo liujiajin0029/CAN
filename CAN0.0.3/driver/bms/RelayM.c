@@ -1,7 +1,5 @@
 #include "RelayM.h"
-
-
-
+   
 void RelayM_Change(unsigned char  Switch)            //    ¿ª¹ØÇÐ»»º¯Êý
 {
     if (Switch ==  RELAYM_PRESWITCHON)

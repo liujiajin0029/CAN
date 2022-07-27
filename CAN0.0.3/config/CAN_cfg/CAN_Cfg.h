@@ -10,5 +10,8 @@ extern Can_MsgType Can_MsgNodeType;
 extern Can_TimeType Can_TimeSendType;
 
 extern Can_MsgType Can_MsgGetType;
+
 void Can_NodeSend(uint8_t Tag_num, uint8_t data);
+void Can_NodePollCallBcak(void);
+
 #endif
