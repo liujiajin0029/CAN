@@ -5,9 +5,9 @@
 
 
 
-float  VBAT_BATGet(void);
+float VBAT_BATGet(void);
 
-float  VBAT_V1Get(void);
+float VBAT_V1Get(void);
 
 
 #endif

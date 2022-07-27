@@ -13,7 +13,7 @@ void Can_DeInit(Can_InitType *Can_Cfg)
     unsigned char Memory = 0;
     unsigned char BlockingTime = 0;
 
-    Memory = Can_Cfg->Geway;
+    Memory = Can_Cfg -> Geway;
 
     if ((*((&CAN0CTL0) + Memory) & 0x01) == 0)
     {
@@ -97,7 +97,7 @@ Bool Can_SendMsg(Can_MsgType *Can_Cfg)
     }while (!(SendBuf) && BlockingTime < 5);
 
     /*扩展帧ID发送*/
-    if (Can_Cfg->Ide)
+    if (Can_Cfg -> Ide)
     {
         /*消除移位超过15位编译器警告问题*/
         Remove_Warning =  (Can_Cfg->Id) >> 15;
@@ -119,12 +119,12 @@ Bool Can_SendMsg(Can_MsgType *Can_Cfg)
     /*报文数据发送*/
     for (sp = 0; sp < Can_Cfg->Len;sp++)
     {
-        *((&CAN0TXDSR0) + sp + Memory) = Can_Cfg-> Data[sp];
+        *((&CAN0TXDSR0) + sp + Memory) = Can_Cfg -> Data[sp];
     }
     /*报文长度发送*/
-    *((&CAN0TXDLR) + Memory) = Can_Cfg-> Len;
+    *((&CAN0TXDLR) + Memory) = Can_Cfg -> Len;
 
-    *((&CAN0TXTBPR) + Memory) = Can_Cfg-> Prty;
+    *((&CAN0TXTBPR) + Memory) = Can_Cfg -> Prty;
     /*清除标志*/
     *((&CAN0TFLG) + Memory) = SendBuf;
 
@@ -149,25 +149,25 @@ Bool Can_GetMsg(Can_MsgType *Can_Cfg)
         return FALSE;
     }
     /*读标识符*/
-    Can_Cfg ->Id = (unsigned int)(CAN1RXIDR0<<3) |
+    Can_Cfg -> Id = (unsigned int)(CAN1RXIDR0<<3) |
                           (unsigned char)(CAN1RXIDR1>>5);
 
     if (CAN1RXIDR1 & 0x10)
     {
-        Can_Cfg->Ide = TRUE;
+        Can_Cfg -> Ide = TRUE;
     }
     else
     {
-        Can_Cfg->Ide = FALSE;
+        Can_Cfg -> Ide = FALSE;
     }
 
     /*读取数据长度 */
-    Can_Cfg->Len = CAN1RXDLR;
+    Can_Cfg -> Len = CAN1RXDLR;
 
     /*读取数据*/
-    for (sp = 0; sp < Can_Cfg->Len; sp++)
+    for (sp = 0; sp < Can_Cfg -> Len; sp++)
     {
-        Can_Cfg->Data[sp] = *((&CAN1RXDSR0)+sp);
+        Can_Cfg -> Data[sp] = *((&CAN1RXDSR0)+sp);
     }
     /*清RXF标志位 (缓冲器准备接收)*/
     CAN1RFLG = 0x01;

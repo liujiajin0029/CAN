@@ -14,6 +14,6 @@
 #define RELAYM_CLOSEDTOTALOFF	(0U)
 #define RELAYM_CLOSEDTOTALIO 	(1U)
 
-void RelayM_Change(unsigned char  Switch);
-void RelayM_Control(unsigned char  Pre_switch,unsigned char state);
+void RelayM_Change(unsigned char Switch);
+void RelayM_Control(unsigned char Pre_switch,unsigned char state);
 #endif

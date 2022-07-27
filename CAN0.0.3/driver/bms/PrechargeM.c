@@ -10,7 +10,7 @@ void Pre_Init(void)
 
 void Pre_StartPre(void)
 {
-    Pre_ReturnType  retval = PRECHARGEM_STATENOTOK;
+    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
     RelayM_Change(RELAYM_PRESWITCHON);
 
@@ -18,7 +18,7 @@ void Pre_StartPre(void)
 
 void Pre_StopPre(void)
 {
-    Pre_ReturnType  retval = PRECHARGEM_STATENOTOK;
+    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
     retval = PRECHARGEM_STATEOK;
     RelayM_Change(RELAYM_PRESWITCHOFF);
@@ -26,7 +26,7 @@ void Pre_StopPre(void)
 
 void Pre_StartMaster(void)
 {
-    Pre_ReturnType  retval = PRECHARGEM_STATENOTOK;
+    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
     retval = PRECHARGEM_STATEOK;
     RelayM_Change(RELAYM_CLOSEDTOTALON);
@@ -34,7 +34,7 @@ void Pre_StartMaster(void)
 
 void Pre_StopMaster(void)
 {
-    Pre_ReturnType  retval = PRECHARGEM_STATENOTOK;
+    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
     retval = PRECHARGEM_STATEOK;
     RelayM_Change(RELAYM_CLOSEDTOTALOFF);
@@ -42,7 +42,7 @@ void Pre_StopMaster(void)
 
 void Pre_Change(void)
 {
-    Pre_ReturnType  retval = PRECHARGEM_STATENOTOK;
+    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
     retval = PRECHARGEM_STATEOK;
     RelayM_Change(RELAYM_CLOSEDTOTALON);
@@ -111,10 +111,9 @@ Bool Pre_DeIsFail(uint32_t StartTime,uint32_t NowTime,uint32_t SetTime)
 /*诊断函数，主要用来故障判断*/
 Pre_ReturnType Pre_Diagnosis(void)
 {
-    Pre_ReturnType  retval = PRECHARGEM_STATENOTOK;
+    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
     retval = PRECHARGEM_STATEOK;
     return  retval;
-
 }
 
 void Pre_NoAct(void)

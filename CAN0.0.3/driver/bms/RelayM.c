@@ -1,12 +1,12 @@
 #include "RelayM.h"
 
-void RelayM_Change(unsigned char  Switch)            //    开关切换函数
+void RelayM_Change(unsigned char Switch)            //    开关切换函数
 {
-    if (Switch ==  RELAYM_PRESWITCHON)
+    if (Switch == RELAYM_PRESWITCHON)
     {
         RelayM_Control(RELAYM_PRE_IOON,1);
     }
-    else if (Switch ==  RELAYM_PRESWITCHOFF)
+    else if (Switch == RELAYM_PRESWITCHOFF)
     {
         RelayM_Control(RELAYM_PRE_IOOFF,0);
     }
@@ -19,7 +19,6 @@ void RelayM_Change(unsigned char  Switch)            //    开关切换函数
     {
 
     }
-
 }
 
 void RelayM_Control(unsigned char Pre_switch,unsigned char  state)

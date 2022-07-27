@@ -12,7 +12,7 @@ Can_MsgType Can_MsgSendType1 =
     CAN_PASSAGEWAY1,
 };
 
- Can_MsgType Can_MsgSendType2 =
+Can_MsgType Can_MsgSendType2 =
 {
     0x000000002,
     0,
