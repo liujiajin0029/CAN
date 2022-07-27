@@ -4,26 +4,13 @@
 #include "hidef.h"
 #include "derivative.h"
 
-typedef struct _PrechargeM_DcDtat
-{
-	float vbat_data;
-	float state_v1;
-} PrechargeM_DcType;
-
 typedef enum _PrechargeM_ReturnType
 {
-    PRECHARGEM_OK               =1,
-    PRECHARGEM_NOTOK            =2,
+    PRECHARGEM_STATEOK          =1,
+    PRECHARGEM_STATENOTOK       =2,
     PRECHARGEM_PENDING          =3,
     PRECHARGEM_INITIALIZED      =4,
-} Pre_ReturnType;
-
-typedef struct _PrechargeM_FaultType
-{
-    Bool FaulData1;
-    Bool FaulData2;
-    Bool FaulData3;
-}PrechargeM_FaultType;
+}Pre_ReturnType;
 
 
 Pre_ReturnType Pre_Diagnosis(void);

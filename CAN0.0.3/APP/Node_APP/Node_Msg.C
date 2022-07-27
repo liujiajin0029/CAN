@@ -2,8 +2,10 @@
 #include "Node_Cfg.h"
 #include "CAN_CFG.h"
 #include "Node_Msg.h"
+#include "CAN_Msg.h"
 
-void Node_CanSend(uint8_t node_num ,uint8_t data)
+
+void Node_CanSend(uint8_t node_num,uint8_t data)
 {
-    Can_NodeSend(node_num,data);
+   Can_NodeSend(node_num,data);
 }

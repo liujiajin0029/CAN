@@ -16,20 +16,20 @@ typedef struct _Node_StateType
     Pre_ReturnType (*Condition)(void);
     Pre_ReturnType Status;
     void (*Act)(void);
-    unsigned char Next;
+    uint8_t Next;
 }Node_StateType;
 
-typedef struct  _NodeStateCfgType
+typedef struct _NodeStateCfgType
 {
     uint16_t num;
     const Node_StateType *state;
-} Node_StateCfgType;
+}Node_StateCfgType;
 
 typedef struct _NodeStateInfoType
 {
     uint8_t node;
     const Node_StateCfgType *state;
-} Node_StateInfoType;
+}Node_StateInfoType;
 
 void Node_Poll(void);
 #endif

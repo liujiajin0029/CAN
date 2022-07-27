@@ -21,11 +21,6 @@ void interrupt VectorNumber_Vpit0 PIT0(void)
 	Can_SendMsgAll();
 }
 
-#pragma CODE_SEG DEFAULT
-
-
-#pragma CODE_SEG __NEAR_SEG NON_BANKED
-
 void interrupt VectorNumber_Vcan1rx Can_receive(void)
 {
 	if (Can_GetCallBack() == 1)

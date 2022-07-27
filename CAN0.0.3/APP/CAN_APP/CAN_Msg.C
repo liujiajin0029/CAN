@@ -7,11 +7,11 @@
 /*报文周期发送函数*/
 void Can_SendTime(Can_TimeType TimeCfgType)
 {
-    static int Can_TIME ;
+    static int Can_Time ;
 
-    Can_TIME++;
+    Can_Time++;
 
-    if (Can_TIME == TimeCfgType.Can_Time1)
+    if (Can_Time == TimeCfgType.Can_Time1)
     {
       /*  if (Can_SendMsg(&Can_MsgNodeType) == 1)
         {
@@ -19,16 +19,16 @@ void Can_SendTime(Can_TimeType TimeCfgType)
         }  */
     }
 
-    if (Can_TIME == TimeCfgType.Can_Time2)
+    if (Can_Time == TimeCfgType.Can_Time2)
     {
       /*  if (Can_SendMsg(&Can_MsgSendType2) == 1)
         {
 
         }     */
     }
-    if (Can_TIME >= TimeCfgType.Can_Time4)
+    if (Can_Time >= TimeCfgType.Can_Time4)
     {
-        Can_TIME = 0;
+        Can_Time = 0;
         Can_NodePollCallBcak();
         if (Can_SendMsg(&Can_MsgNodeType) == 1)
         {
