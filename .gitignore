@@ -1,4 +1,3 @@
-
 # 空格不匹配任意文件，可作为分隔符，可用反斜杠转义
 # 开头的文件标识注释，可以使用反斜杠进行转义
 # ! 开头的模式标识否定，该文件将会再次被包含，如果排除了该文件的父级目录，则使用 ! 也不会再次被包含。可以使用反斜杠进行转义
@@ -41,72 +40,7 @@
 # this is .gitignore file.
 # 以下是忽略的文件
 
-bin/
-CAN_ONE_Data/
 BMS_Data/
 cmd/
-prm/
-
-datapage.c
-derivative.h
-Start12.c
-!/BMS/Sources/main.c
-
-/BMS/C_Layout.hwl
-Default.mem
-TBDML.ini
 
 
-
-# Prerequisites
-*.d
-
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
