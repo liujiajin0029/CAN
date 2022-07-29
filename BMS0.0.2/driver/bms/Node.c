@@ -18,7 +18,7 @@ void Node_Poll(void)
     for (i = 0; i < sum; i++)
     {
         Node_CanSend(0, Node_cfg.node);
-        if (Node_cfg.state -> state[i].Condition()  ==
+        if (Node_cfg.state -> state[i].()  ==
             Node_cfg.state -> state[i].Status)
         {
             Node_cfg.state -> state[i].Act();
