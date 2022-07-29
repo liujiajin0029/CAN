@@ -23,7 +23,7 @@ void Pre_Change(void);
 Pre_ReturnType Pre_IsFail(void);
 void Pre_NoAct(void);
 Bool Pre_DeIsFinish(float BAT,float v1,float multiple);
-Bool Pre_DeIsFail(uint32_t StartTime,uint32_t NowTime,uint32_t SetTime);
+Bool Pre_DeIsFail(uint32 StartTime,uint32 NowTime,uint32 SetTime);
 
 
 #endif

@@ -96,7 +96,7 @@ Pre_ReturnType Pre_IsFail(void)
     retval = PRECHARGEM_STATEOK;
     return retval;
 }
-Bool Pre_DeIsFail(uint32_t StartTime,uint32_t NowTime,uint32_t SetTime)
+Bool Pre_DeIsFail(uint32 StartTime,uint32 NowTime,uint32 SetTime)
 {
     Bool retval = FALSE;
     if ((NowTime - StartTime) > SetTime)

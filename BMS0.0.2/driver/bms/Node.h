@@ -16,18 +16,18 @@ typedef struct _Node_StateType
     Pre_ReturnType (*Condition)(void);
     Pre_ReturnType Status;
     void (*Act)(void);
-    uint8_t Next;
+    uint8 Next;
 }Node_StateType;
 
 typedef struct _NodeStateCfgType
 {
-    uint16_t num;
+    uint16 num;
     const Node_StateType *state;
 }Node_StateCfgType;
 
 typedef struct _NodeStateInfoType
 {
-    uint8_t node;
+    uint8 node;
     const Node_StateCfgType *state;
 }Node_StateInfoType;
 

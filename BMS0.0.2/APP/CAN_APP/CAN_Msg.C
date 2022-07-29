@@ -61,7 +61,7 @@ Bool Can_GetCallBack(void)
     return 0;
 }
 
-void Can_NodeSend(uint8_t Tag_num, uint8_t data)
+void Can_NodeSend(uint8 Tag_num, uint8 data)
 {
     Can_MsgNodeType.Data[Tag_num] = data;
 }

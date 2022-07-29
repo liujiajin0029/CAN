@@ -5,7 +5,7 @@
 #include "CAN_Msg.h"
 
 
-void Node_CanSend(uint8_t node_num,uint8_t data)
+void Node_CanSend(uint8 node_num,uint8 data)
 {
    Can_NodeSend(node_num,data);
 }
