@@ -12,7 +12,7 @@ void Pre_StartPre(void)
 {
     Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
-    RelayM_Change(RELAYM_PRESWITCHON);
+   // RelayM_Change(RELAYM_PRESWITCHON);
 
 }
 
@@ -21,7 +21,7 @@ void Pre_StopPre(void)
     Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
     retval = PRECHARGEM_STATEOK;
-    RelayM_Change(RELAYM_PRESWITCHOFF);
+ //   RelayM_Change(RELAYM_PRESWITCHOFF);
 }
 
 void Pre_StartMaster(void)
@@ -29,7 +29,7 @@ void Pre_StartMaster(void)
     Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
     retval = PRECHARGEM_STATEOK;
-    RelayM_Change(RELAYM_CLOSEDTOTALON);
+ //   RelayM_Change(RELAYM_CLOSEDTOTALON);
 }
 
 void Pre_StopMaster(void)
@@ -37,7 +37,7 @@ void Pre_StopMaster(void)
     Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
     retval = PRECHARGEM_STATEOK;
-    RelayM_Change(RELAYM_CLOSEDTOTALOFF);
+  //  RelayM_Change(RELAYM_CLOSEDTOTALOFF);
 }
 
 void Pre_Change(void)
@@ -45,7 +45,7 @@ void Pre_Change(void)
     Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
 
     retval = PRECHARGEM_STATEOK;
-    RelayM_Change(RELAYM_CLOSEDTOTALON);
+ //   RelayM_Change(RELAYM_CLOSEDTOTALON);
 
 }
 Pre_ReturnType Pre_IsFinish(void)
