@@ -2,7 +2,7 @@
 #include "VBAT.h"
 #include "RelayM.h"
 #include "derivative.h"
-
+#include "RelayM_cfg.h"
 void Pre_Init(void)
 {
 
@@ -10,43 +10,42 @@ void Pre_Init(void)
 
 void Pre_StartPre(void)
 {
-    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
+    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    {
 
-   // RelayM_Change(RELAYM_PRESWITCHON);
-
+    }
 }
 
 void Pre_StopPre(void)
 {
-    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
+    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    {
 
-    retval = PRECHARGEM_STATEOK;
- //   RelayM_Change(RELAYM_PRESWITCHOFF);
+    }
 }
 
 void Pre_StartMaster(void)
 {
-    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
+    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    {
 
-    retval = PRECHARGEM_STATEOK;
- //   RelayM_Change(RELAYM_CLOSEDTOTALON);
+    }
 }
 
 void Pre_StopMaster(void)
 {
-    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
+    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    {
 
-    retval = PRECHARGEM_STATEOK;
-  //  RelayM_Change(RELAYM_CLOSEDTOTALOFF);
+    }
 }
 
 void Pre_Change(void)
 {
-    Pre_ReturnType retval = PRECHARGEM_STATENOTOK;
+    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    {
 
-    retval = PRECHARGEM_STATEOK;
- //   RelayM_Change(RELAYM_CLOSEDTOTALON);
-
+    }
 }
 Pre_ReturnType Pre_IsFinish(void)
 {

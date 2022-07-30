@@ -2,10 +2,9 @@
 #include "Hv_cfg.h"
 
 
-/*ÍêÕû£¬¾­¹ý´¦ÀíµÄÊý¾Ý*/
-Hv_DemoDataType Hv_Data[Hv_MAXPASSANUM] =
+
+Hv_DataCxtCfgType Hv_Data[Hv_MAXPASSANUM] =
 {
-    {0,0,0,0},
-    {0,0,0,0},
+    {Hv_GetVoltageFct,Hv_GetCurrentFct,Hv_GetTempFct,0},
 };
 

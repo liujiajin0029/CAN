@@ -24,8 +24,10 @@ Node_Msg.C.o                            Model: BANKED,        Lang: ANSI-C
 Node_Cfg.c.o                            Model: BANKED,        Lang: ANSI-C
 Node.c.o                                Model: BANKED,        Lang: ANSI-C
 PrechargeM.c.o                          Model: BANKED,        Lang: ANSI-C
+RelayM.c.o                              Model: BANKED,        Lang: ANSI-C
 CAN.C.o                                 Model: BANKED,        Lang: ANSI-C
 CAN_Cfg.c.o                             Model: BANKED,        Lang: ANSI-C
+RelayM_cfg.c.o                          Model: BANKED,        Lang: ANSI-C
 
 *********************************************************************************************
 STARTUP SECTION
@@ -34,7 +36,7 @@ Entry point: 0xC000 (_Startup)
 _startupData is allocated at 0xC00F and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x2100     47
+  _Range   pZeroOut       0x2100     62
   _Copy    *toCopyDownBeg 0xC0DA
 } _startupData;
 
@@ -46,10 +48,10 @@ Section Name                    Size  Type     From       To       Segment
 .startData                        66     R     0xC00F     0xC050   ROM_C000
 .rodata                          115     R     0xC051     0xC0C3   ROM_C000
 NON_BANKED                        22     R     0xC0C4     0xC0D9   ROM_C000
-.copy                             24     R     0xC0DA     0xC0F1   ROM_C000
-.text                           1231     R   0xFE8000   0xFE84CE   PAGE_FE
+.copy                             38     R     0xC0DA     0xC0FF   ROM_C000
+.text                           1486     R   0xFE8000   0xFE85CD   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
-.data                             25   R/W     0x2100     0x2118   RAM
+.data                             40   R/W     0x2100     0x2127   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
 .abs_section_a                     1   N/I        0xA        0xA   .absSeg2
@@ -790,13 +792,13 @@ NON_BANKED                        22     R     0xC0C4     0xC0D9   ROM_C000
 .abs_section_3f2                   2   N/I      0x3F2      0x3F3   .absSeg737
 .abs_section_ff7a                  2     R     0xFF7A     0xFF7B   .absSeg738
 .abs_section_ffaa                  2     R     0xFFAA     0xFFAB   .absSeg739
-.bss                              19   R/W     0x2119     0x212B   RAM
-.common                            3   R/W     0x212C     0x212E   RAM
+.bss                              19   R/W     0x2128     0x213A   RAM
+.common                            3   R/W     0x213B     0x213D   RAM
 .vectSeg740_vect                   2     R     0xFFFE     0xFFFF   .vectSeg740
 
 Summary of section sizes per section type:
-READ_ONLY (R):         5C7 (dec:     1479)
-READ_WRITE (R/W):      12F (dec:      303)
+READ_ONLY (R):         6D4 (dec:     1748)
+READ_WRITE (R/W):      13E (dec:      318)
 NO_INIT (N/I):         383 (dec:      899)
 
 *********************************************************************************************
@@ -1590,7 +1592,7 @@ MODULE:                 -- CAN_Msg.C.o --
      Can_NodeSend                            FE8115       D      13       2   .text       
      Can_NodePollCallBcak                    FE8122       5       5       2   .text       
 - VARIABLES:
-     Can_Time.1                                2119       2       2       3   .bss        
+     Can_Time.1                                2128       2       2       3   .bss        
 MODULE:                 -- Node_Msg.C.o --
 - PROCEDURES:
      Node_CanSend                            FE8127       D      13       6   .text       
@@ -1607,35 +1609,49 @@ MODULE:                 -- Node.c.o --
 - PROCEDURES:
      Node_Poll                               FE8134      78     120       2   .text       
 - VARIABLES:
-     Node_cfg                                  212C       3       3       7   .common     
+     Node_cfg                                  213B       3       3       7   .common     
 MODULE:                 -- PrechargeM.c.o --
 - PROCEDURES:
-     Pre_StartPre                            FE81AC       1       1       2   .text       
-     Pre_StopPre                             FE81AD       1       1       4   .text       
-     Pre_StopMaster                          FE81AE       1       1       2   .text       
-     Pre_Change                              FE81AF       1       1       2   .text       
-     Pre_IsFinish                            FE81B0      1C      28       6   .text       
-     Pre_DeIsFinish                          FE81CC       4       4       2   .text       
-     Pre_IsFail                              FE81D0      15      21       2   .text       
-     Pre_DeIsFail                            FE81E5       4       4       2   .text       
-     Pre_Diagnosis                           FE81E9       4       4      10   .text       
-     Pre_NoAct                               FE81ED       1       1       8   .text       
+     Pre_StartPre                            FE81AC       E      14       2   .text       
+     Pre_StopPre                             FE81BA       E      14       4   .text       
+     Pre_StopMaster                          FE81C8       E      14       2   .text       
+     Pre_Change                              FE81D6       E      14       2   .text       
+     Pre_IsFinish                            FE81E4      1C      28       6   .text       
+     Pre_DeIsFinish                          FE8200       4       4       2   .text       
+     Pre_IsFail                              FE8204      15      21       2   .text       
+     Pre_DeIsFail                            FE8219       4       4       2   .text       
+     Pre_Diagnosis                           FE821D       4       4      10   .text       
+     Pre_NoAct                               FE8221       1       1       8   .text       
+- VARIABLES:
+MODULE:                 -- RelayM.c.o --
+- PROCEDURES:
+     RelayM_IOSetMsg                         FE8222       1       1       8   .text       
+     RelayM_StateCtlWrite                    FE8223      1D      29       2   .text       
+     RelayM_OnTimeCtlWrite                   FE8240      1D      29       2   .text       
+     RelayM_OffTimeCtlWrite                  FE825D      1D      29       2   .text       
+     RelayM_ResCtlWrite                      FE827A      1B      27       2   .text       
+     RelayM_FnControl                        FE8295      58      88       8   .text       
 - VARIABLES:
 MODULE:                 -- CAN.C.o --
 - PROCEDURES:
-     Can_Init                                FE81EE       F      15       2   .text       
-     Can_DeInit                              FE81FD      F6     246       4   .text       
-     Can_SendMsg                             FE82F3     11A     282       5   .text       
-     Can_GetMsg                              FE840D      C2     194       3   .text       
+     Can_Init                                FE82ED       F      15       2   .text       
+     Can_DeInit                              FE82FC      F6     246       4   .text       
+     Can_SendMsg                             FE83F2     11A     282       5   .text       
+     Can_GetMsg                              FE850C      C2     194       3   .text       
 - VARIABLES:
      Can1_InitType                             2100       3       3       1   .data       
-     Can0_InitType                             211B       3       3       1   .bss        
+     Can0_InitType                             212A       3       3       1   .bss        
 MODULE:                 -- CAN_Cfg.c.o --
 - PROCEDURES:
 - VARIABLES:
      Can_TimeSendType                          2103       8       8       1   .data       
      Can_MsgNodeType                           210B       E      14       3   .data       
-     Can_MsgGetType                            211E       E      14       3   .bss        
+     Can_MsgGetType                            212D       E      14       3   .bss        
+MODULE:                 -- RelayM_cfg.c.o --
+- PROCEDURES:
+- VARIABLES:
+     RelayM_FnDataType                         2119       A      10       4   .data       
+     RelayM_CtlDataType                        2123       5       5       4   .data       
 
 *********************************************************************************************
 MODULE STATISTIC
@@ -1652,10 +1668,12 @@ MODULE STATISTIC
   Node_Msg.C.o                                 0     13      0
   Node_Cfg.c.o                                 0      0    115
   Node.c.o                                     3    120      0
-  PrechargeM.c.o                               0     66      0
+  PrechargeM.c.o                               0    118      0
+  RelayM.c.o                                   0    203      0
   CAN.C.o                                      6    737      0
   CAN_Cfg.c.o                                 36      0      0
-  other                                      256     68     24
+  RelayM_cfg.c.o                              15      0      0
+  other                                      256     68     38
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
@@ -1664,10 +1682,13 @@ SECTION: ".text"
   main Init Pii_Init Ect_Init Pit_Init Can_SendTime Can_SendMsgAll 
   Can_GetCallBack Can_NodeSend Can_NodePollCallBcak Node_CanSend Node_Poll 
   Pre_StartPre Pre_StopPre Pre_StopMaster Pre_Change Pre_IsFinish 
-  Pre_DeIsFinish Pre_IsFail Pre_DeIsFail Pre_Diagnosis Pre_NoAct Can_Init 
+  Pre_DeIsFinish Pre_IsFail Pre_DeIsFail Pre_Diagnosis Pre_NoAct 
+  RelayM_IOSetMsg RelayM_StateCtlWrite RelayM_OnTimeCtlWrite 
+  RelayM_OffTimeCtlWrite RelayM_ResCtlWrite RelayM_FnControl Can_Init 
   Can_DeInit Can_SendMsg Can_GetMsg 
 SECTION: ".data"
-  Can1_InitType Can_TimeSendType Can_MsgNodeType 
+  Can1_InitType Can_TimeSendType Can_MsgNodeType RelayM_FnDataType 
+  RelayM_CtlDataType 
 SECTION: ".bss"
   Can_Time.1 Can0_InitType Can_MsgGetType 
 SECTION: ".init"
@@ -3905,10 +3926,12 @@ OBJECT LIST SORTED BY ADDRESS
      Can1_InitType                             2100       3       3       1   .data       
      Can_TimeSendType                          2103       8       8       1   .data       
      Can_MsgNodeType                           210B       E      14       3   .data       
-     Can_Time.1                                2119       2       2       3   .bss        
-     Can0_InitType                             211B       3       3       1   .bss        
-     Can_MsgGetType                            211E       E      14       3   .bss        
-     Node_cfg                                  212C       3       3       7   .common     
+     RelayM_FnDataType                         2119       A      10       4   .data       
+     RelayM_CtlDataType                        2123       5       5       4   .data       
+     Can_Time.1                                2128       2       2       3   .bss        
+     Can0_InitType                             212A       3       3       1   .bss        
+     Can_MsgGetType                            212D       E      14       3   .bss        
+     Node_cfg                                  213B       3       3       7   .common     
      _Startup                                  C000       F      15       0   .init       
      Node_PreStateStart                        C051      16      22       1   .rodata     
      Node_PreStateCheck                        C067      2C      44       1   .rodata     
@@ -3932,20 +3955,26 @@ OBJECT LIST SORTED BY ADDRESS
      Can_NodePollCallBcak                    FE8122       5       5       2   .text       
      Node_CanSend                            FE8127       D      13       6   .text       
      Node_Poll                               FE8134      78     120       2   .text       
-     Pre_StartPre                            FE81AC       1       1       2   .text       
-     Pre_StopPre                             FE81AD       1       1       4   .text       
-     Pre_StopMaster                          FE81AE       1       1       2   .text       
-     Pre_Change                              FE81AF       1       1       2   .text       
-     Pre_IsFinish                            FE81B0      1C      28       6   .text       
-     Pre_DeIsFinish                          FE81CC       4       4       2   .text       
-     Pre_IsFail                              FE81D0      15      21       2   .text       
-     Pre_DeIsFail                            FE81E5       4       4       2   .text       
-     Pre_Diagnosis                           FE81E9       4       4      10   .text       
-     Pre_NoAct                               FE81ED       1       1       8   .text       
-     Can_Init                                FE81EE       F      15       2   .text       
-     Can_DeInit                              FE81FD      F6     246       4   .text       
-     Can_SendMsg                             FE82F3     11A     282       5   .text       
-     Can_GetMsg                              FE840D      C2     194       3   .text       
+     Pre_StartPre                            FE81AC       E      14       2   .text       
+     Pre_StopPre                             FE81BA       E      14       4   .text       
+     Pre_StopMaster                          FE81C8       E      14       2   .text       
+     Pre_Change                              FE81D6       E      14       2   .text       
+     Pre_IsFinish                            FE81E4      1C      28       6   .text       
+     Pre_DeIsFinish                          FE8200       4       4       2   .text       
+     Pre_IsFail                              FE8204      15      21       2   .text       
+     Pre_DeIsFail                            FE8219       4       4       2   .text       
+     Pre_Diagnosis                           FE821D       4       4      10   .text       
+     Pre_NoAct                               FE8221       1       1       8   .text       
+     RelayM_IOSetMsg                         FE8222       1       1       8   .text       
+     RelayM_StateCtlWrite                    FE8223      1D      29       2   .text       
+     RelayM_OnTimeCtlWrite                   FE8240      1D      29       2   .text       
+     RelayM_OffTimeCtlWrite                  FE825D      1D      29       2   .text       
+     RelayM_ResCtlWrite                      FE827A      1B      27       2   .text       
+     RelayM_FnControl                        FE8295      58      88       8   .text       
+     Can_Init                                FE82ED       F      15       2   .text       
+     Can_DeInit                              FE82FC      F6     246       4   .text       
+     Can_SendMsg                             FE83F2     11A     282       5   .text       
+     Can_GetMsg                              FE850C      C2     194       3   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -3960,6 +3989,10 @@ rtshc12.c.o (ansixbf.lib):
   _CASE_SEARCH_8_BYTE _FCALL _FPCMP _PADD _PSUB _PINC _PDEC 
 PrechargeM.c.o:
   Pre_Init Pre_StartMaster 
+RelayM.c.o:
+  RelayM_InterruptOFF RelayM_InterruptON RelayM_GetControL RelayM_GetOnTime 
+  RelayM_GetOffTime RelayM_GetResTime RelayM_GetActTime RelayM_ReadAllData 
+  RelayM_ReadAloneData 
 NOT USED VARIABLES
 main.c.o:
   Can1_InitType Can0_InitType 
@@ -3975,9 +4008,13 @@ Node_Cfg.c.o:
   Can1_InitType Can0_InitType 
 Node.c.o:
   Can1_InitType Can0_InitType nodestate.1 
+RelayM.c.o:
+  RelayM_StateData 
 CAN_Cfg.c.o:
   Can1_InitType Can_MsgSendType1 Can_MsgSendType2 Can_MsgSendType3 
   Can0_InitType 
+RelayM_cfg.c.o:
+  RelayM_ActureData RelayM_ControlData RelayM_StateData 
 
 *********************************************************************************************
 COPYDOWN SECTION
@@ -4002,11 +4039,23 @@ Name of initialized Object : Can_MsgNodeType:1
  03
 ------- ROM-ADDRESS: 0xC0E9 ---- SIZE       4 ---
 Filling bytes inserted
- 00032116
+ 00112116
 ------- ROM-ADDRESS: 0xC0ED ---- RAM-ADDRESS: 0x2116 ---- SIZE       3 ---
 Name of initialized Object : Can_MsgNodeType:11
  080040
-------- ROM-ADDRESS: 0xC0F0 ---- SIZE       2 ---
+------- ROM-ADDRESS: 0xC0F0 ---- SIZE       3 ---
+Filling bytes inserted
+ 000000
+------- ROM-ADDRESS: 0xC0F3 ---- RAM-ADDRESS: 0x211C ---- SIZE       5 ---
+Name of initialized Object : RelayM_FnDataType:3
+ 0400060007
+------- ROM-ADDRESS: 0xC0F8 ---- SIZE       2 ---
+Filling bytes inserted
+ 0000
+------- ROM-ADDRESS: 0xC0FA ---- RAM-ADDRESS: 0x2123 ---- SIZE       4 ---
+Name of initialized Object : RelayM_CtlDataType
+ 010A322C
+------- ROM-ADDRESS: 0xC0FE ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -4043,8 +4092,22 @@ Can_NodeSend              USES Can_MsgNodeType
 Can_NodePollCallBcak      USES Node_Poll 
 Node_CanSend              USES Can_NodeSend 
 Node_Poll                 USES Node_cfg Node_StateCfg Node_CanSend 
+Pre_StartPre              USES RelayM_FnDataType RelayM_CtlDataType 
+                                RelayM_FnControl 
+Pre_StopPre               USES RelayM_FnDataType RelayM_CtlDataType 
+                                RelayM_FnControl 
+Pre_StopMaster            USES RelayM_FnDataType RelayM_CtlDataType 
+                                RelayM_FnControl 
+Pre_Change                USES RelayM_FnDataType RelayM_CtlDataType 
+                                RelayM_FnControl 
 Pre_IsFinish              USES Pre_DeIsFinish 
 Pre_IsFail                USES Pre_DeIsFail 
+RelayM_StateCtlWrite      USES RelayM_IOSetMsg 
+RelayM_OnTimeCtlWrite     USES RelayM_IOSetMsg 
+RelayM_OffTimeCtlWrite    USES RelayM_IOSetMsg 
+RelayM_ResCtlWrite        USES RelayM_IOSetMsg 
+RelayM_FnControl          USES RelayM_StateCtlWrite RelayM_OnTimeCtlWrite 
+                                RelayM_OffTimeCtlWrite RelayM_ResCtlWrite 
 Can_Init                  USES Can0_InitType Can_DeInit Can1_InitType 
 Can_DeInit                USES _CAN0CTL0 _CAN0RXDSR0 _CAN0CTL1 _CAN0BTR0 
                                 _CAN0BTR1 _CAN0IDMR0 _CAN0IDMR1 _CAN0IDMR3 _CAN0IDMR4 
@@ -4101,13 +4164,33 @@ DEPENDENCY TREE
           |     |  |  +- Pre_NoAct           
           |     |  |  |    
           |     |  |  +- Pre_StartPre        
-          |     |  |       
+          |     |  |     | 
+          |     |  |     +- RelayM_FnControl    
+          |     |  |        | 
+          |     |  |        +- RelayM_StateCtlWrite
+          |     |  |        |  | 
+          |     |  |        |  +- RelayM_IOSetMsg     
+          |     |  |        |       
+          |     |  |        +- RelayM_OnTimeCtlWrite
+          |     |  |        |  | 
+          |     |  |        |  +- RelayM_IOSetMsg      (see above)
+          |     |  |        |     
+          |     |  |        +- RelayM_OffTimeCtlWrite
+          |     |  |        |  | 
+          |     |  |        |  +- RelayM_IOSetMsg      (see above)
+          |     |  |        |     
+          |     |  |        +- RelayM_ResCtlWrite  
+          |     |  |           | 
+          |     |  |           +- RelayM_IOSetMsg      (see above)
+          |     |  |              
           |     |  +- Node_PreStateCheck  
           |     |  |  | 
           |     |  |  +- Pre_Diagnosis        (see above)
           |     |  |  |  
           |     |  |  +- Pre_StopPre         
-          |     |  |  |    
+          |     |  |  |  | 
+          |     |  |  |  +- RelayM_FnControl     (see above)
+          |     |  |  |     
           |     |  |  +- Pre_IsFail          
           |     |  |  |  | 
           |     |  |  |  +- Pre_DeIsFail        
@@ -4117,7 +4200,9 @@ DEPENDENCY TREE
           |     |  |  |  +- Pre_DeIsFinish      
           |     |  |  |       
           |     |  |  +- Pre_Change          
-          |     |  |  |    
+          |     |  |  |  | 
+          |     |  |  |  +- RelayM_FnControl     (see above)
+          |     |  |  |     
           |     |  |  +- Pre_NoAct            (see above)
           |     |  |     
           |     |  +- Node_PreStateFault  
@@ -4125,7 +4210,9 @@ DEPENDENCY TREE
           |     |  |  +- Pre_Diagnosis        (see above)
           |     |  |  |  
           |     |  |  +- Pre_StopMaster      
-          |     |  |  |    
+          |     |  |  |  | 
+          |     |  |  |  +- RelayM_FnControl     (see above)
+          |     |  |  |     
           |     |  |  +- Pre_NoAct            (see above)
           |     |  |     
           |     |  +- Node_PreStateFinish 
@@ -4157,5 +4244,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 9
-Total size of all blocks to be downloaded: 1479
+Total size of all blocks to be downloaded: 1748
 
