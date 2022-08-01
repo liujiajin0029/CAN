@@ -1650,8 +1650,8 @@ MODULE:                 -- CAN_Cfg.c.o --
 MODULE:                 -- RelayM_cfg.c.o --
 - PROCEDURES:
 - VARIABLES:
-     RelayM_FnDataType                         2119       A      10       4   .data       
-     RelayM_CtlDataType                        2123       5       5       4   .data       
+     RelayM_FnData                             2119       A      10       4   .data       
+     RelayM_CtlData                            2123       5       5       4   .data       
 
 *********************************************************************************************
 MODULE STATISTIC
@@ -1687,8 +1687,7 @@ SECTION: ".text"
   RelayM_OffTimeCtlWrite RelayM_ResCtlWrite RelayM_FnControl Can_Init 
   Can_DeInit Can_SendMsg Can_GetMsg 
 SECTION: ".data"
-  Can1_InitType Can_TimeSendType Can_MsgNodeType RelayM_FnDataType 
-  RelayM_CtlDataType 
+  Can1_InitType Can_TimeSendType Can_MsgNodeType RelayM_FnData RelayM_CtlData 
 SECTION: ".bss"
   Can_Time.1 Can0_InitType Can_MsgGetType 
 SECTION: ".init"
@@ -3926,8 +3925,8 @@ OBJECT LIST SORTED BY ADDRESS
      Can1_InitType                             2100       3       3       1   .data       
      Can_TimeSendType                          2103       8       8       1   .data       
      Can_MsgNodeType                           210B       E      14       3   .data       
-     RelayM_FnDataType                         2119       A      10       4   .data       
-     RelayM_CtlDataType                        2123       5       5       4   .data       
+     RelayM_FnData                             2119       A      10       4   .data       
+     RelayM_CtlData                            2123       5       5       4   .data       
      Can_Time.1                                2128       2       2       3   .bss        
      Can0_InitType                             212A       3       3       1   .bss        
      Can_MsgGetType                            212D       E      14       3   .bss        
@@ -4047,13 +4046,13 @@ Name of initialized Object : Can_MsgNodeType:11
 Filling bytes inserted
  000000
 ------- ROM-ADDRESS: 0xC0F3 ---- RAM-ADDRESS: 0x211C ---- SIZE       5 ---
-Name of initialized Object : RelayM_FnDataType:3
+Name of initialized Object : RelayM_FnData:3
  0400060007
 ------- ROM-ADDRESS: 0xC0F8 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 ------- ROM-ADDRESS: 0xC0FA ---- RAM-ADDRESS: 0x2123 ---- SIZE       4 ---
-Name of initialized Object : RelayM_CtlDataType
+Name of initialized Object : RelayM_CtlData
  010A322C
 ------- ROM-ADDRESS: 0xC0FE ---- SIZE       2 ---
 Filling bytes inserted
@@ -4092,14 +4091,10 @@ Can_NodeSend              USES Can_MsgNodeType
 Can_NodePollCallBcak      USES Node_Poll 
 Node_CanSend              USES Can_NodeSend 
 Node_Poll                 USES Node_cfg Node_StateCfg Node_CanSend 
-Pre_StartPre              USES RelayM_FnDataType RelayM_CtlDataType 
-                                RelayM_FnControl 
-Pre_StopPre               USES RelayM_FnDataType RelayM_CtlDataType 
-                                RelayM_FnControl 
-Pre_StopMaster            USES RelayM_FnDataType RelayM_CtlDataType 
-                                RelayM_FnControl 
-Pre_Change                USES RelayM_FnDataType RelayM_CtlDataType 
-                                RelayM_FnControl 
+Pre_StartPre              USES RelayM_FnData RelayM_CtlData RelayM_FnControl 
+Pre_StopPre               USES RelayM_FnData RelayM_CtlData RelayM_FnControl 
+Pre_StopMaster            USES RelayM_FnData RelayM_CtlData RelayM_FnControl 
+Pre_Change                USES RelayM_FnData RelayM_CtlData RelayM_FnControl 
 Pre_IsFinish              USES Pre_DeIsFinish 
 Pre_IsFail                USES Pre_DeIsFail 
 RelayM_StateCtlWrite      USES RelayM_IOSetMsg 

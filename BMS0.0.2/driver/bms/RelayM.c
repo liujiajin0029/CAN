@@ -14,37 +14,37 @@ void RelayM_InterruptON()
 
 uint8 RelayM_IOSetMsg(uint8 IO, uint8 data)
 {
-     IO = data;
+    IO = data;
     return IO;
 }
 
 uint8 RelayM_GetControL(uint8 pas)
 {
-     pas = 1;
+    pas = 1;
     return pas;
 }
 uint8 RelayM_GetOnTime(uint8 pas)
 {
-     pas = 1;
+    pas = 1;
     return pas;
 }
 uint8 RelayM_GetOffTime(uint8 pas)
 {
-     pas = 1;
+    pas = 1;
     return pas;
 }
 uint8 RelayM_GetResTime(uint8 pas)
 {
-     pas = 1;
+    pas = 1;
     return pas;
 }
 uint8 RelayM_GetActTime(uint8 pas)
 {
-     pas = 1;
+    pas = 1;
     return pas;
 }
 
-uint8  RelayM_StateCtlWrite(RelayM_ControLCfgType *cfg)
+uint8 RelayM_StateCtlWrite(RelayM_ControLCfgType *cfg)
 {
     uint8 data;
     uint8 retval;
@@ -61,7 +61,7 @@ uint8  RelayM_StateCtlWrite(RelayM_ControLCfgType *cfg)
 }
 
 
-uint8  RelayM_OnTimeCtlWrite(RelayM_ControLCfgType *cfg)
+uint8 RelayM_OnTimeCtlWrite(RelayM_ControLCfgType *cfg)
 {
     uint8 data;
     uint8 retval;
@@ -77,7 +77,7 @@ uint8  RelayM_OnTimeCtlWrite(RelayM_ControLCfgType *cfg)
     return retval;
 }
 
-uint8  RelayM_OffTimeCtlWrite(RelayM_ControLCfgType *cfg)
+uint8 RelayM_OffTimeCtlWrite(RelayM_ControLCfgType *cfg)
 {
     uint8 data;
     uint8 retval;
@@ -92,7 +92,7 @@ uint8  RelayM_OffTimeCtlWrite(RelayM_ControLCfgType *cfg)
     }
     return retval;
 }
-uint8  RelayM_ResCtlWrite(RelayM_ControLCfgType *cfg)
+uint8 RelayM_ResCtlWrite(RelayM_ControLCfgType *cfg)
 {
     uint8 data;
     uint8 retval;
@@ -115,31 +115,30 @@ Relaym_StateRetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_ControLCfgType
    {
         if (RelayM_StateCtlWrite(ctl) == 1)
         {
-           retval =   RELAYM_STATERETVALON;
+           retval = RELAYM_STATERETVALON;
         }
    }
    if (fn->OnTime == RELAYM_HAVE_ONTIME )
    {
         if (RelayM_OnTimeCtlWrite(ctl) == 1)
         {
-           retval =   RELAYM_STATERETVALON;
+           retval = RELAYM_STATERETVALON;
         }
    }
    if (fn->OffTime == RELAYM_NOT_HAVE_OFFTIME )
    {
         if (RelayM_OffTimeCtlWrite(ctl) == 1)
         {
-           retval =   RELAYM_STATERETVALON;
+           retval = RELAYM_STATERETVALON;
         }
    }
    if (fn->Res == RELAYM_HAVE_RES )
    {
         if (RelayM_ResCtlWrite(ctl) == 1)
         {
-          retval =   RELAYM_STATERETVALON;
+          retval = RELAYM_STATERETVALON;
         }
    }
-   
    return retval;
 }
 
@@ -148,7 +147,7 @@ RelayM_ActureCallType RelayM_ReadAllData(uint8 pas)
 {
     RelayM_ActureCallType retval;
     /*数组越界保护*/
-    if (pas < RELAYM_MAXPASSANUM)
+    if (pas < RELAYM_MAX_PASSANUM)
     {
         RelayM_InterruptOFF();
         retval.Act = RelayM_StateData[pas].get -> Act(pas);
@@ -166,7 +165,7 @@ uint8 RelayM_ReadAloneData(uint8 pas ,Relaym_SateMsgType state)
 {
     uint8 retval;
     /*数组越界保护*/
-    if (pas < RELAYM_MAXPASSANUM)
+    if (pas < RELAYM_MAX_PASSANUM)
     {
         RelayM_InterruptOFF();
         switch ( state )

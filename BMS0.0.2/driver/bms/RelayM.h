@@ -5,22 +5,19 @@
 #include "derivative.h"
 #include "VBAT.h"
 
+/*预充状态*/
+#define RELAYM_PRE_SWITCH_ON      (1U)
+#define RELAYM_PRE_SWITCH_OFF     (0U)
+/*预充控制器状态*/
+#define RELAYM_PRE_IO_ON         (1U)
+#define RELAYM_PRE_IO_OFF        (1U)
 
-#define RELAYM_PRESWITCHON      (1U)
-#define RELAYM_PRESWITCHOFF     (0U)
-#define RELAYM_PRE_IOON         (1U)
-#define RELAYM_PRE_IOOFF        (1U)
-#define RELAYM_CLOSEDTOTALON    (5U)
-#define RELAYM_CLOSEDTOTALOFF   (0U)
-#define RELAYM_CLOSEDTOTALIO    (1U)
+/*所有的继电器IO口数量*/
+#define RELAYM_CLOSE_DTOTAL_ON    (5U)
+#define RELAYM_CLOSE_DTOTAL_OFF   (0U)
+#define RELAYM_CLOSE_DTOTAL_IO    (1U)
 
-
-#define RELAYM_RES_SUPPORT FALSE
-#define RELAYM_SET_SUPPORT TRUE
-
-
-
-#define RELAYM_MAXPASSANUM 10
+#define RELAYM_MAX_PASSANUM 10
 
 typedef enum _Relaym_SateMsgType
 {
@@ -52,7 +49,7 @@ typedef enum _RELAYM_ChannelType
     RELAYM_CHANNEL_6,
     RELAYM_CHANNEL_7,
     RELAYM_CHANNEL_8,
-} RELAYM_ChannelType;
+}RELAYM_ChannelType;
 
 typedef enum RELAYM_HaveAttribute
 {
@@ -64,15 +61,15 @@ typedef enum RELAYM_HaveAttribute
     RELAYM_NOT_HAVE_ONTIME,
     RELAYM_HAVE_OFFTIME,
     RELAYM_NOT_HAVE_OFFTIME,
-}RELAYM_Attribute;
+}RelayM_HaveAttributeType;
 
 
 typedef struct _RelayM_ControlType
 {
-    RELAYM_Attribute Ctl;      /*继电器是否拥有控制属性*/
-    RELAYM_Attribute OnTime;   /*继电器是否拥有开时间属性*/
-    RELAYM_Attribute OffTime;  /*继电器是否拥有关闭时间属性*/
-    RELAYM_Attribute Res;      /*继电器是否拥有阻值属性*/
+    RelayM_HaveAttributeType Ctl;      /*继电器是否拥有控制属性*/
+    RelayM_HaveAttributeType OnTime;   /*继电器是否拥有开时间属性*/
+    RelayM_HaveAttributeType OffTime;  /*继电器是否拥有关闭时间属性*/
+    RelayM_HaveAttributeType Res;      /*继电器是否拥有阻值属性*/
     RELAYM_ChannelType passage;
 }RelayM_FnType;
 
@@ -95,7 +92,7 @@ typedef struct _RelayM_ActureType
     uint8 (*OffTime)(uint8 pas);        /*读取继电器关闭时间参数*/
     uint8 (*Res)(uint8 pas);            /*读取继电器阻值参数*/
     uint8  passage;
-}RelayM_ActureType;
+}RelayM_ActureCxtType;
 
 
 typedef struct _RelayM_CtlType
@@ -111,7 +108,7 @@ typedef struct _RelayM_CtlType
 typedef struct _RelayM_MsgCfgType
 {
     uint8    passage;
-    RelayM_ActureType *get;
+    RelayM_ActureCxtType *get;
     RelayM_CtlCxtType *ctl;
 }RelayM_MsgCfgType;
 
@@ -125,7 +122,7 @@ typedef struct _RelayM_CtlCfgType
 typedef struct _RelayM_ActCfgType
 {
     uint8    passage;
-    RelayM_ActureType *get;
+    RelayM_ActureCxtType *get;
 }RelayM_ActCfgType;
 
 typedef struct _RelayM_ActureCallType
@@ -139,7 +136,6 @@ typedef struct _RelayM_ActureCallType
 }RelayM_ActureCallType;
 
 
-int RelayM_SetOnTime(uint8 ctl ,uint8 pas);
 uint8  RelayM_StateCtlWrite(RelayM_ControLCfgType *cfg);
 uint8  RelayM_OnTimeCtlWrite(RelayM_ControLCfgType *cfg);
 uint8  RelayM_OffTimeCtlWrite(RelayM_ControLCfgType *cfg);

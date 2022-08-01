@@ -10,7 +10,7 @@ void Pre_Init(void)
 
 void Pre_StartPre(void)
 {
-    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    if (RelayM_FnControl(&RelayM_FnData,&RelayM_CtlData) == 1)
     {
 
     }
@@ -18,7 +18,7 @@ void Pre_StartPre(void)
 
 void Pre_StopPre(void)
 {
-    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    if (RelayM_FnControl(&RelayM_FnData,&RelayM_CtlData) == 1)
     {
 
     }
@@ -26,7 +26,7 @@ void Pre_StopPre(void)
 
 void Pre_StartMaster(void)
 {
-    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    if (RelayM_FnControl(&RelayM_FnData,&RelayM_CtlData) == 1)
     {
 
     }
@@ -34,7 +34,7 @@ void Pre_StartMaster(void)
 
 void Pre_StopMaster(void)
 {
-    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    if (RelayM_FnControl(&RelayM_FnData,&RelayM_CtlData) == 1)
     {
 
     }
@@ -42,7 +42,7 @@ void Pre_StopMaster(void)
 
 void Pre_Change(void)
 {
-    if (RelayM_FnControl(&RelayM_FnDataType,&RelayM_CtlDataType) == 1)
+    if (RelayM_FnControl(&RelayM_FnData,&RelayM_CtlData) == 1)
     {
 
     }

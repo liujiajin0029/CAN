@@ -12,18 +12,18 @@ void Hv_ClosePit()
 }
 uint8 Hv_GetVoltageFct(uint8 pas)
 {
-     pas = 1;
+    pas = 1;
     return pas;
 }
 uint8 Hv_GetCurrentFct(uint8 pas)
 {
-     pas = 1;
+    pas = 1;
     return pas;
 }
 
 uint8 Hv_GetTempFct(uint8 pas)
 {
-     pas = 1;
+    pas = 1;
     return pas;
 }
 
@@ -44,16 +44,16 @@ uint8 Hv_GetAlonMsg(HV_CfgPassType *cfg)
 {
     uint8 retval;
     Hv_RetvalType data;
-   data = Hv_GetVoltageData(cfg -> geway);
-    if (cfg ->passageway == HV_GEWAYVOLTAGE)
+    data = Hv_GetVoltageData(cfg -> passageway);
+    if (cfg ->geway == HV_GEWAY_VOLTAGE)
     {
         retval = data.Voltage;
     }
-    else if (cfg ->passageway == HV_GEWAYCURRENT)
+    else if (cfg ->geway == HV_GEWAY_CURRENT)
     {
         retval = data.Current;
     }
-    else if (cfg ->passageway == HV_GEWAYTEMP)
+    else if (cfg ->geway == HV_GEWAY_TEMP)
     {
         retval = data.Temp;
     }
@@ -64,19 +64,19 @@ uint8 Hv_GetAlonMsg(HV_CfgPassType *cfg)
     return retval;
 }
 
-Bool Hv_OpenPitCheck(Hv_RetvalType retval)
+Bool Hv_OpenPitCheck(Hv_RetvalType *cfg)
 {
     uint8 sum = 0;
 
-    if(Hv_DataManage(retval.Temp,HV_GEWAYMAXTEMP,HV_GEWAYMINTEMP) == TRUE)
+    if (Hv_DataManage(cfg->Temp,HV_GEWAYMAXTEMP,HV_GEWAYMINTEMP) == TRUE)
     {
         sum ++;
     }
-    if(Hv_DataManage(retval.Current,HV_GEWAYMAXCURRENT,HV_GEWAYMINCURRENT) == TRUE)
+    if (Hv_DataManage(cfg->Current,HV_GEWAYMAXCURRENT,HV_GEWAYMINCURRENT) == TRUE)
     {
         sum ++;
     }
-    if(Hv_DataManage(retval.Voltage,HV_GEWAYMAXVOLTAGE,HV_GEWAYMINVOLTAGE) == TRUE)
+    if (Hv_DataManage(cfg->Voltage,HV_GEWAYMAXVOLTAGE,HV_GEWAYMINVOLTAGE) == TRUE)
     {
         sum ++;
     }
@@ -90,7 +90,7 @@ Bool Hv_OpenPitCheck(Hv_RetvalType retval)
     }
 }
 
-Hv_RetvalType Hv_GetVoltageData (uint8 geway) //µçÑ¹
+Hv_RetvalType Hv_GetVoltageData(uint8 geway) //µçÑ¹
 {
     Hv_RetvalType retval;
     uint8 i;
@@ -114,7 +114,7 @@ Hv_RetvalType Hv_GetVoltageData (uint8 geway) //µçÑ¹
         }
     }
     retval.power =  retval.Voltage *  retval.Current;
-    if (Hv_OpenPitCheck(retval) == TRUE)
+    if (Hv_OpenPitCheck(&retval) == TRUE)
     {
 
     }

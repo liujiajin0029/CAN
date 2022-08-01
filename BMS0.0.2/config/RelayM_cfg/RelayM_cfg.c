@@ -1,7 +1,7 @@
 #include "RelayM.h"
 #include "RelayM_cfg.h"
 
-RelayM_ActureType   RelayM_ActureData[10] =
+RelayM_ActureCxtType   RelayM_ActureData[10] =
 {
     {RelayM_GetActTime,RelayM_GetControL,RelayM_GetOnTime,
      RelayM_GetOffTime,RelayM_GetResTime,0},
@@ -19,7 +19,7 @@ RelayM_MsgCfgType   RelayM_StateData[10]  =
    {1,&RelayM_ActureData[1],&RelayM_ControlData[1]},
 };
 
-RelayM_FnType   RelayM_FnDataType =
+RelayM_FnType   RelayM_FnData =
 {
     RELAYM_HAVE_CTL,
     RELAYM_HAVE_ONTIME,
@@ -28,7 +28,7 @@ RelayM_FnType   RelayM_FnDataType =
     RELAYM_CHANNEL_0,
 };
 
-RelayM_ControLCfgType   RelayM_CtlDataType =
+RelayM_ControLCfgType   RelayM_CtlData =
 {
-    1,10,50,300,0,
-};
+    1,10,50,300,0
+};  

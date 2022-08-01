@@ -21,15 +21,15 @@ typedef struct  _Hv_RetvalType
 
 typedef enum _HV_ATTRIBUTETYPE
 {
-    HV_GEWAYVOLTAGE,
-    HV_GEWAYCURRENT,
-    HV_GEWAYTEMP,
-}HV_ATTRIBUTETYPE;
+    HV_GEWAY_VOLTAGE,
+    HV_GEWAY_CURRENT,
+    HV_GEWAY_TEMP,
+}Hv_AttriButeType;
 
 
 typedef struct _HV_CfgPass
 {
-    HV_ATTRIBUTETYPE geway;
+    Hv_AttriButeType geway;
     uint8 passageway;
 }HV_CfgPassType;
 
@@ -45,7 +45,7 @@ typedef struct _Hv_DemoDataType
 Hv_RetvalType Hv_GetVoltage(uint8 geway);
 Bool Hv_DataManage(uint8 data ,uint8 MAX ,uint8 MIN);
 uint8 Hv_GetAlonMsg(HV_CfgPassType *Hv_msg);
-Bool Hv_OpenPitCheck(Hv_RetvalType retval);
+Bool Hv_OpenPitCheck(Hv_RetvalType *cfg);
 Hv_RetvalType Hv_GetVoltageData (uint8 geway); //µçÑ¹
 uint8 Hv_GetVoltageFct(uint8 pas);
 uint8 Hv_GetCurrentFct(uint8 pas);
