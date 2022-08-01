@@ -141,15 +141,15 @@ uint8  RelayM_OnTimeCtlWrite(RelayM_ControLCfgType *cfg);
 uint8  RelayM_OffTimeCtlWrite(RelayM_ControLCfgType *cfg);
 uint8  RelayM_ResCtlWrite(RelayM_ControLCfgType *cfg);
 
-RelayM_ActureCallType RelayM_ReadAllData(uint8 pas);
-uint8 RelayM_ReadAloneData(uint8 pas ,Relaym_SateMsgType state);
-Relaym_StateRetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_ControLCfgType *ctl);
-
 uint8 RelayM_GetControL(uint8 pas);
 uint8 RelayM_GetOnTime(uint8 pas);
 uint8 RelayM_GetOffTime(uint8 pas);
 uint8 RelayM_GetResTime(uint8 pas);
 uint8 RelayM_GetActTime(uint8 pas);
+
+RelayM_ActureCallType RelayM_ReadAllData(uint8 pas);
+uint8 RelayM_ReadAloneData(uint8 pas ,Relaym_SateMsgType state);
+Relaym_StateRetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_ControLCfgType *ctl);
 
 
 #endif

@@ -155,13 +155,13 @@ RelayM_ActureCallType RelayM_ReadAllData(uint8 pas)
         retval.OnTime = RelayM_StateData[pas].get -> OnTime(pas);
         retval.OffTime = RelayM_StateData[pas].get -> OffTime(pas);
         retval.Res = RelayM_StateData[pas].get -> Res(pas);
-        retval.passage = RelayM_StateData[pas].get->passage;
+        retval.passage = RelayM_StateData[pas].get-> passage;
         RelayM_InterruptON();
     }
     return retval;
 }
 
-uint8 RelayM_ReadAloneData(uint8 pas ,Relaym_SateMsgType state)
+uint8 RelayM_ReadAloneData(uint8 pas, Relaym_SateMsgType state)
 {
     uint8 retval;
     /*数组越界保护*/

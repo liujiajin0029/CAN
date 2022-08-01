@@ -3,12 +3,12 @@
 #include "hidef.h"
 #include "derivative.h"
 
-#define HV_GEWAYMAXTEMP     100
-#define HV_GEWAYMAXCURRENT  100
-#define HV_GEWAYMAXVOLTAGE  100
-#define HV_GEWAYMINTEMP     10
-#define HV_GEWAYMINCURRENT  10
-#define HV_GEWAYMINVOLTAGE  10
+#define HV_GEWAY_MAX_TEMP     100
+#define HV_GEWAY_MAX_CURRENT  100
+#define HV_GEWAY_MAX_VOLTAGE  100
+#define HV_GEWAY_MIN_TEMP     10
+#define HV_GEWAY_MIN_CURRENT  10
+#define HV_GEWAY_MIN_VOLTAGE  10
 
 typedef struct  _Hv_RetvalType
 {

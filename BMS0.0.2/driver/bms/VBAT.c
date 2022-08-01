@@ -67,27 +67,20 @@ uint8 Hv_GetAlonMsg(HV_CfgPassType *cfg)
 Bool Hv_OpenPitCheck(Hv_RetvalType *cfg)
 {
     uint8 sum = 0;
-
-    if (Hv_DataManage(cfg->Temp,HV_GEWAYMAXTEMP,HV_GEWAYMINTEMP) == TRUE)
+    Bool retval;
+    if (Hv_DataManage(cfg->Temp,HV_GEWAY_MAX_TEMP,HV_GEWAY_MIN_TEMP) == TRUE)
     {
-        sum ++;
+        retval = TRUE;
     }
-    if (Hv_DataManage(cfg->Current,HV_GEWAYMAXCURRENT,HV_GEWAYMINCURRENT) == TRUE)
+    if (Hv_DataManage(cfg->Current,HV_GEWAY_MAX_CURRENT,HV_GEWAY_MIN_CURRENT) == TRUE)
     {
-        sum ++;
+        retval = TRUE;
     }
-    if (Hv_DataManage(cfg->Voltage,HV_GEWAYMAXVOLTAGE,HV_GEWAYMINVOLTAGE) == TRUE)
+    if (Hv_DataManage(cfg->Voltage,HV_GEWAY_MAX_VOLTAGE,HV_GEWAY_MIN_VOLTAGE) == TRUE)
     {
-        sum ++;
+        retval = TRUE;
     }
-    if (sum >= 3)
-    {
-        return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
+    return retval;
 }
 
 Hv_RetvalType Hv_GetVoltageData(uint8 geway) //µçÑ¹
@@ -115,10 +108,6 @@ Hv_RetvalType Hv_GetVoltageData(uint8 geway) //µçÑ¹
     }
     retval.power =  retval.Voltage *  retval.Current;
     if (Hv_OpenPitCheck(&retval) == TRUE)
-    {
-
-    }
-    else
     {
 
     }
