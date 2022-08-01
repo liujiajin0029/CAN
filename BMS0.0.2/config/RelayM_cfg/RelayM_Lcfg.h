@@ -2,7 +2,7 @@
 #define __RELAY_LCFG_H
 
 extern RelayM_FnType RelayM_FnData;
-extern RelayM_ControLCfgType RelayM_CtlData;
+extern RelayM_CtlCallType RelayM_CtlData;
 
 #endif
 

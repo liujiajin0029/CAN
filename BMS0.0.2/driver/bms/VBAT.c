@@ -42,7 +42,7 @@ Bool Hv_DataManage(uint8 data, uint8 MAX, uint8 MIN)
         return FALSE;
     }
 }
-uint8 Hv_GetAlonMsg(HV_CfgPassType *cfg, Hv_DataCxtType *msg)
+uint8 Hv_GetAlonMsg(HV_PassCfgType *cfg, Hv_DataCxtType *msg)
 {
     uint8 retval;
     Hv_RetvalType data;

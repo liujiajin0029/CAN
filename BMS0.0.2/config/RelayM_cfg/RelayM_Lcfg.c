@@ -10,7 +10,7 @@ RelayM_FnType   RelayM_FnData =
     RELAYM_CHANNEL_0,
 };
 
-RelayM_ControLCfgType   RelayM_CtlData =
+RelayM_CtlCallType   RelayM_CtlData =
 {
     1,10,50,200,0
 };

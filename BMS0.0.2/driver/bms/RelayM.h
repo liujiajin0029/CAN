@@ -22,7 +22,7 @@ typedef enum _RELAYM_STATERETVAL
 {
     RELAYM_STATE_RETVAL_ON,
     RELAYM_STATE_RETVAL_OFF,
-}Relaym_StateRetvalType;
+}Relaym_RetvalType;
 
 
 typedef enum _RELAYM_ChannelType
@@ -48,15 +48,15 @@ typedef enum RELAYM_HaveAttribute
     RELAYM_NOT_HAVE_ONTIME,
     RELAYM_HAVE_OFFTIME,
     RELAYM_NOT_HAVE_OFFTIME,
-}RelayM_HaveAttributeType;
+}RelayM_HaveAttType;
 
 
 typedef struct _RelayM_ControlType
 {
-    RelayM_HaveAttributeType Ctl;      /*继电器是否拥有控制属性*/
-    RelayM_HaveAttributeType OnTime;   /*继电器是否拥有开时间属性*/
-    RelayM_HaveAttributeType OffTime;  /*继电器是否拥有关闭时间属性*/
-    RelayM_HaveAttributeType Res;      /*继电器是否拥有阻值属性*/
+    RelayM_HaveAttType Ctl;      /*继电器是否拥有控制属性*/
+    RelayM_HaveAttType OnTime;   /*继电器是否拥有开时间属性*/
+    RelayM_HaveAttType OffTime;  /*继电器是否拥有关闭时间属性*/
+    RelayM_HaveAttType Res;      /*继电器是否拥有阻值属性*/
     RELAYM_ChannelType passage;
 }RelayM_FnType;
 
@@ -68,7 +68,7 @@ typedef struct _RelayM_ControLCfgType
     uint8 OffTime;   /*继电器关闭时间参数*/
     uint8 Res;       /*继电器阻值参数*/
     uint8 passage;
-}RelayM_ControLCfgType;
+}RelayM_CtlCallType;
 
 
 typedef struct _RelayM_ActureType
@@ -79,38 +79,38 @@ typedef struct _RelayM_ActureType
     uint8 (*OffTime)(uint8 pas);        /*读取继电器关闭时间参数*/
     uint8 (*Res)(uint8 pas);            /*读取继电器阻值参数*/
     uint8  passage;
-}RelayM_ActureCxtType;
+}RelayM_ActInfoType;
 
 
 typedef struct _RelayM_CtlType
 {
-    uint8 (*Ctl)(RelayM_ControLCfgType *cfg);           /*输入继电器控制参数*/
-    uint8 (*OnTime)(RelayM_ControLCfgType *cfg);        /*输入继电器开时间参数*/
-    uint8 (*OffTime)(RelayM_ControLCfgType *cfg);       /*输入继电器关闭时间参数*/
-    uint8 (*Res)(RelayM_ControLCfgType *cfg);           /*输入继电器阻值参数*/
+    uint8 (*Ctl)(RelayM_CtlCallType *cfg);           /*输入继电器控制参数*/
+    uint8 (*OnTime)(RelayM_CtlCallType *cfg);        /*输入继电器开时间参数*/
+    uint8 (*OffTime)(RelayM_CtlCallType *cfg);       /*输入继电器关闭时间参数*/
+    uint8 (*Res)(RelayM_CtlCallType *cfg);           /*输入继电器阻值参数*/
     uint8    passage;
-}RelayM_CtlCxtType;
+}RelayM_CtlInfoType;
 
 
 typedef struct _RelayM_MsgCfgType
 {
     uint8    passage;
-    RelayM_ActureCxtType *get;
-    RelayM_CtlCxtType *ctl;
+    RelayM_ActInfoType *get;
+    RelayM_CtlInfoType *ctl;
 }RelayM_MsgCfgType;
 
 typedef struct _RelayM_CtlCfgType
 {
     uint8    passage;
-    RelayM_CtlCxtType *ctl;
-}RelayM_CtlCfgType;
+    RelayM_CtlInfoType *ctl;
+}RelayM_CtlCxtType;
 
 
 typedef struct _RelayM_ActCfgType
 {
     uint8    passage;
-    RelayM_ActureCxtType *get;
-}RelayM_ActCfgType;
+    RelayM_ActInfoType *get;
+}RelayM_ActCxtType;
 
 typedef struct _RelayM_ActureCallType
 {
@@ -120,23 +120,23 @@ typedef struct _RelayM_ActureCallType
     uint8 OffTime;
     uint8 Res;
     uint8 passage;
-}RelayM_ActureCallType;
+}RelayM_ActCallType;
 
 
-uint8  RelayM_StateCtlWrite(RelayM_ControLCfgType *cfg);
-uint8  RelayM_OnTimeCtlWrite(RelayM_ControLCfgType *cfg);
-uint8  RelayM_OffTimeCtlWrite(RelayM_ControLCfgType *cfg);
-uint8  RelayM_ResCtlWrite(RelayM_ControLCfgType *cfg);
+uint8   RelayM_StateCtlWrite(RelayM_CtlCallType *cfg);
+uint8   RelayM_OnTimeCtlWrite(RelayM_CtlCallType *cfg);
+uint8   RelayM_OffTimeCtlWrite(RelayM_CtlCallType *cfg);
+uint8   RelayM_ResCtlWrite(RelayM_CtlCallType *cfg);
 
-uint8 RelayM_GetControL(uint8 pas);
-uint8 RelayM_GetOnTime(uint8 pas);
-uint8 RelayM_GetOffTime(uint8 pas);
-uint8 RelayM_GetResTime(uint8 pas);
-uint8 RelayM_GetActTime(uint8 pas);
+uint8   RelayM_GetControL(uint8 pas);
+uint8   RelayM_GetOnTime(uint8 pas);
+uint8   RelayM_GetOffTime(uint8 pas);
+uint8   RelayM_GetResTime(uint8 pas);
+uint8   RelayM_GetActTime(uint8 pas);
 
-RelayM_ActureCallType RelayM_ReadAllData(uint8 pas, RelayM_ActureCxtType *cfg);
+RelayM_ActCallType RelayM_ReadAllData(uint8 pas, RelayM_ActInfoType *cfg);
 uint8 RelayM_ReadAloneData(uint8 pas ,Relaym_SateMsgType state);
-Relaym_StateRetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_ControLCfgType *ctl);
+Relaym_RetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_CtlCallType *ctl);
 
 
 #endif

@@ -46,7 +46,7 @@ uint8 RelayM_GetActTime(uint8 pas)
     return pas;
 }
 
-uint8 RelayM_StateCtlWrite(RelayM_ControLCfgType *cfg)
+uint8 RelayM_StateCtlWrite(RelayM_CtlCallType *cfg)
 {
     uint8 data;
     uint8 retval;
@@ -63,7 +63,7 @@ uint8 RelayM_StateCtlWrite(RelayM_ControLCfgType *cfg)
 }
 
 
-uint8 RelayM_OnTimeCtlWrite(RelayM_ControLCfgType *cfg)
+uint8 RelayM_OnTimeCtlWrite(RelayM_CtlCallType *cfg)
 {
     uint8 data;
     uint8 retval;
@@ -79,7 +79,7 @@ uint8 RelayM_OnTimeCtlWrite(RelayM_ControLCfgType *cfg)
     return retval;
 }
 
-uint8 RelayM_OffTimeCtlWrite(RelayM_ControLCfgType *cfg)
+uint8 RelayM_OffTimeCtlWrite(RelayM_CtlCallType *cfg)
 {
     uint8 data;
     uint8 retval;
@@ -94,7 +94,7 @@ uint8 RelayM_OffTimeCtlWrite(RelayM_ControLCfgType *cfg)
     }
     return retval;
 }
-uint8 RelayM_ResCtlWrite(RelayM_ControLCfgType *cfg)
+uint8 RelayM_ResCtlWrite(RelayM_CtlCallType *cfg)
 {
     uint8 data;
     uint8 retval;
@@ -110,9 +110,9 @@ uint8 RelayM_ResCtlWrite(RelayM_ControLCfgType *cfg)
     return retval;
 }
 
-Relaym_StateRetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_ControLCfgType *ctl)
+Relaym_RetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_CtlCallType *ctl)
 {
-    Relaym_StateRetvalType retval;
+    Relaym_RetvalType retval;
    if (fn->Ctl == RELAYM_HAVE_CTL )
    {
         if (RelayM_StateCtlWrite(ctl) == 1)
@@ -145,9 +145,9 @@ Relaym_StateRetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_ControLCfgType
 }
 
 
-RelayM_ActureCallType RelayM_ReadAllData(uint8 pas, RelayM_ActureCxtType *cfg)
+RelayM_ActCallType RelayM_ReadAllData(uint8 pas, RelayM_ActInfoType *cfg)
 {
-    RelayM_ActureCallType retval;
+    RelayM_ActCallType retval;
     /*数组越界保护*/
     if (pas < RELAYM_MAX_PASSANUM)
     {

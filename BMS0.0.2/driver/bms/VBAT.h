@@ -3,12 +3,12 @@
 #include "hidef.h"
 #include "derivative.h"
 
-#define HV_GEWAY_MAX_TEMP     100
-#define HV_GEWAY_MAX_CURRENT  100
-#define HV_GEWAY_MAX_VOLTAGE  100
-#define HV_GEWAY_MIN_TEMP     10
-#define HV_GEWAY_MIN_CURRENT  10
-#define HV_GEWAY_MIN_VOLTAGE  10
+#define HV_GEWAY_MAX_TEMP     (100U)
+#define HV_GEWAY_MAX_CURRENT  (100U)
+#define HV_GEWAY_MAX_VOLTAGE  (100U)
+#define HV_GEWAY_MIN_TEMP     (10U)
+#define HV_GEWAY_MIN_CURRENT  (10U)
+#define HV_GEWAY_MIN_VOLTAGE  (10U)
 
 typedef struct  _Hv_RetvalType
 {
@@ -31,7 +31,7 @@ typedef struct _HV_CfgPass
 {
     Hv_AttriButeType geway;
     uint8 passageway;
-}HV_CfgPassType;
+}HV_PassCfgType;
 
 
 typedef struct _Hv_DemoDataType
@@ -43,10 +43,10 @@ typedef struct _Hv_DemoDataType
 }Hv_DataCxtType;
 
 Hv_RetvalType Hv_GetVoltage(uint8 geway);
-Bool Hv_DataManage(uint8 data ,uint8 MAX ,uint8 MIN);
-uint8 Hv_GetAlonMsg(HV_CfgPassType *cfg, Hv_DataCxtType *msg);
+Bool Hv_DataManage(uint8 data, uint8 MAX, uint8 MIN);
+uint8 Hv_GetAlonMsg(HV_PassCfgType *cfg, Hv_DataCxtType *msg);
 Bool Hv_OpenCheck(Hv_RetvalType *cfg);
-Hv_RetvalType Hv_GetVoltageData(uint8 geway , Hv_DataCxtType *cfg); //µçÑ¹
+Hv_RetvalType Hv_GetVoltageData(uint8 geway, Hv_DataCxtType *cfg); //µçÑ¹
 uint8 Hv_GetVoltageFct(uint8 pas);
 uint8 Hv_GetCurrentFct(uint8 pas);
 uint8 Hv_GetTempFct(uint8 pas);
