@@ -20,8 +20,8 @@ typedef enum _Relaym_SateMsgType
 
 typedef enum _RELAYM_STATERETVAL
 {
-    RELAYM_STATERETVALON,
-    RELAYM_STATERETVALOFF,
+    RELAYM_STATE_RETVAL_ON,
+    RELAYM_STATE_RETVAL_OFF,
 }Relaym_StateRetvalType;
 
 
@@ -134,7 +134,7 @@ uint8 RelayM_GetOffTime(uint8 pas);
 uint8 RelayM_GetResTime(uint8 pas);
 uint8 RelayM_GetActTime(uint8 pas);
 
-RelayM_ActureCallType RelayM_ReadAllData(uint8 pas);
+RelayM_ActureCallType RelayM_ReadAllData(uint8 pas, RelayM_ActureCxtType *cfg);
 uint8 RelayM_ReadAloneData(uint8 pas ,Relaym_SateMsgType state);
 Relaym_StateRetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_ControLCfgType *ctl);
 

@@ -40,13 +40,13 @@ typedef struct _Hv_DemoDataType
     uint8 (*Current)(uint8 pas);
     uint8 (*Temp)(uint8 pas);
     uint8 passa;
-}Hv_DataCxtCfgType;
+}Hv_DataCxtType;
 
 Hv_RetvalType Hv_GetVoltage(uint8 geway);
 Bool Hv_DataManage(uint8 data ,uint8 MAX ,uint8 MIN);
-uint8 Hv_GetAlonMsg(HV_CfgPassType *Hv_msg);
-Bool Hv_OpenPitCheck(Hv_RetvalType *cfg);
-Hv_RetvalType Hv_GetVoltageData (uint8 geway); //µçÑ¹
+uint8 Hv_GetAlonMsg(HV_CfgPassType *cfg, Hv_DataCxtType *msg);
+Bool Hv_OpenCheck(Hv_RetvalType *cfg);
+Hv_RetvalType Hv_GetVoltageData(uint8 geway , Hv_DataCxtType *cfg); //µçÑ¹
 uint8 Hv_GetVoltageFct(uint8 pas);
 uint8 Hv_GetCurrentFct(uint8 pas);
 uint8 Hv_GetTempFct(uint8 pas);

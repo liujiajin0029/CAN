@@ -117,46 +117,57 @@ Relaym_StateRetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_ControLCfgType
    {
         if (RelayM_StateCtlWrite(ctl) == 1)
         {
-           retval = RELAYM_STATERETVALON;
+           retval = RELAYM_STATE_RETVAL_ON;
         }
    }
    if (fn->OnTime == RELAYM_HAVE_ONTIME )
    {
         if (RelayM_OnTimeCtlWrite(ctl) == 1)
         {
-           retval = RELAYM_STATERETVALON;
+           retval = RELAYM_STATE_RETVAL_ON;
         }
    }
    if (fn->OffTime == RELAYM_NOT_HAVE_OFFTIME )
    {
         if (RelayM_OffTimeCtlWrite(ctl) == 1)
         {
-           retval = RELAYM_STATERETVALON;
+           retval = RELAYM_STATE_RETVAL_ON;
         }
    }
    if (fn->Res == RELAYM_HAVE_RES )
    {
         if (RelayM_ResCtlWrite(ctl) == 1)
         {
-          retval = RELAYM_STATERETVALON;
+          retval = RELAYM_STATE_RETVAL_ON;
         }
    }
    return retval;
 }
 
 
-RelayM_ActureCallType RelayM_ReadAllData(uint8 pas)
+RelayM_ActureCallType RelayM_ReadAllData(uint8 pas, RelayM_ActureCxtType *cfg)
 {
     RelayM_ActureCallType retval;
     /*数组越界保护*/
     if (pas < RELAYM_MAX_PASSANUM)
     {
         RelayM_InterruptOFF();
+
+        RelayM_StateData[pas].get -> Act = (cfg->Act);
         retval.Act = RelayM_StateData[pas].get -> Act(pas);
+
+        RelayM_StateData[pas].get -> Ctl = (cfg->Ctl);
         retval.Ctl = RelayM_StateData[pas].get -> Ctl(pas);
+
+        RelayM_StateData[pas].get -> OnTime = (cfg->OnTime);
         retval.OnTime = RelayM_StateData[pas].get -> OnTime(pas);
+
+        RelayM_StateData[pas].get -> OffTime = (cfg->OffTime);
         retval.OffTime = RelayM_StateData[pas].get -> OffTime(pas);
+
+        RelayM_StateData[pas].get -> Res = (cfg->Res);
         retval.Res = RelayM_StateData[pas].get -> Res(pas);
+
         retval.passage = RelayM_StateData[pas].get-> passage;
         RelayM_InterruptON();
     }
@@ -170,7 +181,7 @@ uint8 RelayM_ReadAloneData(uint8 pas, Relaym_SateMsgType state)
     if (pas < RELAYM_MAX_PASSANUM)
     {
         RelayM_InterruptOFF();
-        switch ( state )
+        switch (state)
         {
             case RELAYM_ACTURE_STATE:
             retval = RelayM_StateData[pas].get -> Act(pas);
