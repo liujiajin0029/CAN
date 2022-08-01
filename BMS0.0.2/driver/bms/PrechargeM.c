@@ -3,6 +3,7 @@
 #include "RelayM.h"
 #include "derivative.h"
 #include "RelayM_cfg.h"
+#include "RelayM_Lcfg.h"
 void Pre_Init(void)
 {
 

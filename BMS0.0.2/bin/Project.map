@@ -27,7 +27,7 @@ PrechargeM.c.o                          Model: BANKED,        Lang: ANSI-C
 RelayM.c.o                              Model: BANKED,        Lang: ANSI-C
 CAN.C.o                                 Model: BANKED,        Lang: ANSI-C
 CAN_Cfg.c.o                             Model: BANKED,        Lang: ANSI-C
-RelayM_cfg.c.o                          Model: BANKED,        Lang: ANSI-C
+RelayM_Lcfg.c.o                         Model: BANKED,        Lang: ANSI-C
 
 *********************************************************************************************
 STARTUP SECTION
@@ -1647,7 +1647,7 @@ MODULE:                 -- CAN_Cfg.c.o --
      Can_TimeSendType                          2103       8       8       1   .data       
      Can_MsgNodeType                           210B       E      14       3   .data       
      Can_MsgGetType                            212D       E      14       3   .bss        
-MODULE:                 -- RelayM_cfg.c.o --
+MODULE:                 -- RelayM_Lcfg.c.o --
 - PROCEDURES:
 - VARIABLES:
      RelayM_FnData                             2119       A      10       4   .data       
@@ -1672,7 +1672,7 @@ MODULE STATISTIC
   RelayM.c.o                                   0    203      0
   CAN.C.o                                      6    737      0
   CAN_Cfg.c.o                                 36      0      0
-  RelayM_cfg.c.o                              15      0      0
+  RelayM_Lcfg.c.o                             15      0      0
   other                                      256     68     38
 
 *********************************************************************************************
@@ -4012,8 +4012,6 @@ RelayM.c.o:
 CAN_Cfg.c.o:
   Can1_InitType Can_MsgSendType1 Can_MsgSendType2 Can_MsgSendType3 
   Can0_InitType 
-RelayM_cfg.c.o:
-  RelayM_ActureData RelayM_ControlData RelayM_StateData 
 
 *********************************************************************************************
 COPYDOWN SECTION
@@ -4053,7 +4051,7 @@ Filling bytes inserted
  0000
 ------- ROM-ADDRESS: 0xC0FA ---- RAM-ADDRESS: 0x2123 ---- SIZE       4 ---
 Name of initialized Object : RelayM_CtlData
- 010A322C
+ 010A32C8
 ------- ROM-ADDRESS: 0xC0FE ---- SIZE       2 ---
 Filling bytes inserted
  0000

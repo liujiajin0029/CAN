@@ -3,7 +3,6 @@
 
 #define Hv_MAXPASSANUM 5
 
-extern Hv_DataCxtCfgType Hv_Data[Hv_MAXPASSANUM];
 
 #endif
 

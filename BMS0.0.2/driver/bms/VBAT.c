@@ -1,6 +1,8 @@
 #include "derivative.h"
 #include "Vbat.h"
 #include "Hv_cfg.h"
+#include "Hv_Lcfg.h"
+#include "Hv_PBcfg.h"
 
 void Hv_OpenPit()
 {
