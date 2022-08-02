@@ -7,6 +7,16 @@
 Node_StateInfoType Node_cfg;
 
 
+
+void Node_OpenPit()
+{
+
+}
+void Node_ClosePit()
+{
+
+}
+
 void Node_Poll(void)
 {
     static uint8 nodestate  = 0;
@@ -15,8 +25,11 @@ void Node_Poll(void)
     Node_cfg.state = &(Node_StateCfg[Node_cfg.node]);
     sum = (uint8)(Node_cfg.state -> num);
     Node_CanSend(2, sum);
+    Node_ClosePit();
     for (i = 0; i < sum; i++)
     {
+        if (i < sum)
+        {
         Node_CanSend(0, Node_cfg.node);
         if (Node_cfg.state -> state[i].Condition()  == Node_cfg.state -> state[i].Status)
         {
@@ -25,7 +38,9 @@ void Node_Poll(void)
             Node_CanSend(1, Node_cfg.node);
             break;
         }
+        }
     }
+    Node_OpenPit();
 }
 
 

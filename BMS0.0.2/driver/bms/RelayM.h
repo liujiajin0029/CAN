@@ -6,6 +6,7 @@
 #include "VBAT.h"
 
 
+
 typedef enum _Relaym_SateMsgType
 {
     RELAYM_ACTURE_STATE,
@@ -132,7 +133,7 @@ uint8   RelayM_GetControL(uint8 pas);
 uint8   RelayM_GetOnTime(uint8 pas);
 uint8   RelayM_GetOffTime(uint8 pas);
 uint8   RelayM_GetResTime(uint8 pas);
-uint8   RelayM_GetActTime(uint8 pas);
+uint8   RelayM_GetActstate(uint8 pas);
 
 RelayM_ActCallType RelayM_ReadAllData(uint8 pas, RelayM_ActInfoType *cfg);
 uint8 RelayM_ReadAloneData(uint8 pas ,Relaym_SateMsgType state);

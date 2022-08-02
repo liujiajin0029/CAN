@@ -12,6 +12,7 @@ void Hv_ClosePit()
 {
 
 }
+
 uint8 Hv_GetVoltageFct(uint8 pas)
 {
     pas = 1;
@@ -28,9 +29,12 @@ uint8 Hv_GetTempFct(uint8 pas)
     pas = 1;
     return pas;
 }
-
-
-
+uint8 (*Hv_GetAllFct[])(uint8) =
+{
+    Hv_GetVoltageFct,
+    Hv_GetCurrentFct,
+    Hv_GetTempFct,
+};
 Bool Hv_DataManage(uint8 data, uint8 MAX, uint8 MIN)
 {
     if (data > MIN && data < MAX)
@@ -42,6 +46,7 @@ Bool Hv_DataManage(uint8 data, uint8 MAX, uint8 MIN)
         return FALSE;
     }
 }
+
 uint8 Hv_GetAlonMsg(HV_PassCfgType *cfg, Hv_DataCxtType *msg)
 {
     uint8 retval;
@@ -85,7 +90,7 @@ Bool Hv_OpenCheck(Hv_RetvalType *cfg)
     return retval;
 }
 
-Hv_RetvalType Hv_GetVoltageData(uint8 geway, Hv_DataCxtType *cfg) //µçÑ¹
+Hv_RetvalType Hv_GetVoltageData(uint8 geway, Hv_DataCxtType *cfg)
 {
     Hv_RetvalType retval;
     uint8 i;
@@ -96,8 +101,8 @@ Hv_RetvalType Hv_GetVoltageData(uint8 geway, Hv_DataCxtType *cfg) //µçÑ¹
         {
             if (geway == Hv_Data[i].passa)
             {
-            /*¹ØÖÐ¶Ï*/
             Hv_ClosePit();
+
             Hv_Data[i].Voltage = cfg->Voltage;
             retval.Voltage = Hv_Data[i].Voltage(geway);
 
@@ -106,18 +111,20 @@ Hv_RetvalType Hv_GetVoltageData(uint8 geway, Hv_DataCxtType *cfg) //µçÑ¹
 
             Hv_Data[i].Temp = cfg->Temp;
             retval.Temp = Hv_Data[i].Temp(geway);
+
             retval.passa = geway;
-            /*¿ªÖÐ¶Ï*/
             Hv_OpenPit();
             break;
             }
         }
     }
-   // retval.power =  retval.Voltage *  retval.Current;
     if (Hv_OpenCheck(&retval) == TRUE)
     {
 
     }
     return retval;
 }
+
+
+
 

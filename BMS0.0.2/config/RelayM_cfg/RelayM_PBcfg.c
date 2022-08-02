@@ -1,9 +1,10 @@
 #include "RelayM.h"
 #include "RelayM_cfg.h"
+#include "RelayM_Pbcfg.h"
 
 RelayM_ActInfoType   RelayM_ActureData[10] =
 {
-    {RelayM_GetActTime,RelayM_GetControL,RelayM_GetOnTime,
+    {RelayM_GetActstate,RelayM_GetControL,RelayM_GetOnTime,
      RelayM_GetOffTime,RelayM_GetResTime,0},
 };
 

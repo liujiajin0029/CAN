@@ -25,26 +25,35 @@ uint8 RelayM_GetControL(uint8 pas)
     pas = 1;
     return pas;
 }
-uint8 RelayM_GetOnTime(uint8 pas)
+uint8 RelayM_GetOnTime(uint8 time)
+{
+    time = 1;
+    return time;
+}
+uint8 RelayM_GetOffTime(uint8 time)
+{
+    time = 1;
+    return time;
+}
+uint8 RelayM_GetResTime(uint8 time)
+{
+    time = 1;
+    return time;
+}
+uint8 RelayM_GetActstate(uint8 pas)
 {
     pas = 1;
     return pas;
 }
-uint8 RelayM_GetOffTime(uint8 pas)
+
+uint8 (*RelayM_Get[])(uint8) =
 {
-    pas = 1;
-    return pas;
-}
-uint8 RelayM_GetResTime(uint8 pas)
-{
-    pas = 1;
-    return pas;
-}
-uint8 RelayM_GetActTime(uint8 pas)
-{
-    pas = 1;
-    return pas;
-}
+    RelayM_GetActstate,
+    RelayM_GetControL,
+    RelayM_GetOnTime,
+    RelayM_GetOffTime,
+    RelayM_GetResTime,
+};
 
 uint8 RelayM_StateCtlWrite(RelayM_CtlCallType *cfg)
 {
@@ -62,7 +71,6 @@ uint8 RelayM_StateCtlWrite(RelayM_CtlCallType *cfg)
     return retval;
 }
 
-
 uint8 RelayM_OnTimeCtlWrite(RelayM_CtlCallType *cfg)
 {
     uint8 data;
@@ -79,6 +87,7 @@ uint8 RelayM_OnTimeCtlWrite(RelayM_CtlCallType *cfg)
     return retval;
 }
 
+
 uint8 RelayM_OffTimeCtlWrite(RelayM_CtlCallType *cfg)
 {
     uint8 data;
@@ -94,6 +103,8 @@ uint8 RelayM_OffTimeCtlWrite(RelayM_CtlCallType *cfg)
     }
     return retval;
 }
+
+
 uint8 RelayM_ResCtlWrite(RelayM_CtlCallType *cfg)
 {
     uint8 data;
@@ -170,39 +181,29 @@ RelayM_ActCallType RelayM_ReadAllData(uint8 pas, RelayM_ActInfoType *cfg)
 
         retval.passage = RelayM_StateData[pas].get-> passage;
         RelayM_InterruptON();
+
     }
     return retval;
 }
 
+uint8 RelayM_StateDatanum = 0;
+uint8  (*RelayM_AloneState[])(uint8 i) = {RelayM_StateData[RelayM_StateDatanum].get -> Act,
+                                          RelayM_StateData[RelayM_StateDatanum].get -> Ctl,
+                                          RelayM_StateData[RelayM_StateDatanum].get -> OnTime,
+                                          RelayM_StateData[RelayM_StateDatanum].get -> OffTime,
+                                          RelayM_StateData[RelayM_StateDatanum].get -> Res};
+
 uint8 RelayM_ReadAloneData(uint8 pas, Relaym_SateMsgType state)
 {
+
     uint8 retval;
     /*数组越界保护*/
     if (pas < RELAYM_MAX_PASSANUM)
     {
         RelayM_InterruptOFF();
-        switch (state)
-        {
-            case RELAYM_ACTURE_STATE:
-            retval = RelayM_StateData[pas].get -> Act(pas);
-            break;
 
-            case RELAYM_CONTROL_STATE:
-            retval = RelayM_StateData[pas].get -> Ctl(pas);
-            break;
-
-            case RELAYM_ON_TIME_STATE:
-            retval = RelayM_StateData[pas].get -> OnTime(pas);
-            break;
-
-            case RELAYM_OFF_TIME_STATE:
-            retval = RelayM_StateData[pas].get -> OffTime(pas);
-            break;
-
-            case RELAYM_RES_STATE:
-            retval = RelayM_StateData[pas].get -> Res(pas);
-            break;
-        }
+        RelayM_StateDatanum =  pas;
+        retval = RelayM_AloneState[state](pas);
         RelayM_InterruptON();
     }
     return retval;

@@ -1,5 +1,5 @@
 
-PROGRAM "D:\Project_DATA\BMS0.0.2\BMS0.0.2\bin\Project.abs"
+PROGRAM "D:\Project_DATA\BMS0.0.2 - ¸±±¾\BMS0.0.2\bin\Project.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -49,7 +49,7 @@ Section Name                    Size  Type     From       To       Segment
 .rodata                          115     R     0xC051     0xC0C3   ROM_C000
 NON_BANKED                        22     R     0xC0C4     0xC0D9   ROM_C000
 .copy                             38     R     0xC0DA     0xC0FF   ROM_C000
-.text                           1486     R   0xFE8000   0xFE85CD   PAGE_FE
+.text                           1498     R   0xFE8000   0xFE85D9   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
 .data                             40   R/W     0x2100     0x2127   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
@@ -797,7 +797,7 @@ NON_BANKED                        22     R     0xC0C4     0xC0D9   ROM_C000
 .vectSeg740_vect                   2     R     0xFFFE     0xFFFF   .vectSeg740
 
 Summary of section sizes per section type:
-READ_ONLY (R):         6D4 (dec:     1748)
+READ_ONLY (R):         6E0 (dec:     1760)
 READ_WRITE (R/W):      13E (dec:      318)
 NO_INIT (N/I):         383 (dec:      899)
 
@@ -1607,37 +1607,39 @@ MODULE:                 -- Node_Cfg.c.o --
      Node_StateCfg                             C0B4      10      16       1   .rodata     
 MODULE:                 -- Node.c.o --
 - PROCEDURES:
-     Node_Poll                               FE8134      78     120       2   .text       
+     Node_OpenPit                            FE8134       1       1       2   .text       
+     Node_ClosePit                           FE8135       1       1       2   .text       
+     Node_Poll                               FE8136      82     130       2   .text       
 - VARIABLES:
      Node_cfg                                  213B       3       3       7   .common     
 MODULE:                 -- PrechargeM.c.o --
 - PROCEDURES:
-     Pre_StartPre                            FE81AC       E      14       2   .text       
-     Pre_StopPre                             FE81BA       E      14       4   .text       
-     Pre_StopMaster                          FE81C8       E      14       2   .text       
-     Pre_Change                              FE81D6       E      14       2   .text       
-     Pre_IsFinish                            FE81E4      1C      28       6   .text       
-     Pre_DeIsFinish                          FE8200       4       4       2   .text       
-     Pre_IsFail                              FE8204      15      21       2   .text       
-     Pre_DeIsFail                            FE8219       4       4       2   .text       
-     Pre_Diagnosis                           FE821D       4       4      10   .text       
-     Pre_NoAct                               FE8221       1       1       8   .text       
+     Pre_StartPre                            FE81B8       E      14       2   .text       
+     Pre_StopPre                             FE81C6       E      14       4   .text       
+     Pre_StopMaster                          FE81D4       E      14       2   .text       
+     Pre_Change                              FE81E2       E      14       2   .text       
+     Pre_IsFinish                            FE81F0      1C      28       6   .text       
+     Pre_DeIsFinish                          FE820C       4       4       2   .text       
+     Pre_IsFail                              FE8210      15      21       2   .text       
+     Pre_DeIsFail                            FE8225       4       4       2   .text       
+     Pre_Diagnosis                           FE8229       4       4      10   .text       
+     Pre_NoAct                               FE822D       1       1       8   .text       
 - VARIABLES:
 MODULE:                 -- RelayM.c.o --
 - PROCEDURES:
-     RelayM_IOSetMsg                         FE8222       1       1       8   .text       
-     RelayM_StateCtlWrite                    FE8223      1D      29       2   .text       
-     RelayM_OnTimeCtlWrite                   FE8240      1D      29       2   .text       
-     RelayM_OffTimeCtlWrite                  FE825D      1D      29       2   .text       
-     RelayM_ResCtlWrite                      FE827A      1B      27       2   .text       
-     RelayM_FnControl                        FE8295      58      88       8   .text       
+     RelayM_IOSetMsg                         FE822E       1       1       8   .text       
+     RelayM_StateCtlWrite                    FE822F      1D      29       2   .text       
+     RelayM_OnTimeCtlWrite                   FE824C      1D      29       2   .text       
+     RelayM_OffTimeCtlWrite                  FE8269      1D      29       2   .text       
+     RelayM_ResCtlWrite                      FE8286      1B      27       2   .text       
+     RelayM_FnControl                        FE82A1      58      88       8   .text       
 - VARIABLES:
 MODULE:                 -- CAN.C.o --
 - PROCEDURES:
-     Can_Init                                FE82ED       F      15       2   .text       
-     Can_DeInit                              FE82FC      F6     246       4   .text       
-     Can_SendMsg                             FE83F2     11A     282       5   .text       
-     Can_GetMsg                              FE850C      C2     194       3   .text       
+     Can_Init                                FE82F9       F      15       2   .text       
+     Can_DeInit                              FE8308      F6     246       4   .text       
+     Can_SendMsg                             FE83FE     11A     282       5   .text       
+     Can_GetMsg                              FE8518      C2     194       3   .text       
 - VARIABLES:
      Can1_InitType                             2100       3       3       1   .data       
      Can0_InitType                             212A       3       3       1   .bss        
@@ -1667,7 +1669,7 @@ MODULE STATISTIC
   CAN_Msg.C.o                                  2     96      0
   Node_Msg.C.o                                 0     13      0
   Node_Cfg.c.o                                 0      0    115
-  Node.c.o                                     3    120      0
+  Node.c.o                                     3    132      0
   PrechargeM.c.o                               0    118      0
   RelayM.c.o                                   0    203      0
   CAN.C.o                                      6    737      0
@@ -1680,9 +1682,9 @@ SECTION USE IN OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 SECTION: ".text"
   main Init Pii_Init Ect_Init Pit_Init Can_SendTime Can_SendMsgAll 
-  Can_GetCallBack Can_NodeSend Can_NodePollCallBcak Node_CanSend Node_Poll 
-  Pre_StartPre Pre_StopPre Pre_StopMaster Pre_Change Pre_IsFinish 
-  Pre_DeIsFinish Pre_IsFail Pre_DeIsFail Pre_Diagnosis Pre_NoAct 
+  Can_GetCallBack Can_NodeSend Can_NodePollCallBcak Node_CanSend Node_OpenPit 
+  Node_ClosePit Node_Poll Pre_StartPre Pre_StopPre Pre_StopMaster Pre_Change 
+  Pre_IsFinish Pre_DeIsFinish Pre_IsFail Pre_DeIsFail Pre_Diagnosis Pre_NoAct 
   RelayM_IOSetMsg RelayM_StateCtlWrite RelayM_OnTimeCtlWrite 
   RelayM_OffTimeCtlWrite RelayM_ResCtlWrite RelayM_FnControl Can_Init 
   Can_DeInit Can_SendMsg Can_GetMsg 
@@ -3953,27 +3955,29 @@ OBJECT LIST SORTED BY ADDRESS
      Can_NodeSend                            FE8115       D      13       2   .text       
      Can_NodePollCallBcak                    FE8122       5       5       2   .text       
      Node_CanSend                            FE8127       D      13       6   .text       
-     Node_Poll                               FE8134      78     120       2   .text       
-     Pre_StartPre                            FE81AC       E      14       2   .text       
-     Pre_StopPre                             FE81BA       E      14       4   .text       
-     Pre_StopMaster                          FE81C8       E      14       2   .text       
-     Pre_Change                              FE81D6       E      14       2   .text       
-     Pre_IsFinish                            FE81E4      1C      28       6   .text       
-     Pre_DeIsFinish                          FE8200       4       4       2   .text       
-     Pre_IsFail                              FE8204      15      21       2   .text       
-     Pre_DeIsFail                            FE8219       4       4       2   .text       
-     Pre_Diagnosis                           FE821D       4       4      10   .text       
-     Pre_NoAct                               FE8221       1       1       8   .text       
-     RelayM_IOSetMsg                         FE8222       1       1       8   .text       
-     RelayM_StateCtlWrite                    FE8223      1D      29       2   .text       
-     RelayM_OnTimeCtlWrite                   FE8240      1D      29       2   .text       
-     RelayM_OffTimeCtlWrite                  FE825D      1D      29       2   .text       
-     RelayM_ResCtlWrite                      FE827A      1B      27       2   .text       
-     RelayM_FnControl                        FE8295      58      88       8   .text       
-     Can_Init                                FE82ED       F      15       2   .text       
-     Can_DeInit                              FE82FC      F6     246       4   .text       
-     Can_SendMsg                             FE83F2     11A     282       5   .text       
-     Can_GetMsg                              FE850C      C2     194       3   .text       
+     Node_OpenPit                            FE8134       1       1       2   .text       
+     Node_ClosePit                           FE8135       1       1       2   .text       
+     Node_Poll                               FE8136      82     130       2   .text       
+     Pre_StartPre                            FE81B8       E      14       2   .text       
+     Pre_StopPre                             FE81C6       E      14       4   .text       
+     Pre_StopMaster                          FE81D4       E      14       2   .text       
+     Pre_Change                              FE81E2       E      14       2   .text       
+     Pre_IsFinish                            FE81F0      1C      28       6   .text       
+     Pre_DeIsFinish                          FE820C       4       4       2   .text       
+     Pre_IsFail                              FE8210      15      21       2   .text       
+     Pre_DeIsFail                            FE8225       4       4       2   .text       
+     Pre_Diagnosis                           FE8229       4       4      10   .text       
+     Pre_NoAct                               FE822D       1       1       8   .text       
+     RelayM_IOSetMsg                         FE822E       1       1       8   .text       
+     RelayM_StateCtlWrite                    FE822F      1D      29       2   .text       
+     RelayM_OnTimeCtlWrite                   FE824C      1D      29       2   .text       
+     RelayM_OffTimeCtlWrite                  FE8269      1D      29       2   .text       
+     RelayM_ResCtlWrite                      FE8286      1B      27       2   .text       
+     RelayM_FnControl                        FE82A1      58      88       8   .text       
+     Can_Init                                FE82F9       F      15       2   .text       
+     Can_DeInit                              FE8308      F6     246       4   .text       
+     Can_SendMsg                             FE83FE     11A     282       5   .text       
+     Can_GetMsg                              FE8518      C2     194       3   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -3990,7 +3994,7 @@ PrechargeM.c.o:
   Pre_Init Pre_StartMaster 
 RelayM.c.o:
   RelayM_InterruptOFF RelayM_InterruptON RelayM_GetControL RelayM_GetOnTime 
-  RelayM_GetOffTime RelayM_GetResTime RelayM_GetActTime RelayM_ReadAllData 
+  RelayM_GetOffTime RelayM_GetResTime RelayM_GetActstate RelayM_ReadAllData 
   RelayM_ReadAloneData 
 NOT USED VARIABLES
 main.c.o:
@@ -4008,7 +4012,7 @@ Node_Cfg.c.o:
 Node.c.o:
   Can1_InitType Can0_InitType nodestate.1 
 RelayM.c.o:
-  RelayM_StateData 
+  RelayM_Get RelayM_StateDatanum RelayM_AloneState RelayM_StateData 
 CAN_Cfg.c.o:
   Can1_InitType Can_MsgSendType1 Can_MsgSendType2 Can_MsgSendType3 
   Can0_InitType 
@@ -4089,6 +4093,7 @@ Can_NodeSend              USES Can_MsgNodeType
 Can_NodePollCallBcak      USES Node_Poll 
 Node_CanSend              USES Can_NodeSend 
 Node_Poll                 USES Node_cfg Node_StateCfg Node_CanSend 
+                                Node_ClosePit Node_OpenPit 
 Pre_StartPre              USES RelayM_FnData RelayM_CtlData RelayM_FnControl 
 Pre_StopPre               USES RelayM_FnData RelayM_CtlData RelayM_FnControl 
 Pre_StopMaster            USES RelayM_FnData RelayM_CtlData RelayM_FnControl 
@@ -4215,9 +4220,13 @@ DEPENDENCY TREE
           |     |     +- Pre_NoAct            (see above)
           |     |        
           |     +- Node_CanSend        
-          |        | 
-          |        +- Can_NodeSend        
-          |             
+          |     |  | 
+          |     |  +- Can_NodeSend        
+          |     |       
+          |     +- Node_ClosePit       
+          |     |    
+          |     +- Node_OpenPit        
+          |          
           +- Can_SendMsg         
                
  _Vector_42          
@@ -4237,5 +4246,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 9
-Total size of all blocks to be downloaded: 1748
+Total size of all blocks to be downloaded: 1760
 
