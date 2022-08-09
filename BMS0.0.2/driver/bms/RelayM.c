@@ -55,12 +55,10 @@ uint8 (*RelayM_Get[])(uint8) =
     RelayM_GetResTime,
 };
 
-uint8 RelayM_StateCtlWrite(RelayM_CtlCallType *cfg)
+uint8 RelayM_StateCtlWrite(uint8 pas, uint8 data)
 {
-    uint8 data;
     uint8 retval;
-    data = cfg->Ctl;
-    if (RelayM_IOSetMsg(cfg->passage, data) == TRUE)
+    if (RelayM_IOSetMsg(pas, data) == TRUE)
     {
         retval = data;
     }
@@ -71,12 +69,10 @@ uint8 RelayM_StateCtlWrite(RelayM_CtlCallType *cfg)
     return retval;
 }
 
-uint8 RelayM_OnTimeCtlWrite(RelayM_CtlCallType *cfg)
+uint8 RelayM_OnTimeCtlWrite(uint8 pas, uint8 data)
 {
-    uint8 data;
     uint8 retval;
-    data = cfg->OnTime;
-    if (RelayM_IOSetMsg(cfg->passage, data) == TRUE)
+    if (RelayM_IOSetMsg(pas, data) == TRUE)
     {
         retval = data;
     }
@@ -88,12 +84,10 @@ uint8 RelayM_OnTimeCtlWrite(RelayM_CtlCallType *cfg)
 }
 
 
-uint8 RelayM_OffTimeCtlWrite(RelayM_CtlCallType *cfg)
+uint8 RelayM_OffTimeCtlWrite(uint8 pas, uint8 data)
 {
-    uint8 data;
     uint8 retval;
-    data = cfg->OffTime;
-    if (RelayM_IOSetMsg(cfg->passage, data) == 1)
+    if (RelayM_IOSetMsg(pas, data) == 1)
     {
        retval = data;
     }
@@ -105,12 +99,10 @@ uint8 RelayM_OffTimeCtlWrite(RelayM_CtlCallType *cfg)
 }
 
 
-uint8 RelayM_ResCtlWrite(RelayM_CtlCallType *cfg)
+uint8 RelayM_ResCtlWrite(uint8 pas, uint8 data)
 {
-    uint8 data;
     uint8 retval;
-    data = cfg->Res;
-    if (RelayM_IOSetMsg(cfg->Res, data) == TRUE)
+    if (RelayM_IOSetMsg(pas, data) == TRUE)
     {
         retval = data;
     }
@@ -124,30 +116,30 @@ uint8 RelayM_ResCtlWrite(RelayM_CtlCallType *cfg)
 Relaym_RetvalType RelayM_FnControl(RelayM_FnType *fn, RelayM_CtlCallType *ctl)
 {
     Relaym_RetvalType retval;
-   if (fn->Ctl == RELAYM_HAVE_CTL )
+   if (fn->Ctl == RELAYM_CTL )
    {
-        if (RelayM_StateCtlWrite(ctl) == 1)
+        if (RelayM_StateCtlWrite(ctl->Ctl,ctl->passage) == 1)
         {
            retval = RELAYM_STATE_RETVAL_ON;
         }
    }
-   if (fn->OnTime == RELAYM_HAVE_ONTIME )
+   if (fn->OnTime == RELAYM_ONTIME )
    {
-        if (RelayM_OnTimeCtlWrite(ctl) == 1)
+        if (RelayM_OnTimeCtlWrite(ctl->OnTime,ctl->passage) == 1)
         {
            retval = RELAYM_STATE_RETVAL_ON;
         }
    }
-   if (fn->OffTime == RELAYM_NOT_HAVE_OFFTIME )
+   if (fn->OffTime == RELAYM_NOT_OFFTIME )
    {
-        if (RelayM_OffTimeCtlWrite(ctl) == 1)
+        if (RelayM_OffTimeCtlWrite(ctl->OffTime,ctl->passage) == 1)
         {
            retval = RELAYM_STATE_RETVAL_ON;
         }
    }
-   if (fn->Res == RELAYM_HAVE_RES )
+   if (fn->Res == RELAYM_RES )
    {
-        if (RelayM_ResCtlWrite(ctl) == 1)
+        if (RelayM_ResCtlWrite(ctl->Res,ctl->passage) == 1)
         {
           retval = RELAYM_STATE_RETVAL_ON;
         }

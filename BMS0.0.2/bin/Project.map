@@ -1,5 +1,5 @@
 
-PROGRAM "D:\Project_DATA\BMS0.0.2 - ¸±±¾\BMS0.0.2\bin\Project.abs"
+PROGRAM "C:\Users\Administrator\Desktop\4\CAN\BMS0.0.2\bin\Project.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -49,7 +49,7 @@ Section Name                    Size  Type     From       To       Segment
 .rodata                          115     R     0xC051     0xC0C3   ROM_C000
 NON_BANKED                        22     R     0xC0C4     0xC0D9   ROM_C000
 .copy                             38     R     0xC0DA     0xC0FF   ROM_C000
-.text                           1498     R   0xFE8000   0xFE85D9   PAGE_FE
+.text                           1512     R   0xFE8000   0xFE85E7   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
 .data                             40   R/W     0x2100     0x2127   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
@@ -797,7 +797,7 @@ NON_BANKED                        22     R     0xC0C4     0xC0D9   ROM_C000
 .vectSeg740_vect                   2     R     0xFFFE     0xFFFF   .vectSeg740
 
 Summary of section sizes per section type:
-READ_ONLY (R):         6E0 (dec:     1760)
+READ_ONLY (R):         6EE (dec:     1774)
 READ_WRITE (R/W):      13E (dec:      318)
 NO_INIT (N/I):         383 (dec:      899)
 
@@ -1628,18 +1628,18 @@ MODULE:                 -- PrechargeM.c.o --
 MODULE:                 -- RelayM.c.o --
 - PROCEDURES:
      RelayM_IOSetMsg                         FE822E       1       1       8   .text       
-     RelayM_StateCtlWrite                    FE822F      1D      29       2   .text       
-     RelayM_OnTimeCtlWrite                   FE824C      1D      29       2   .text       
-     RelayM_OffTimeCtlWrite                  FE8269      1D      29       2   .text       
-     RelayM_ResCtlWrite                      FE8286      1B      27       2   .text       
-     RelayM_FnControl                        FE82A1      58      88       8   .text       
+     RelayM_StateCtlWrite                    FE822F      19      25       2   .text       
+     RelayM_OnTimeCtlWrite                   FE8248      19      25       2   .text       
+     RelayM_OffTimeCtlWrite                  FE8261      19      25       2   .text       
+     RelayM_ResCtlWrite                      FE827A      19      25       2   .text       
+     RelayM_FnControl                        FE8293      74     116       8   .text       
 - VARIABLES:
 MODULE:                 -- CAN.C.o --
 - PROCEDURES:
-     Can_Init                                FE82F9       F      15       2   .text       
-     Can_DeInit                              FE8308      F6     246       4   .text       
-     Can_SendMsg                             FE83FE     11A     282       5   .text       
-     Can_GetMsg                              FE8518      C2     194       3   .text       
+     Can_Init                                FE8307       F      15       2   .text       
+     Can_DeInit                              FE8316      F6     246       4   .text       
+     Can_SendMsg                             FE840C     11A     282       5   .text       
+     Can_GetMsg                              FE8526      C2     194       3   .text       
 - VARIABLES:
      Can1_InitType                             2100       3       3       1   .data       
      Can0_InitType                             212A       3       3       1   .bss        
@@ -1671,7 +1671,7 @@ MODULE STATISTIC
   Node_Cfg.c.o                                 0      0    115
   Node.c.o                                     3    132      0
   PrechargeM.c.o                               0    118      0
-  RelayM.c.o                                   0    203      0
+  RelayM.c.o                                   0    217      0
   CAN.C.o                                      6    737      0
   CAN_Cfg.c.o                                 36      0      0
   RelayM_Lcfg.c.o                             15      0      0
@@ -3969,15 +3969,15 @@ OBJECT LIST SORTED BY ADDRESS
      Pre_Diagnosis                           FE8229       4       4      10   .text       
      Pre_NoAct                               FE822D       1       1       8   .text       
      RelayM_IOSetMsg                         FE822E       1       1       8   .text       
-     RelayM_StateCtlWrite                    FE822F      1D      29       2   .text       
-     RelayM_OnTimeCtlWrite                   FE824C      1D      29       2   .text       
-     RelayM_OffTimeCtlWrite                  FE8269      1D      29       2   .text       
-     RelayM_ResCtlWrite                      FE8286      1B      27       2   .text       
-     RelayM_FnControl                        FE82A1      58      88       8   .text       
-     Can_Init                                FE82F9       F      15       2   .text       
-     Can_DeInit                              FE8308      F6     246       4   .text       
-     Can_SendMsg                             FE83FE     11A     282       5   .text       
-     Can_GetMsg                              FE8518      C2     194       3   .text       
+     RelayM_StateCtlWrite                    FE822F      19      25       2   .text       
+     RelayM_OnTimeCtlWrite                   FE8248      19      25       2   .text       
+     RelayM_OffTimeCtlWrite                  FE8261      19      25       2   .text       
+     RelayM_ResCtlWrite                      FE827A      19      25       2   .text       
+     RelayM_FnControl                        FE8293      74     116       8   .text       
+     Can_Init                                FE8307       F      15       2   .text       
+     Can_DeInit                              FE8316      F6     246       4   .text       
+     Can_SendMsg                             FE840C     11A     282       5   .text       
+     Can_GetMsg                              FE8526      C2     194       3   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -4246,5 +4246,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 9
-Total size of all blocks to be downloaded: 1760
+Total size of all blocks to be downloaded: 1774
 
